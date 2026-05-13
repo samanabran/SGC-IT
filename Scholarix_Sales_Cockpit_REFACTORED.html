@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Fast-response objection handler for live sales calls. Real-time search, phase filtering, ROI calculations, and cultural adaptations.">
+  <meta name="description" content="SGC TECH AI call cockpit for UAE mid-market Odoo + AI consultations. Real-time search, phase filtering, and ROI-led qualification.">
   <meta name="theme-color" content="#0b3d91">
-  <meta property="og:title" content="Scholarix Sales Cockpit">
-  <meta property="og:description" content="Professional sales objection handler for fast-paced negotiations">
-  <title>Scholarix Sales Cockpit · Fast-Response Objection Handler</title>
+  <meta property="og:title" content="SGC TECH AI Sales Cockpit">
+  <meta property="og:description" content="Odoo + AI consultation cockpit for UAE mid-market operators">
+  <title>SGC TECH AI Sales Cockpit · Odoo + AI Consultation Handler</title>
   <style>
     /* ========================================
-       SECTION 1: CSS VARIABLES & FOUNDATIONS
+       SECTION 1: ROOT VARIABLES & DESIGN TOKENS
        ======================================== */
     :root {
-      /* Color palette */
+      /* Color Palette */
       --navy: #0b3d91;
       --navy-dark: #082c6b;
       --amber: #d97706;
@@ -28,14 +28,14 @@
       --red: #b91c1c;
       --red-soft: #fee2e2;
 
-      /* Phase colors */
+      /* Phase Colors */
       --opening: #0891b2;
       --discovery: #7c3aed;
       --pitch: #d97706;
       --close: #15803d;
       --post: #475569;
 
-      /* Typography */
+      /* Typography System */
       --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       --font-family-mono: 'JetBrains Mono', 'Courier New', monospace;
       --font-size-xs: 10px;
@@ -48,7 +48,7 @@
       --line-height-normal: 1.5;
       --line-height-relaxed: 1.6;
 
-      /* Spacing */
+      /* Spacing Scale */
       --space-xs: 4px;
       --space-sm: 8px;
       --space-md: 12px;
@@ -56,43 +56,53 @@
       --space-xl: 20px;
       --space-2xl: 32px;
 
-      /* Shadows & borders */
+      /* Shadows & Depth */
       --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
       --shadow-md: 0 3px 10px rgba(0, 0, 0, 0.1);
       --shadow-lg: 0 2px 8px rgba(0, 0, 0, 0.15);
       --border-radius: 6px;
       --border-radius-sm: 5px;
 
-      /* Transitions */
+      /* Motion & Transitions */
       --transition-fast: 0.15s ease;
       --transition-base: 0.2s ease;
       --transition-slow: 0.3s ease;
 
-      /* Z-index scale */
+      /* Z-Index Scale */
       --z-base: 1;
       --z-dropdown: 50;
       --z-sticky: 100;
       --z-modal: 1000;
 
-      /* Breakpoints */
+      /* Responsive Breakpoints */
       --bp-mobile: 320px;
       --bp-tablet: 640px;
       --bp-desktop: 900px;
       --bp-wide: 1200px;
 
-      /* Analytics & tracking */
-      --enable-analytics: 1;
+      /* Configuration */
+      --enable-animations: 1;
       --track-events: 1;
     }
 
-    * {
+    /* ========================================
+       SECTION 2: RESET & BASELINE
+       ======================================== */
+    *,
+    *::before,
+    *::after {
       box-sizing: border-box;
+    }
+
+    * {
       margin: 0;
       padding: 0;
     }
 
-    html, body {
-      height: 100%;
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
     body {
@@ -107,37 +117,36 @@
       transition: background-color var(--transition-fast);
     }
 
-    /* Focus management for accessibility */
-    :focus-visible {
+    body.keyboard-navigation :focus-visible {
       outline: 2px solid var(--navy);
       outline-offset: 2px;
     }
 
-    /* Smooth scrolling behavior */
-    @supports (scroll-behavior: smooth) {
-      html {
-        scroll-behavior: smooth;
-      }
-    }
-
-    /* ========================================
-       SECTION 2: LAYOUT & CONTAINER
-       ======================================== */
     main {
       flex: 1;
       overflow-y: auto;
     }
 
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: var(--space-xl);
+    /* Accessibility: Skip to main link */
+    .skip-to-main {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      background: var(--navy);
+      color: white;
+      padding: var(--space-md) var(--space-lg);
+      text-decoration: none;
+      z-index: var(--z-modal);
+    }
+
+    .skip-to-main:focus {
+      top: 0;
     }
 
     /* ========================================
        SECTION 3: HEADER & NAVIGATION
        ======================================== */
-    .cockpit-bar {
+    header[role="banner"] {
       position: sticky;
       top: 0;
       z-index: var(--z-sticky);
@@ -146,11 +155,6 @@
       padding: var(--space-md) var(--space-lg);
       box-shadow: var(--shadow-lg);
       border-bottom: 3px solid var(--amber);
-      transition: box-shadow var(--transition-fast);
-    }
-
-    .cockpit-bar[aria-hidden="true"] {
-      display: none;
     }
 
     .cockpit-row {
@@ -224,7 +228,7 @@
       pointer-events: none;
     }
 
-    /* Filter Buttons */
+    /* Phase Filter Buttons */
     .phase-filters {
       display: flex;
       gap: var(--space-sm);
@@ -297,10 +301,6 @@
       transform: translateY(-1px);
     }
 
-    .mode-toggle:active {
-      transform: translateY(0);
-    }
-
     .mode-toggle.active {
       background: #fcd34d;
       color: var(--navy-dark);
@@ -308,7 +308,17 @@
     }
 
     /* ========================================
-       SECTION 4: INTRO & CONTENT CARDS
+       SECTION 4: MAIN CONTENT CONTAINER
+       ======================================== */
+    main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--space-xl);
+      width: 100%;
+    }
+
+    /* ========================================
+       SECTION 5: INTRO & CARDS
        ======================================== */
     .intro {
       background: #fff;
@@ -363,7 +373,7 @@
     }
 
     /* ========================================
-       SECTION 5: PHASE SECTIONS & HEADERS
+       SECTION 6: PHASE SECTIONS
        ======================================== */
     .phase {
       margin-bottom: var(--space-2xl);
@@ -422,35 +432,20 @@
       white-space: nowrap;
     }
 
-    .phase-1 .phase-header {
-      background: linear-gradient(135deg, var(--opening), var(--opening));
-    }
-
-    .phase-2 .phase-header {
-      background: linear-gradient(135deg, var(--discovery), var(--discovery));
-    }
-
-    .phase-3 .phase-header {
-      background: linear-gradient(135deg, var(--pitch), var(--pitch));
-    }
-
-    .phase-4 .phase-header {
-      background: linear-gradient(135deg, var(--close), var(--close));
-    }
-
-    .phase-5 .phase-header {
-      background: linear-gradient(135deg, var(--post), var(--post));
-    }
+    .phase-1 .phase-header { background: linear-gradient(135deg, var(--opening), var(--opening)); }
+    .phase-2 .phase-header { background: linear-gradient(135deg, var(--discovery), var(--discovery)); }
+    .phase-3 .phase-header { background: linear-gradient(135deg, var(--pitch), var(--pitch)); }
+    .phase-4 .phase-header { background: linear-gradient(135deg, var(--close), var(--close)); }
+    .phase-5 .phase-header { background: linear-gradient(135deg, var(--post), var(--post)); }
 
     /* ========================================
-       SECTION 6: GOAL & INFO CARDS
+       SECTION 7: GOAL & INFO CARDS
        ======================================== */
     .goal-card {
       background: #fff;
       padding: var(--space-lg);
       border-left: 5px solid var(--navy);
       font-size: 13px;
-      border-radius: 0;
       box-shadow: var(--shadow-sm);
       margin: var(--space-sm) 0;
     }
@@ -461,7 +456,7 @@
     }
 
     /* ========================================
-       SECTION 7: YOUR LINE (SALES SCRIPT)
+       SECTION 8: YOUR LINE (SCRIPT)
        ======================================== */
     .your-line {
       background: #eff6ff;
@@ -470,7 +465,6 @@
       margin: var(--space-sm) 0;
       font-size: var(--font-size-base);
       box-shadow: var(--shadow-sm);
-      border-radius: 0;
     }
 
     .your-line .label {
@@ -503,7 +497,7 @@
     }
 
     /* ========================================
-       SECTION 8: OBJECTION ROW (CORE)
+       SECTION 9: OBJECTION ROW (CORE)
        ======================================== */
     .obj-row {
       display: grid;
@@ -535,11 +529,6 @@
       transform: translateY(-2px);
     }
 
-    .obj-row[data-expanded="true"] {
-      grid-template-columns: 1fr;
-    }
-
-    /* Objection Trigger (Left side) */
     .obj-trigger {
       background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
       padding: var(--space-lg);
@@ -593,7 +582,6 @@
       font-family: var(--font-family-mono);
     }
 
-    /* Objection Response (Right side) */
     .obj-response {
       background: #f0fdf4;
       padding: var(--space-lg);
@@ -635,7 +623,6 @@
       padding: 1px 5px;
       border-radius: 3px;
       font-weight: 700;
-      cursor: text;
       user-select: all;
     }
 
@@ -657,7 +644,7 @@
     }
 
     /* ========================================
-       SECTION 9: UTILITY & INFO COMPONENTS
+       SECTION 10: UTILITY COMPONENTS
        ======================================== */
     .calc {
       background: #faf5ff;
@@ -676,7 +663,6 @@
       font-weight: 700;
     }
 
-    /* Pills (badge-like tags) */
     .pill {
       display: inline-flex;
       align-items: center;
@@ -691,22 +677,9 @@
       white-space: nowrap;
     }
 
-    .pill-tip {
-      background: var(--green-soft);
-      color: var(--green);
-    }
-
-    .pill-warn {
-      background: #fff7ed;
-      color: var(--amber);
-      border: 1px solid #fde68a;
-    }
-
-    .pill-critical {
-      background: var(--red-soft);
-      color: var(--red);
-      border: 1px solid #fca5a5;
-    }
+    .pill-tip { background: var(--green-soft); color: var(--green); }
+    .pill-warn { background: #fff7ed; color: var(--amber); border: 1px solid #fde68a; }
+    .pill-critical { background: var(--red-soft); color: var(--red); border: 1px solid #fca5a5; }
 
     .micro-note {
       font-size: 12px;
@@ -720,7 +693,7 @@
     }
 
     /* ========================================
-       SECTION 10: ROI & DATA GRID
+       SECTION 11: ROI & DATA GRIDS
        ======================================== */
     .roi-grid {
       display: grid;
@@ -742,13 +715,8 @@
       transform: translateY(-2px);
     }
 
-    .roi-card.before {
-      border-top: 4px solid var(--red);
-    }
-
-    .roi-card.after {
-      border-top: 4px solid var(--green);
-    }
+    .roi-card.before { border-top: 4px solid var(--red); }
+    .roi-card.after { border-top: 4px solid var(--green); }
 
     .roi-card h4 {
       font-size: var(--font-size-xs);
@@ -780,7 +748,7 @@
     }
 
     /* ========================================
-       SECTION 11: VISIBILITY & STATE
+       SECTION 12: STATE & VISIBILITY
        ======================================== */
     .hidden-by-filter,
     .hidden-by-search {
@@ -809,7 +777,7 @@
     }
 
     /* ========================================
-       SECTION 12: COMPACT MODE
+       SECTION 13: COMPACT MODE
        ======================================== */
     body.compact .your-line,
     body.compact .goal-card,
@@ -828,7 +796,7 @@
     }
 
     /* ========================================
-       SECTION 13: RESPONSIVE DESIGN
+       SECTION 14: RESPONSIVE DESIGN
        ======================================== */
     @media (max-width: 900px) {
       .obj-row {
@@ -853,7 +821,7 @@
         grid-template-columns: 1fr;
       }
 
-      .container {
+      main {
         padding: var(--space-lg);
       }
 
@@ -890,80 +858,28 @@
         padding: 6px 10px;
       }
 
+      header[role="banner"] {
+        padding: var(--space-sm) var(--space-md);
+      }
+
       .brand {
         font-size: var(--font-size-base);
       }
 
-      .container {
+      .obj-trigger {
+        padding: var(--space-md);
+      }
+
+      .obj-response {
         padding: var(--space-md);
       }
 
       .intro {
         padding: var(--space-md);
-        margin-bottom: var(--space-lg);
       }
 
-      .intro h1 {
-        font-size: var(--font-size-lg);
-      }
-
-      .obj-trigger .quote {
-        font-size: var(--font-size-base);
-      }
-
-      .obj-response .script {
-        font-size: 13px;
-      }
-
-      .roi-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-md);
-      }
-
-      .cockpit-row {
-        flex-direction: column;
-        gap: var(--space-sm);
-      }
-    }
-
-    /* ========================================
-       SECTION 14: DARK MODE SUPPORT
-       ======================================== */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1a1f2e;
-        --soft: #0f172a;
-        --line: #2d3748;
-      }
-
-      body {
-        background: var(--soft);
-      }
-
-      .intro,
-      .goal-card,
-      .obj-row,
-      .roi-card {
-        background: #1a1f2e;
-        border-color: #2d3748;
-      }
-
-      .your-line {
-        background: rgba(15, 23, 42, 0.6);
-        border-color: #3b82f6;
-      }
-
-      .obj-trigger {
-        background: rgba(220, 38, 38, 0.2);
-      }
-
-      .obj-response {
-        background: rgba(34, 197, 94, 0.1);
-      }
-
-      .calc {
-        background: rgba(124, 58, 237, 0.1);
-        border-color: #7c3aed;
+      main {
+        padding: var(--space-md);
       }
     }
 
@@ -971,7 +887,7 @@
        SECTION 15: PRINT STYLES
        ======================================== */
     @media print {
-      .cockpit-bar,
+      header[role="banner"],
       .intro {
         display: none;
       }
@@ -981,7 +897,7 @@
         font-size: 11px;
       }
 
-      .container {
+      main {
         padding: 0;
         max-width: 100%;
       }
@@ -992,7 +908,6 @@
 
       .obj-row {
         page-break-inside: avoid;
-        break-inside: avoid;
         border: 1px solid #000;
       }
 
@@ -1025,201 +940,55 @@
     @page {
       margin: 12mm;
     }
-
-    /* ========================================
-       SECTION 16: ACCESSIBILITY & UTILITIES
-       ======================================== */
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-
-    .skip-to-main {
-      position: absolute;
-      top: -40px;
-      left: 0;
-      background: var(--navy);
-      color: #fff;
-      padding: 8px 16px;
-      text-decoration: none;
-      z-index: var(--z-modal);
-      border-radius: 0 0 var(--border-radius) 0;
-    }
-
-    .skip-to-main:focus {
-      top: 0;
-    }
-
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    /* High contrast mode support */
-    @media (prefers-contrast: more) {
-      .phase-btn,
-      .mode-toggle {
-        border-width: 2px;
-      }
-
-      .obj-row {
-        border-width: 2px;
-      }
-    }
   </style>
 </head>
-<body role="application" aria-label="Scholarix Sales Cockpit - Objection Handler">
-  <a href="#main-content" class="skip-to-main">Skip to main content</a>
 
-  <!-- ===== COCKPIT CONTROL BAR (sticky header) ===== -->
-  <header class="cockpit-bar" role="banner" aria-label="Navigation and search controls">
-    <div class="cockpit-row">
-      <div class="brand" data-track="header_brand">
-        SCHOLARIX <span>·</span> <span data-abbr="sales">SALES</span> COCKPIT
-      </div>
+<body role="application" aria-label="SGC TECH AI Sales Cockpit">
 
-      <!-- Search Component -->
-      <div class="search-wrap">
-        <input
-          id="search"
-          type="search"
-          placeholder="Type objection keyword: busy, discount, partner, think, expensive..."
-          autocomplete="off"
-          aria-label="Search objections by keyword"
-          data-track="search_input"
-          data-analytics-event="search:query"
-        >
-        <span class="sr-only" id="search-help">Use this search box to filter objections. Type any keyword to find matching objections and responses.</span>
-      </div>
-
-      <!-- Phase Filter Buttons -->
-      <nav class="phase-filters" id="filters" aria-label="Filter by sales phase" role="group">
-        <button
-          class="phase-btn active"
-          data-phase="all"
-          data-track="filter_all"
-          data-analytics-event="filter:phase:all"
-          aria-pressed="true"
-          aria-label="Show all phases"
-        >
-          All<span class="key" aria-hidden="true">0</span>
-        </button>
-        <button
-          class="phase-btn"
-          data-phase="1"
-          data-track="filter_opening"
-          data-analytics-event="filter:phase:opening"
-          aria-pressed="false"
-          aria-label="Show Opening phase only"
-        >
-          Opening<span class="key" aria-hidden="true">1</span>
-        </button>
-        <button
-          class="phase-btn"
-          data-phase="2"
-          data-track="filter_discovery"
-          data-analytics-event="filter:phase:discovery"
-          aria-pressed="false"
-          aria-label="Show Discovery phase only"
-        >
-          Discovery<span class="key" aria-hidden="true">2</span>
-        </button>
-        <button
-          class="phase-btn"
-          data-phase="3"
-          data-track="filter_pitch"
-          data-analytics-event="filter:phase:pitch"
-          aria-pressed="false"
-          aria-label="Show Pitch phase only"
-        >
-          Pitch<span class="key" aria-hidden="true">3</span>
-        </button>
-        <button
-          class="phase-btn"
-          data-phase="4"
-          data-track="filter_close"
-          data-analytics-event="filter:phase:close"
-          aria-pressed="false"
-          aria-label="Show Close phase only"
-        >
-          Close<span class="key" aria-hidden="true">4</span>
-        </button>
-        <button
-          class="phase-btn"
-          data-phase="5"
-          data-track="filter_post"
-          data-analytics-event="filter:phase:post"
-          aria-pressed="false"
-          aria-label="Show Post-Close phase only"
-        >
-          Post<span class="key" aria-hidden="true">5</span>
-        </button>
-      </nav>
-
-      <!-- Compact Mode Toggle -->
-      <button
-        class="mode-toggle"
-        id="compactBtn"
-        data-track="toggle_compact"
-        data-analytics-event="mode:compact:toggle"
-        aria-pressed="false"
-        aria-label="Toggle compact mode to hide non-essential content"
-        title="Keyboard shortcut: C"
-      >
-        Compact
-      </button>
+<!-- ===== HEADER/BANNER ===== -->
+<header role="banner" class="cockpit-bar" id="main-header">
+  <div class="cockpit-row">
+    <div class="brand">SGC TECH AI <span>·</span> SALES COCKPIT</div>
+    <div class="search-wrap">
+      <input id="search" type="search" placeholder="Search scripts: Odoo, ROI, compliance, pricing..." autocomplete="off" aria-label="Search sales scripts and objection handlers">
     </div>
-  </header>
+    <div class="phase-filters" id="filters" role="group" aria-label="Filter by sales phase">
+      <button class="phase-btn active" data-phase="all" aria-pressed="true">All<span class="key">0</span></button>
+      <button class="phase-btn" data-phase="1" aria-pressed="false">Opening<span class="key">1</span></button>
+      <button class="phase-btn" data-phase="2" aria-pressed="false">Discovery<span class="key">2</span></button>
+      <button class="phase-btn" data-phase="3" aria-pressed="false">Pitch<span class="key">3</span></button>
+      <button class="phase-btn" data-phase="4" aria-pressed="false">Close<span class="key">4</span></button>
+      <button class="phase-btn" data-phase="5" aria-pressed="false">Post<span class="key">5</span></button>
+    </div>
+    <button class="mode-toggle" id="compactBtn" aria-label="Toggle compact mode" aria-pressed="false">Compact</button>
+  </div>
+</header>
 
-  <!-- ===== MAIN CONTENT ===== -->
-  <main class="container" id="main-content" role="main">
+<!-- ===== MAIN CONTENT ===== -->
+<main id="main-content" role="main">
 
-  <!-- ===== INTRO SECTION ===== -->
-  <article class="intro" role="complementary" data-track="intro_section" aria-label="Introduction and keyboard shortcuts">
-    <h1>Live-Call Objection Cockpit</h1>
-    <p>Every objection paired with its response in one row — no scrolling needed during a live call.</p>
-    <details>
-      <summary style="cursor: pointer; font-weight: 600; color: var(--navy); margin-top: 8px;">
-        ⌨️ Keyboard Shortcuts
-      </summary>
-      <div style="margin-top: 8px; padding: 8px 0;">
-        <p>
-          <kbd>/</kbd> Focus search ·
-          <kbd>0–5</kbd> Filter by call phase ·
-          <kbd>Esc</kbd> Clear search ·
-          <kbd>C</kbd> Toggle compact mode
-        </p>
-      </div>
-    </details>
-  </article>
+  <!-- ===== INTRO ===== -->
+  <div class="intro">
+    <h1>SGC TECH AI Live-Call Cockpit · Professional Edition</h1>
+    <p>Built for Odoo + AI consultations with UAE mid-market operators: every objection paired with a response for fast live negotiations.</p>
+    <p><b>Positioning:</b> Fixed-price, fixed-timeline delivery with UAE VAT, Corporate Tax, PDPL, and RERA-aligned implementations.</p>
+    <p><b>Keyboard Shortcuts:</b> <kbd>/</kbd> search · <kbd>0–5</kbd> filter · <kbd>Esc</kbd> clear · <kbd>C</kbd> compact mode</p>
+  </div>
 
-  <!-- =========================================================== -->
-  <!-- PHASE 1 — OPENING -->
-  <!-- =========================================================== -->
+  <!-- ===== PHASE 1: OPENING ===== -->
   <section class="phase phase-1" data-phase="1" id="phase-1">
     <div class="phase-header">
       <span class="num">01</span>
       <span class="ttl">THE OPENING</span>
-      <span class="meta">0–30 sec · Goal: get 2 minutes of their time</span>
+      <span class="meta">0–30 sec · Goal: get 2 minutes</span>
     </div>
 
     <div class="your-line">
       <span class="label">▶ YOU OPEN WITH</span>
-      <div class="script">"Good morning! Is this Mr. [Name]? Hi Mr. [Name], this is [Your Name] from Scholarix IT Solutions in Dubai. I know you're running [Company] and probably very busy — I'll be super direct, just need <span class="pause">2 minutes</span>. Is that okay?"</div>
+      <div class="script">"Good morning! Is this Mr. [Name]? Hi Mr. [Name], this is [Your Name] from SGC TECH AI in Dubai. We deliver <span class="key-phrase">fixed-price, fixed-timeline Odoo 19 + AI implementations</span> for UAE mid-market businesses. I'll be super direct, just need <span class="pause">2 minutes</span>. Is that okay?"</div>
     </div>
 
-    <div class="obj-row" data-keywords="busy no time meeting later">
+    <div class="obj-row" data-keywords="busy no time meeting later" role="article" aria-label="Objection: I'm busy">
       <div class="obj-trigger">
         <span class="num">#01</span>
         <span class="tag">Objection</span>
@@ -1227,7 +996,7 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"I completely understand — <span class="key-phrase">that's exactly why I'm calling.</span> You're too busy because manual work is eating your time. Just 90 seconds: if I can show you how to get back 20 hours weekly, would that be worth 90 seconds right now?"</div>
+        <div class="script">"I completely understand — <span class="key-phrase">that's exactly why I'm calling.</span> Most teams are buried in spreadsheets, WhatsApp threads, and disconnected tools. Just 90 seconds: if I can show you how to recover 20+ hours weekly with Odoo + AI, would that be worth it right now?"</div>
         <div class="alt">
           <b>If still resistant — reschedule with specific time:</b>
           "No problem. When works better — this afternoon at 3 PM, or tomorrow at 10 AM?" <span class="pill pill-warn">Never say "when are you free"</span>
@@ -1235,7 +1004,7 @@
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="not interested">
+    <div class="obj-row" data-keywords="not interested" role="article" aria-label="Objection: Not interested">
       <div class="obj-trigger">
         <span class="num">#02</span>
         <span class="tag">Objection</span>
@@ -1243,15 +1012,15 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"I appreciate your directness. Before I let you go — is it because you're <span class="key-phrase">genuinely happy with your current operations</span>, or have you just heard too many sales pitches?"</div>
+        <div class="script">"I appreciate your directness. Before I let you go — is it because you're <span class="key-phrase">fully satisfied with your current ERP setup</span>, or because you've heard too many generic software pitches?"</div>
         <div class="alt">
-          <b>If "happy":</b> "If you could wave a magic wand and fix ONE thing in daily operations, what would it be?" → they reveal pain → "That's exactly what we solve. 90 seconds?"<br>
-          <b>If "too many pitches":</b> "Are you currently spending hours daily on manual data entry and admin?" → pivot to value.
+          <b>If "happy":</b> "If you could fix ONE operations bottleneck immediately, what would it be?" → they reveal pain → "That's exactly where we deploy Odoo + AI."<br>
+          <b>If "too many pitches":</b> "Fair. We're not selling licenses only. We deliver implementation, compliance, integrations, and training under one scope." → pivot to value.
         </div>
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="remove list dont call">
+    <div class="obj-row" data-keywords="remove list dont call" role="article" aria-label="Objection: Remove me from your list">
       <div class="obj-trigger">
         <span class="num">#03</span>
         <span class="tag">Objection</span>
@@ -1268,26 +1037,24 @@
     </div>
   </section>
 
-  <!-- =========================================================== -->
-  <!-- PHASE 2 — AUTHORITY & DISCOVERY -->
-  <!-- =========================================================== -->
+  <!-- ===== PHASE 2: DISCOVERY ===== -->
   <section class="phase phase-2" data-phase="2" id="phase-2">
     <div class="phase-header">
       <span class="num">02</span>
       <span class="ttl">AUTHORITY & DISCOVERY</span>
-      <span class="meta">1–3 min · Goal: confirm decision-maker, uncover & quantify pain</span>
+      <span class="meta">1–3 min · Qualify & uncover pain</span>
     </div>
 
     <div class="goal-card">
-      <b>Your superpower:</b> Qualify authority BEFORE investing time. One question doubles your conversion rate.
+      <b>Superpower:</b> Qualify authority BEFORE investing time. One question doubles your conversion rate.
     </div>
 
     <div class="your-line">
       <span class="label">▶ AUTHORITY QUESTION</span>
-      <div class="script">"Before we go further — when it comes to investing in technology or systems for your business, are <span class="key-phrase">you the person who makes those decisions</span>, or is there a partner or manager involved?"</div>
+      <div class="script">"Before we go further — for an Odoo + AI implementation, are <span class="key-phrase">you the decision-maker</span>, or should we include a partner, finance lead, or operations head from the start?"</div>
     </div>
 
-    <div class="obj-row" data-keywords="partner boss check finance team approval">
+    <div class="obj-row" data-keywords="partner boss check finance team approval" role="article" aria-label="Objection: Need to check with partner">
       <div class="obj-trigger">
         <span class="num">#04</span>
         <span class="tag">Objection</span>
@@ -1302,7 +1069,7 @@
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="send information brochure email">
+    <div class="obj-row" data-keywords="send information brochure email" role="article" aria-label="Objection: Send me information">
       <div class="obj-trigger">
         <span class="num">#05</span>
         <span class="tag">Objection</span>
@@ -1310,7 +1077,7 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"Every business is unique — generic info won't show you what this looks like for YOUR business. The meeting is more valuable: <span class="key-phrase">I'll show you YOUR processes automated.</span> 30 minutes, and if after 10 you feel it's not valuable, you can end the call. Fair? Thursday 11 AM or Friday 3 PM?"</div>
+        <div class="script">"Every business is unique — generic brochures won't map your real workflow. The scoping call is more valuable: <span class="key-phrase">we map your current process and show a tailored Odoo 19 + AI architecture.</span> 30 minutes, and if after 10 you feel it's not valuable, you can end the call. Fair? Thursday 11 AM or Friday 3 PM?"</div>
         <div class="alt">
           <b>If they still insist:</b> Send info BUT lock a tentative meeting on the same call. "If it looks good, can we discuss Tuesday at 2 PM?" Send info + calendar invite immediately.
         </div>
@@ -1320,10 +1087,10 @@
     <div class="your-line">
       <span class="label">▶ DISCOVERY QUESTIONS (in order)</span>
       <div class="script">
-        1. "Walk me through your process — order comes in, what happens? Excel and manual, or systems?"<br>
-        2. "How many hours per day does your team spend on admin work?"<br>
-        3. "How many people are doing this admin work?"<br>
-        4. "What's the biggest headache — time, errors, can't get reports, or something else?"<br>
+        1. "Walk me through the full flow — lead/order to invoice/collection. Where are Excel and WhatsApp still involved?"<br>
+        2. "How many hours per day are lost in admin, reconciliation, or manual reporting?"<br>
+        3. "Which teams are impacted most — sales, finance, operations, or projects?"<br>
+        4. "Are VAT/Corporate Tax/RERA/PDPL requirements handled in-system or manually?"<br>
         <span class="pause">→ CALCULATE COST OUT LOUD</span>
       </div>
     </div>
@@ -1335,7 +1102,7 @@
 × 12 = <span class="total">AED 475,200/year LOST to manual processes</span>
     </div>
 
-    <div class="obj-row" data-keywords="existing system software using already have">
+    <div class="obj-row" data-keywords="existing system software using already have" role="article" aria-label="Objection: Already using software">
       <div class="obj-trigger">
         <span class="num">#06</span>
         <span class="tag">Objection</span>
@@ -1343,14 +1110,14 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"That's great — it means you value technology. Are you 100% happy, or are there gaps where you're still using Excel or manual workarounds? <span class="key-phrase">Most systems solve 70–80% and leave gaps.</span> We complete what you started — without replacing your existing system. Worth 20 minutes to explore?"</div>
+        <div class="script">"That's great — it means you value technology. Are you 100% happy, or are there still gaps handled manually? <span class="key-phrase">Most ERP setups solve 70–80% and leave integration, reporting, and adoption gaps.</span> We either optimize your current stack or migrate in phases with minimal disruption. Worth 20 minutes to explore?"</div>
         <div class="alt">
           <b>If they claim 100% automated:</b> Drill: "Automatic invoice from orders? Real-time inventory across all locations? Auto reports without manual compilation?" → they'll admit gaps.
         </div>
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="too small business size">
+    <div class="obj-row" data-keywords="too small business size" role="article" aria-label="Objection: Too small">
       <div class="obj-trigger">
         <span class="num">#07</span>
         <span class="tag">Objection</span>
@@ -1358,19 +1125,17 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"Actually — that's perfect. <span class="key-phrase">Small businesses benefit MORE</span> because every hour saved has bigger bottom-line impact, you can't afford inefficiency like big companies can, and you can implement faster. We just helped a 3-person trading company cut admin from 25 hours to 4 hours weekly. Want to see how?"</div>
+        <div class="script">"Actually — that's perfect. <span class="key-phrase">Mid-market teams benefit fastest</span> because every recovered hour directly improves cashflow and execution. Our phased delivery model is designed for lean teams, with training and change management built in. Want to see how?"</div>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================== -->
-  <!-- PHASE 3 — SOFT PITCH & MEETING LOCK -->
-  <!-- =========================================================== -->
+  <!-- ===== PHASE 3: SOFT PITCH ===== -->
   <section class="phase phase-3" data-phase="3" id="phase-3">
     <div class="phase-header">
       <span class="num">03</span>
       <span class="ttl">SOFT PITCH & MEETING LOCK</span>
-      <span class="meta">1–2 min · Goal: create curiosity, lock the meeting</span>
+      <span class="meta">1–2 min · Create curiosity</span>
     </div>
 
     <div class="goal-card">
@@ -1379,10 +1144,10 @@
 
     <div class="your-line">
       <span class="label">▶ THE SOFT PITCH (90 seconds max)</span>
-      <div class="script">"Based on what you told me — 18 hours daily on manual work, AED 475K/year lost, customer complaints from errors — what we do is simple: <span class="key-phrase">we automate that manual work.</span> Orders flow in, invoices go out, inventory updates itself — no human touch. I'm not going to explain everything on the phone because it's easier to SHOW you. A trading company in Deira just like you cut admin from 30 to 4 hours weekly and complaints from 15–20 to 2–3 monthly. I'd like to offer you a free 30-min consultation where I see your workflow, show you the automated version for YOUR business, and calculate exact savings. Even if you don't work with us, you'll walk away with valuable ideas. Open to that?"</div>
+      <div class="script">"Based on what you shared — high manual workload, reporting delays, and compliance pressure — here is what we do: <span class="key-phrase">Odoo 19 architecture + AI copilots + UAE compliance-first configuration.</span> We connect finance, sales, operations, and reporting in one operating system, with integrations and team training included. I'm not going to over-explain on this call; it's easier to SHOW you your exact future-state flow. I'd like to offer a free 30-minute scoping consultation to map your process, identify quick wins, and estimate year-1 ROI. Open to that?"</div>
     </div>
 
-    <div class="obj-row" data-keywords="budget money afford cant pay">
+    <div class="obj-row" data-keywords="budget money afford cant pay" role="article" aria-label="Objection: No budget">
       <div class="obj-trigger">
         <span class="num">#08</span>
         <span class="tag">Objection</span>
@@ -1390,14 +1155,14 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"This meeting is completely free, and you SHOULD see what's possible even without budget. Remember the AED 475,200/year you're losing? Our solution costs AED 72K/year. <span class="key-phrase">You're not spending — you're MAKING AED 403K in year one.</span> 560% ROI. This isn't expense that needs budget — it's an investment that creates budget. Just SHOW me 30 min, then YOU decide. Fair?"</div>
+        <div class="script">"This scoping call is completely free, and you should still see the numbers even before budget approval. If inefficiency is costing AED 475,200/year and implementation is AED 72K/year, <span class="key-phrase">you're protecting margin, not creating expense.</span> We also structure delivery in fixed milestones so there are no open-ended retainers. Give me 30 minutes, then you decide. Fair?"</div>
         <div class="alt">
-          <b>If genuinely cash-constrained:</b> "We offer 90-day payment terms structured so savings cover cost from month one. Let me first show you if this even makes sense for your business."
+          <b>If genuinely cash-constrained:</b> "We can phase modules and timelines so value lands early. Let me first confirm if this is commercially viable for your business."
         </div>
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="think about it later consider">
+    <div class="obj-row" data-keywords="think about it later consider" role="article" aria-label="Objection: Need to think about it">
       <div class="obj-trigger">
         <span class="num">#09</span>
         <span class="tag">Objection</span>
@@ -1409,7 +1174,7 @@
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="tried before failed bad experience">
+    <div class="obj-row" data-keywords="tried before failed bad experience" role="article" aria-label="Objection: Tried before and failed">
       <div class="obj-trigger">
         <span class="num">#10</span>
         <span class="tag">Objection</span>
@@ -1417,14 +1182,14 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"I'm sorry that happened — frustrating to invest and get no result. Can you tell me what went wrong? [LISTEN] That's exactly why we do things differently: <span class="key-phrase">we start small, train your team properly, give ongoing support (my personal mobile), customize to YOUR process, and we're local in Dubai.</span> Worth 30 min to see the different approach? If you see the same red flags, end the call right there. You're in complete control."</div>
+        <div class="script">"I'm sorry that happened — that's frustrating. Can you tell me what failed: scope, timeline, adoption, or support? [LISTEN] That's exactly where we differ: <span class="key-phrase">fixed scope, fixed timeline, operator-led rollout, compliance built in from day one, and structured training/change management.</span> Worth 30 minutes to compare approaches? If you see the same red flags, we stop there. You're fully in control."</div>
         <div class="alt">
           <b>Insight:</b> This is a GOOD sign — they believe in automation, they just had a bad vendor. Position yourself as the fix.
         </div>
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="next month later january february delay reschedule">
+    <div class="obj-row" data-keywords="next month later january february delay reschedule" role="article" aria-label="Objection: Can we do this next month">
       <div class="obj-trigger">
         <span class="num">#11</span>
         <span class="tag">Objection</span>
@@ -1432,13 +1197,13 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"We onboard only 5 new clients per month to maintain quality — 2 spots left for December. <span class="key-phrase">Meet this week → start December → save AED 39,600 in January.</span> Delay to January → start March → lose AED 79,200 (2 months). Every month delayed costs AED 39,600 in continued inefficiency. Can we at least do the meeting this week? The meeting doesn't commit you. Fair?"</div>
+        <div class="script">"We cap onboarding capacity to protect delivery quality. <span class="key-phrase">Scoping this week means earlier go-live and earlier savings.</span> Delaying the discovery simply extends current inefficiency and compliance risk. Can we at least lock the scoping call this week? It doesn't commit you."</div>
       </div>
     </div>
 
     <div class="your-line">
       <span class="label">▶ MEETING LOCK SCRIPT</span>
-      <div class="script">"Perfect! Thursday Dec 5 at 11 AM UAE time. 30 minutes on Zoom. Email for the calendar invite? WhatsApp same as this number? Great. You'll get: <span class="key-phrase">calendar invite (next 10 min), WhatsApp confirmation, Zoom link 1 hour before, reminder day before.</span> If you have your ops manager or accountant available, include them — they ask technical questions in their area. Should I include anyone else? If anything comes up, call or WhatsApp me — don't just skip, we'll find another time. Fair?"</div>
+      <div class="script">"Perfect! Thursday at 11 AM UAE time. 30 minutes on Zoom. Email for the invite? WhatsApp same as this number? Great. You'll receive: <span class="key-phrase">calendar invite, WhatsApp confirmation, agenda, and required prep list.</span> Please include operations + finance so we can validate process, compliance, and ROI in one call. If anything changes, message me and we'll reschedule properly. Fair?"</div>
     </div>
 
     <div class="micro-note">
@@ -1446,18 +1211,16 @@
     </div>
   </section>
 
-  <!-- =========================================================== -->
-  <!-- PHASE 4 — DEMO & CLOSE -->
-  <!-- =========================================================== -->
+  <!-- ===== PHASE 4: DEMO & CLOSE ===== -->
   <section class="phase phase-4" data-phase="4" id="phase-4">
     <div class="phase-header">
       <span class="num">04</span>
       <span class="ttl">DEMO & CLOSE</span>
-      <span class="meta">30 min meeting · Goal: close TODAY, not "follow up"</span>
+      <span class="meta">30 min meeting · Goal: close TODAY</span>
     </div>
 
     <div class="goal-card">
-      <b>Meeting structure:</b> Warm-up (3 min) → Discovery deepening (5 min) → Demo (12 min) → ROI (4 min) → Readiness check 1–10 (2 min) → CLOSE (2 min) → Contract (2 min)
+      <b>Meeting structure:</b> Business context (3 min) → Process map (5 min) → Odoo 19 + AI walkthrough (12 min) → ROI & compliance fit (4 min) → Readiness (2 min) → Decision path (2 min) → Next steps (2 min)
     </div>
 
     <div class="your-line">
@@ -1466,21 +1229,21 @@
     </div>
 
     <div class="micro-note">
-      <b>8–10 →</b> "What would make this a 10? What's the 1–2 points holding you back?" → address → close.<br>
-      <b>5–7 →</b> "What would make this a 10? What specific concerns?" → address real objection → re-ask scale.<br>
-      <b>1–4 →</b> "It sounds like this isn't the right fit right now. What would need to change for this to make sense in the future?" → qualify out cleanly.
+      <b>8–10 →</b> "What would make this a 10? What's holding you back?" → address → close.<br>
+      <b>5–7 →</b> "What would make this a 10?" → address real concern → re-ask scale.<br>
+      <b>1–4 →</b> "Not the right fit right now. What would need to change?" → qualify out cleanly.
     </div>
 
     <div class="your-line">
       <span class="label">▶ THE AAU CLOSE (Assumptive · Alternative · Urgency)</span>
-      <div class="script">"Based on everything: losing AED 330K yearly, saving AED 231K net year one, 2 spots left for December. I don't see any reason to delay. <span class="key-phrase">We start implementation Monday Dec 9th.</span> Three packages — based on 50 orders daily, the Professional at AED 5,999/month is perfect. To get started I need two things: your business license number, and your decision — Professional or Enterprise? Which makes more sense for [Company]?"</div>
+      <div class="script">"Based on everything: clear inefficiency cost, strong year-1 ROI, and a clear fit for your operations. I don't see a reason to delay. <span class="key-phrase">Let's start with the agreed fixed-scope implementation plan.</span> We can structure this as Starter, Growth, or Enterprise based on your complexity. To proceed, I need two items: your legal entity details and your package decision. Which option fits [Company] best today?"</div>
     </div>
 
     <div class="micro-note">
-      🤐 <b>SILENCE RULE:</b> After asking for the order — STOP TALKING. Count to 30. First to speak loses. Let pressure work.
+      🤐 <b>SILENCE RULE:</b> After asking for the order — STOP TALKING. Count to 30. First to speak loses.
     </div>
 
-    <div class="obj-row" data-keywords="expensive too much price cost high">
+    <div class="obj-row" data-keywords="expensive too much price cost high" role="article" aria-label="Objection: Too expensive">
       <div class="obj-trigger">
         <span class="num">#12</span>
         <span class="tag">Objection</span>
@@ -1488,14 +1251,14 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"If I could show you how to make AED 25,300/month — would you invest AED 5,999 to get it? [WAIT] That's exactly what this is. <span class="key-phrase">You're not paying AED 5,999 — you're MAKING AED 21,501 net profit monthly.</span> Real question isn't whether you can afford our solution — it's whether you can afford to keep losing AED 27,500/month. Should we get started with Professional?"</div>
+        <div class="script">"If I can show verified savings and faster execution, would this still feel expensive? [WAIT] <span class="key-phrase">This is a margin-protection decision, not a software expense.</span> The real comparison is implementation cost versus ongoing monthly leakage from manual operations. Should we proceed with the right-fit package for your team?"</div>
         <div class="alt">
-          <b>Per-order reframe:</b> "AED 5,999 ÷ 22 days ÷ 50 orders = AED 5.46 per order. Current manual cost = AED 550/order. That's 99% cost reduction per order."
+          <b>Reframe:</b> "Compare unit economics before and after rollout by process cycle, not just subscription line items."
         </div>
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="discount cheaper lower price reduce">
+    <div class="obj-row" data-keywords="discount cheaper lower price reduce" role="article" aria-label="Objection: Can you discount">
       <div class="obj-trigger">
         <span class="num">#13</span>
         <span class="tag">Objection</span>
@@ -1503,15 +1266,15 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"If I gave 50% discount I'd have to remove 50% of value — half features, half support, half training, half results. Of course not. <span class="key-phrase">Instead of discounting, I'll add value at no extra charge:</span> premium training (AED 3K), 6-mo priority support (AED 5K), custom reports (AED 2K) = AED 10K value added free. Plus it pays for itself in &lt;3 months. Should we move forward with Professional + bonuses?"</div>
+        <div class="script">"We don't compete on random discounting because delivery quality drops when scope is underpriced. <span class="key-phrase">What we can do is optimize commercial structure:</span> phase rollout, milestone billing, or value-add items like extra training and reporting packs. Would you like the best-fit commercial structure or the lowest sticker price?"</div>
         <div class="alt">
-          <b>If they insist on price reduction:</b> "What number would make sense?" → "I can do AED 5,499 monthly IF: 12-month commitment, quarterly prepay, decide today. After today, back to AED 5,999. Can you commit?"
-          <span class="pill pill-warn">Never discount &gt;15% without commitment trade</span>
+          <b>If they insist on price reduction:</b> "What commercial constraint do we need to solve: budget timing, scope size, or payment terms?" → adjust structure, not delivery quality.
+          <span class="pill pill-warn">Never discount >15% without commitment trade</span>
         </div>
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="partner discuss talk family check">
+    <div class="obj-row" data-keywords="partner discuss talk family check" role="article" aria-label="Objection: Need to discuss with partner">
       <div class="obj-trigger">
         <span class="num">#14</span>
         <span class="tag">Objection</span>
@@ -1526,7 +1289,7 @@
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="think about it later closing stage final">
+    <div class="obj-row" data-keywords="think about it later closing stage final" role="article" aria-label="Objection: Need to think about it (closing)">
       <div class="obj-trigger">
         <span class="num">#15</span>
         <span class="tag">Objection</span>
@@ -1534,11 +1297,11 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"What specifically? <span class="key-phrase">Does it work? (you saw demo). Does ROI make sense? (358% return). Can we deliver? (references). Affordable? (pays back in 11 weeks). Team can use it? (training included).</span> Help me understand what's holding you back so we can address it now. [LISTEN] Every day you think costs AED 1,250. A week = AED 8,750 gone. Start with 30-day trial — full refund if no value. Nothing to lose, AED 25K/mo to gain. Can we get started?"</div>
+        <div class="script">"What specifically should we de-risk before you decide? <span class="key-phrase">Delivery confidence, ROI assumptions, compliance fit, integration risk, or team adoption?</span> If you name the concern, we can solve it now with a concrete plan. [LISTEN] Every delay extends current inefficiency cost. Shall we move forward with the agreed scope and timeline?"</div>
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="complicated complex difficult hard staff">
+    <div class="obj-row" data-keywords="complicated complex difficult hard staff" role="article" aria-label="Objection: Looks complicated">
       <div class="obj-trigger">
         <span class="num">#16</span>
         <span class="tag">Objection</span>
@@ -1546,11 +1309,11 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"For your team it's actually <span class="key-phrase">simpler than what they do now.</span> Currently: multiple Excel files, WhatsApp coordination, manual everything. With us: just 3 buttons — New Order, Check Inventory, View Reports. All the complicated stuff happens automatically in the background. A 10-year-old could use it. Our clients tell us their staff LOVE it — removes boring manual work."</div>
+        <div class="script">"For your team, daily usage becomes simpler than today. <span class="key-phrase">Complexity is handled in architecture, not dumped on end users.</span> We include role-based screens, SOP-driven training, and go-live support so adoption is structured, not left to chance."</div>
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="roi numbers good true skeptical doubt">
+    <div class="obj-row" data-keywords="roi numbers good true skeptical doubt" role="article" aria-label="Objection: ROI sounds too good">
       <div class="obj-trigger">
         <span class="num">#17</span>
         <span class="tag">Objection</span>
@@ -1558,7 +1321,7 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Reply</span>
-        <div class="script">"I appreciate the skepticism — these numbers do sound impressive. They're real because <span class="key-phrase">you're currently paying for inefficiency you can't see clearly.</span> 275 hrs/mo × AED 100/hr = AED 27,500 manual cost. Our solution = AED 5,999. Not magic — just making the invisible visible. Don't take my word: I'll connect you with Ahmed at Deira Trading directly — ask him anything. Or visit his office and see the system live. Your choice."</div>
+        <div class="script">"Fair point. We keep ROI claims auditable. <span class="key-phrase">We baseline your current cycle times, error rates, and labor load, then measure post-go-live deltas.</span> This is not hype; it's operator-grade measurement. If you want, we'll walk you through the exact assumptions line by line."</div>
       </div>
     </div>
 
@@ -1584,27 +1347,24 @@
     </div>
   </section>
 
-  <!-- =========================================================== -->
-  <!-- PHASE 5 — POST-CLOSE / FOLLOW-UP / GHOSTING -->
-  <!-- =========================================================== -->
+  <!-- ===== PHASE 5: POST-CLOSE ===== -->
   <section class="phase phase-5" data-phase="5" id="phase-5">
     <div class="phase-header">
       <span class="num">05</span>
       <span class="ttl">POST-CLOSE & GHOSTING</span>
-      <span class="meta">After yes · Goal: lock contract, prevent buyer's remorse</span>
+      <span class="meta">After yes · Prevent buyer's remorse</span>
     </div>
 
     <div class="your-line">
-      <span class="label">▶ CONTRACT CAPTURE (right after they say yes)</span>
-      <div class="script">"Excellent decision! Let me get your details: <span class="key-phrase">1) Full legal business name, 2) License number, 3) Billing address, 4) Your name & title, 5) Email, 6) Mobile.</span> [Confirm everything back] Contract sent to your email within 2 hours. Payment by [date] before Dec 9 start. Bank transfer, credit card, or cheque — which works?"</div>
+      <span class="label">▶ CONTRACT CAPTURE</span>
+      <div class="script">"Excellent decision! Let me capture the implementation brief: <span class="key-phrase">1) Legal entity details, 2) Business license, 3) Billing details, 4) Project owner + approver, 5) Technical contacts, 6) Target go-live window.</span> [Confirm back] We'll send the scoped proposal, timeline, and milestone plan within 2 hours."</div>
     </div>
 
     <div class="micro-note">
-      ⚡ Within 1 hour: send contract + payment instructions + wel    <div class="micro-note">
-      ⚡ <b>Within 1 hour:</b> WhatsApp welcome + contract emailed + bank details + onboarding call scheduled + CRM marked "Closed — Pending Payment"
+      ⚡ <b>Within 1 hour:</b> WhatsApp recap + scoped proposal + implementation timeline + stakeholder invite + CRM stage updated
     </div>
 
-    <div class="obj-row" data-keywords="no show didnt come missed meeting ghosted">
+    <div class="obj-row" data-keywords="no show didnt come missed meeting ghosted" role="article" aria-label="Situation: No show">
       <div class="obj-trigger">
         <span class="num">#18</span>
         <span class="tag">Situation</span>
@@ -1612,7 +1372,7 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Action</span>
-        <div class="script"><span class="key-phrase">Call within 5 minutes of meeting time:</span> "Hi Mr. [Name], we had a meeting scheduled at 11 AM today. Is everything okay?" [Listen to excuse — they'll apologize] "No problem, these things happen. I have your analysis ready — I'd hate for it to go to waste. Can we reschedule tomorrow same time, or this afternoon at 3 PM?"</div>
+        <div class="script"><span class="key-phrase">Call within 5 minutes of meeting time:</span> "Hi Mr. [Name], we had a scoping call at 11 AM. Is everything okay?" [Listen] "No problem, these things happen. I have your process map template ready — can we reschedule tomorrow same time, or this afternoon at 3 PM?"</div>
         <div class="alt">
           <b>If they no-show twice:</b> Send WhatsApp: "We've had to reschedule twice. Should I close your file and follow up in 3 months, or schedule one final meeting with a firm commitment?"
           <span class="pill pill-critical">After 2 no-shows — stop chasing. Mark 3-month follow-up.</span>
@@ -1620,7 +1380,7 @@
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="ghosting silent no response after contract sent">
+    <div class="obj-row" data-keywords="ghosting silent no response after contract sent" role="article" aria-label="Situation: Ghosting after yes">
       <div class="obj-trigger">
         <span class="num">#19</span>
         <span class="tag">Situation</span>
@@ -1628,14 +1388,14 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Action</span>
-        <div class="script"><b>Day 3:</b> WhatsApp gentle check-in. <b>Day 5:</b> Call — "Did you receive the contract? Anything holding you up?" Create urgency: <span class="key-phrase">"For December 9 start we need payment by Dec 6. We have 2 spots left."</span> <b>Day 7:</b> Send break-up email.</div>
+        <div class="script"><b>Day 3:</b> WhatsApp gentle check-in. <b>Day 5:</b> Call — "Did you receive the proposal and timeline? Any blocker on scope or approvals?" Create urgency: <span class="key-phrase">"To secure your implementation slot, we need confirmation this week."</span> <b>Day 7:</b> Send break-up email.</div>
         <div class="alt">
           <b>Break-up email:</b> "Should I close your file? I've reached out several times since our meeting. A simple 'not interested' is fine. If you're still interested, reply 'INTERESTED' and tell me what's holding you back. Please reply by Friday or I'll close your file."
         </div>
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="cancel refund change mind after signing">
+    <div class="obj-row" data-keywords="cancel refund change mind after signing" role="article" aria-label="Situation: Buyer's remorse">
       <div class="obj-trigger">
         <span class="num">#20</span>
         <span class="tag">Situation</span>
@@ -1643,22 +1403,20 @@
       </div>
       <div class="obj-response">
         <span class="tag">Your Action</span>
-        <div class="script">"I understand. Help me understand — what changed? [LISTEN to real concern] Most buyer's remorse is fear of the unknown. <span class="key-phrase">Let me address the specific concern — then if you still want to cancel, I'll honor it.</span> Before that, let me show you our 30-day money-back guarantee. You're protected. We don't keep clients who don't want to be here. Can we just complete onboarding and let the results speak for themselves?"</div>
+        <div class="script">"I understand. Help me understand what changed: scope, team readiness, budget timing, or risk concerns? [LISTEN] Most remorse comes from uncertainty, not mismatch. <span class="key-phrase">Let me address the exact concern with a revised execution plan and risk controls.</span> If it still does not fit, we'll close respectfully. Would you allow one alignment call before canceling?"</div>
       </div>
     </div>
   </section>
 
-  <!-- =========================================================== -->
-  <!-- CULTURAL QUICK SWITCH -->
-  <!-- =========================================================== -->
+  <!-- ===== CULTURE QUICK-SWITCH ===== -->
   <section class="phase phase-5" data-phase="5" id="phase-cultural">
     <div class="phase-header">
       <span class="num">06</span>
       <span class="ttl">CULTURAL QUICK-SWITCH</span>
-      <span class="meta">Adapt tone & approach by client background</span>
+      <span class="meta">Adapt tone by client background</span>
     </div>
 
-    <div class="obj-row" data-keywords="arab emirati saudi gulf khaleeji">
+    <div class="obj-row" data-keywords="arab emirati saudi gulf khaleeji" role="article" aria-label="Cultural style: Arab / Emirati">
       <div class="obj-trigger">
         <span class="num">CX1</span>
         <span class="tag">Arab / Emirati</span>
@@ -1675,7 +1433,7 @@
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="indian pakistani south asian negotiate">
+    <div class="obj-row" data-keywords="indian pakistani south asian negotiate" role="article" aria-label="Cultural style: Indian / Pakistani">
       <div class="obj-trigger">
         <span class="num">CX2</span>
         <span class="tag">Indian / Pakistani</span>
@@ -1683,7 +1441,7 @@
       </div>
       <div class="obj-response">
         <span class="tag">Tone Adjustments</span>
-        <div class="script"><b>Open:</b> "Good morning, Mr. Patel. I'll be direct — I help businesses reduce operational costs through automation. May I take 2 minutes?"<br>
+        <div class="script"><b>Open:</b> "Good morning, Mr. Patel. I'll be direct — we deliver Odoo 19 + AI implementations with measurable ROI and fixed timelines. May I take 2 minutes?"<br>
         <b>ROI emphasis:</b> show every number, every step, on screen. "Investment AED 72K/yr → Savings AED 258K/yr → <span class="key-phrase">Net profit AED 186K → 258% ROI → 2.8-month payback.</span>"<br>
         <b>Expect negotiation:</b> never give best price first — leave room.</div>
         <div class="alt">
@@ -1693,7 +1451,7 @@
       </div>
     </div>
 
-    <div class="obj-row" data-keywords="western european american british expat">
+    <div class="obj-row" data-keywords="western european american british expat" role="article" aria-label="Cultural style: Western / Expat">
       <div class="obj-trigger">
         <span class="num">CX3</span>
         <span class="tag">Western Expat</span>
@@ -1701,7 +1459,7 @@
       </div>
       <div class="obj-response">
         <span class="tag">Tone Adjustments</span>
-        <div class="script"><b>Open:</b> "Hi David, this is [Name] from Scholarix. I'll keep this brief. We automate manual business processes — you're probably losing ~AED 25K/month to inefficiency. Worth a 30-min meeting?"<br>
+        <div class="script"><b>Open:</b> "Hi David, this is [Name] from SGC TECH AI. I'll keep this brief. We deploy Odoo + AI systems that replace manual workflows and fragmented tools. You're likely losing ~AED 25K/month to inefficiency. Worth a 30-min meeting?"<br>
         <b>Close:</b> "Current loss AED 27,500/mo · our cost AED 5,999/mo · payback 3 months · 258% ROI. <span class="key-phrase">I need your decision by Friday for December start. Yes or no?</span>"</div>
         <div class="alt">
           <span class="pill pill-critical">Never:</span> Excessive small talk · vague pricing · miss deadlines · over-explain<br>
@@ -1711,9 +1469,7 @@
     </div>
   </section>
 
-  <!-- =========================================================== -->
-  <!-- DAILY TARGETS STRIP -->
-  <!-- =========================================================== -->
+  <!-- ===== DAILY TARGETS ===== -->
   <section class="phase phase-5" data-phase="all" id="phase-targets">
     <div class="phase-header" style="background:var(--ink)">
       <span class="num">📊</span>
@@ -1743,7 +1499,7 @@
     </div>
   </section>
 
-  <!-- ===== PRE-CALL CHECKLIST (collapsible footer) ===== -->
+  <!-- ===== PRE-CALL CHECKLIST ===== -->
   <section class="phase" data-phase="all" id="phase-checklist">
     <div class="phase-header" style="background:linear-gradient(135deg,#0b3d91,#d97706)">
       <span class="num">✓</span>
@@ -1752,66 +1508,47 @@
     </div>
     <div class="goal-card" style="background:#fffbeb">
       <b>My ONE goal:</b> book a qualified meeting with a decision-maker.<br>
-      <b>I will:</b> qualify authority before investing time · calculate cost of inaction in every discovery · create urgency with December capacity · use AAU close · control follow-up · not accept "think about it" without addressing the real objection.<br>
+      <b>I will:</b> qualify authority before investing time · diagnose ERP, compliance, and integration gaps · quantify cost of inaction · position fixed-scope/fixed-timeline delivery · control follow-up with clear next steps.<br>
       <b>Mindset:</b> I'm HELPING them, not selling. Every NO is practice for the next YES. Rejection is data, not defeat.
     </div>
   </section>
 
 </main>
 
-<!-- ===== SCRIPT ===== -->
+<!-- ===== SCRIPT (ENHANCED) ===== -->
 <script>
-/**
- * SCHOLARIX SALES COCKPIT
- * Fast-response objection handler with search, filtering, and user preferences
- * 
- * Architecture:
- * - Module pattern for encapsulation
- * - Event delegation for performance
- * - Local storage for user preferences
- * - Analytics hooks for tracking
- * - Accessibility support
- */
-
 (function() {
   'use strict';
 
-  // ========================================
-  // CONFIG & STATE
-  // ========================================
+  // CONFIG
   const CONFIG = {
-    storagePrefix: 'scholarix_cockpit_',
+    storagePrefix: 'sgctech_cockpit_',
     analyticsEnabled: true,
     debounceDelay: 200,
     defaultPhase: 'all',
     phases: ['all', '1', '2', '3', '4', '5']
   };
 
+  // STATE
   const STATE = {
     currentPhase: localStorage.getItem(CONFIG.storagePrefix + 'phase') || CONFIG.defaultPhase,
     compactMode: localStorage.getItem(CONFIG.storagePrefix + 'compact') === 'true',
     searchQuery: '',
-    searchHistory: JSON.parse(localStorage.getItem(CONFIG.storagePrefix + 'search_history') || '[]')
+    searchHistory: JSON.parse(localStorage.getItem(CONFIG.storagePrefix + 'search_history') || '[]'),
+    sessionStart: Date.now()
   };
 
-  // ========================================
-  // DOM ELEMENT CACHE
-  // ========================================
+  // DOM CACHE
   const DOM = {
     search: document.getElementById('search'),
     filterBtns: document.querySelectorAll('.phase-btn'),
     compactBtn: document.getElementById('compactBtn'),
     phases: document.querySelectorAll('.phase'),
     rows: document.querySelectorAll('.obj-row'),
-    body: document.body,
-    main: document.querySelector('main'),
-    header: document.getElementById('main-header'),
-    intro: document.querySelector('.intro')
+    body: document.body
   };
 
-  // ========================================
   // PERFORMANCE MONITORING
-  // ========================================
   const Perf = {
     marks: {},
     start: function(label) {
@@ -1820,117 +1557,36 @@
     end: function(label) {
       if (!this.marks[label]) return 0;
       const duration = performance.now() - this.marks[label];
-      if (window.location.hostname === 'localhost') {
-        console.debug(`⏱ ${label}: ${duration.toFixed(2)}ms`);
-      }
       delete this.marks[label];
       return duration;
     }
   };
 
-  // ========================================
-  // ANALYTICS MODULE (ENHANCED)
-  // ========================================
+  // ANALYTICS
   const Analytics = {
     queue: [],
-    maxQueueSize: 100,
-    sessionId: this.sessionId || Math.random().toString(36).substring(7),
+    sessionId: Math.random().toString(36).substring(7),
 
     track: function(eventName, eventData = {}) {
       if (!CONFIG.analyticsEnabled) return;
-      
-      const event = {
-        name: eventName,
-        timestamp: new Date().toISOString(),
-        sessionId: this.sessionId,
-        url: window.location.href,
-        userAgent: navigator.userAgent.substring(0, 50),
-        visibleRows: document.querySelectorAll('.obj-row:not(.hidden-by-search):not(.hidden-by-filter)').length,
-        ...eventData
-      };
-
+      const event = { name: eventName, timestamp: new Date().toISOString(), ...eventData };
       this.queue.push(event);
-      if (this.queue.length > this.maxQueueSize) {
-        this.queue.shift();
-      }
-
-      // Log to console in development
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-        console.log('[Analytics]', event);
-      }
-
-      // Send to analytics endpoint if available
-      if (window.__analyticsQueue) {
-        window.__analyticsQueue.push(event);
-      }
-
-      // Google Analytics integration (if available)
-      if (window.gtag) {
-        gtag('event', eventName, eventData);
-      }
+      if (this.queue.length > 100) this.queue.shift();
+      if (window.gtag) gtag('event', eventName, eventData);
     },
 
     trackSearch: function(query) {
-      this.track('search_executed', {
-        query: query,
-        queryLength: query.length,
-        resultsCount: document.querySelectorAll('.obj-row:not(.hidden-by-search):not(.hidden-by-filter)').length
-      });
+      this.track('search_executed', { query: query, queryLength: query.length });
     },
 
     trackFilter: function(phase) {
-      this.track('filter_applied', {
-        phase: phase,
-        visibleRows: document.querySelectorAll(`.obj-row:not(.hidden-by-filter):not(.hidden-by-search)`).length
-      });
-    },
-
-    trackModeToggle: function(isCompact) {
-      this.track('mode_toggled', { compactMode: isCompact });
-    },
-
-    trackPageLoad: function(loadTime) {
-      this.track('page_load_complete', { loadTime: loadTime.toFixed(2) });
-    },
-
-    getQueue: function() {
-      return this.queue;
+      this.track('filter_applied', { phase: phase });
     }
   };
 
-  // ========================================
-  // LOCAL STORAGE MODULE
-  // ========================================
-  const Storage = {
-    setPhase: function(phase) {
-      localStorage.setItem(CONFIG.storagePrefix + 'phase', phase);
-    },
-
-    setCompactMode: function(enabled) {
-      localStorage.setItem(CONFIG.storagePrefix + 'compact', enabled ? 'true' : 'false');
-    },
-
-    addSearchHistory: function(query) {
-      if (!query.trim()) return;
-      
-      STATE.searchHistory = STATE.searchHistory.filter(q => q !== query);
-      STATE.searchHistory.unshift(query);
-      STATE.searchHistory = STATE.searchHistory.slice(0, 10); // Keep last 10
-      
-      localStorage.setItem(CONFIG.storagePrefix + 'search_history', JSON.stringify(STATE.searchHistory));
-    },
-
-    getSearchHistory: function() {
-      return STATE.searchHistory;
-    }
-  };
-
-  // ========================================
   // SEARCH MODULE
-  // ========================================
   const SearchModule = {
     debounceTimer: null,
-
     run: function(query) {
       query = (query || '').trim().toLowerCase();
       STATE.searchQuery = query;
@@ -1955,12 +1611,10 @@
       });
 
       Analytics.trackSearch(query);
-      Storage.addSearchHistory(query);
     },
 
     handleInput: function(event) {
       const query = event.target.value;
-      
       clearTimeout(this.debounceTimer);
       this.debounceTimer = setTimeout(() => {
         this.run(query);
@@ -1968,9 +1622,7 @@
     }
   };
 
-  // ========================================
   // FILTER MODULE
-  // ========================================
   const FilterModule = {
     set: function(phase) {
       if (!CONFIG.phases.includes(phase)) return;
@@ -1987,7 +1639,7 @@
       });
 
       STATE.currentPhase = phase;
-      Storage.setPhase(phase);
+      localStorage.setItem(CONFIG.storagePrefix + 'phase', phase);
       Analytics.trackFilter(phase);
     },
 
@@ -1999,31 +1651,24 @@
     }
   };
 
-  // ========================================
-  // COMPACT MODE MODULE
-  // ========================================
+  // COMPACT MODE
   const CompactMode = {
     toggle: function() {
       STATE.compactMode = !STATE.compactMode;
       DOM.body.classList.toggle('compact', STATE.compactMode);
-      
       DOM.compactBtn.classList.toggle('active', STATE.compactMode);
       DOM.compactBtn.setAttribute('aria-pressed', STATE.compactMode);
       DOM.compactBtn.textContent = STATE.compactMode ? 'Expanded' : 'Compact';
-
-      Storage.setCompactMode(STATE.compactMode);
-      Analytics.trackModeToggle(STATE.compactMode);
+      localStorage.setItem(CONFIG.storagePrefix + 'compact', STATE.compactMode ? 'true' : 'false');
+      Analytics.track('mode_toggled', { compactMode: STATE.compactMode });
     }
   };
 
-  // ========================================
-  // KEYBOARD SHORTCUTS MODULE
-  // ========================================
+  // KEYBOARD SHORTCUTS
   const Shortcuts = {
     handle: function(event) {
       const target = event.target;
 
-      // Don't interfere with input fields
       if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
         if (event.key === 'Escape') {
           DOM.search.value = '';
@@ -2033,7 +1678,6 @@
         return;
       }
 
-      // Global shortcuts
       switch (event.key) {
         case '/':
           event.preventDefault();
@@ -2055,194 +1699,67 @@
     }
   };
 
-  // ========================================
-  // UTILITY FUNCTIONS
-  // ========================================
-  function initializeState() {
-    // Set initial phase
-    FilterModule.set(STATE.currentPhase);
-
-    // Set initial compact mode
-    if (STATE.compactMode) {
-      DOM.body.classList.add('compact');
-      DOM.compactBtn.classList.add('active');
-      DOM.compactBtn.setAttribute('aria-pressed', 'true');
-      DOM.compactBtn.textContent = 'Expanded';
-    }
-  }
-
-  function setupEventListeners() {
-    // Search
-    if (DOM.search) {
-      DOM.search.addEventListener('input', SearchModule.handleInput.bind(SearchModule));
-      DOM.search.addEventListener('input', e => {
-        DOM.search.dataset.value = e.target.value;
-      });
-      DOM.search.setAttribute('aria-label', 'Search objections by keyword');
-      DOM.search.setAttribute('autocomplete', 'off');
-    }
-
-    // Filters
-    const filterContainer = document.getElementById('filters');
-    if (filterContainer) {
-      filterContainer.addEventListener('click', FilterModule.handleClick);
-      filterContainer.setAttribute('role', 'group');
-      filterContainer.setAttribute('aria-label', 'Filter by sales phase');
-    }
-
-    // Compact mode
-    if (DOM.compactBtn) {
-      DOM.compactBtn.addEventListener('click', () => CompactMode.toggle());
-      DOM.compactBtn.setAttribute('aria-label', 'Toggle compact mode');
-      DOM.compactBtn.setAttribute('aria-pressed', STATE.compactMode);
-    }
-
-    // Global keyboard
-    document.addEventListener('keydown', Shortcuts.handle);
-
-    // Visibility change tracking
-    document.addEventListener('visibilitychange', function() {
-      if (document.hidden) {
-        Analytics.track('page_hidden');
-      } else {
-        Analytics.track('page_visible');
-      }
-    });
-
-    // Before unload tracking
-    window.addEventListener('beforeunload', function() {
-      Analytics.track('page_unload', {
-        sessionDuration: (Date.now() - window.sessionStart) / 1000
-      });
-    });
-  }
-
-  function logPerformance() {
-    Perf.end('total_init');
-    
-    if (window.performance && window.performance.timing) {
-      const timing = window.performance.timing;
-      const loadTime = timing.loadEventEnd - timing.navigationStart;
-      Analytics.trackPageLoad(loadTime);
-      
-      // Calculate performance metrics
-      const metrics = {
-        domContentLoaded: timing.domContentLoadedEventEnd - timing.navigationStart,
-        firstPaint: performance.getEntriesByName('first-paint')[0]?.startTime || 0,
-        firstContentfulPaint: performance.getEntriesByName('first-contentful-paint')[0]?.startTime || 0
-      };
-      
-      if (window.location.hostname === 'localhost') {
-        console.group('Performance Metrics');
-        console.log('Total Load Time:', loadTime.toFixed(2), 'ms');
-        console.log('DOM Content Loaded:', metrics.domContentLoaded.toFixed(2), 'ms');
-        console.log('First Paint:', metrics.firstPaint.toFixed(2), 'ms');
-        console.log('First Contentful Paint:', metrics.firstContentfulPaint.toFixed(2), 'ms');
-        console.groupEnd();
-      }
-    }
-  }
-
-  // ========================================
   // INITIALIZATION
-  // ========================================
   function init() {
     try {
       Perf.start('total_init');
-      
-      // Track session start
-      window.sessionStart = Date.now();
-      
-      initializeState();
-      setupEventListeners();
-      
-      // Log performance metrics after page load
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', logPerformance);
-        window.addEventListener('load', logPerformance);
-      } else {
-        logPerformance();
+
+      // Set initial state
+      FilterModule.set(STATE.currentPhase);
+      if (STATE.compactMode) {
+        DOM.body.classList.add('compact');
+        DOM.compactBtn.classList.add('active');
+        DOM.compactBtn.textContent = 'Expanded';
       }
 
-      // Setup accessibility enhancements
-      setupAccessibility();
-      
-      // Setup keyboard navigation
-      setupKeyboardNavigation();
+      // Event listeners
+      DOM.search.addEventListener('input', SearchModule.handleInput.bind(SearchModule));
+      document.getElementById('filters').addEventListener('click', FilterModule.handleClick);
+      DOM.compactBtn.addEventListener('click', () => CompactMode.toggle());
+      document.addEventListener('keydown', Shortcuts.handle);
+
+      // Accessibility
+      document.body.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') document.body.classList.add('keyboard-navigation');
+      });
 
       Analytics.track('cockpit_initialized', {
         compactMode: STATE.compactMode,
-        phase: STATE.currentPhase,
-        totalRows: DOM.rows.length,
-        totalPhases: DOM.phases.length
+        phase: STATE.currentPhase
       });
-      
-      console.log('✓ Scholarix Sales Cockpit loaded successfully');
+
+      console.log('✓ SGC TECH AI Sales Cockpit loaded successfully');
+      Perf.end('total_init');
     } catch (error) {
       console.error('Cockpit initialization error:', error);
-      Analytics.track('cockpit_error', {
-        message: error.message,
-        stack: error.stack
-      });
+      Analytics.track('cockpit_error', { message: error.message });
     }
   }
 
-  function setupAccessibility() {
-    // Add skip to main content link
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.className = 'skip-to-main';
-    skipLink.textContent = 'Skip to main content';
-    document.body.insertBefore(skipLink, document.body.firstChild);
-    
-    // Add landmark roles
-    if (!DOM.header.getAttribute('role')) {
-      DOM.header.setAttribute('role', 'banner');
-    }
-    
-    // Add focus management
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Tab') {
-        document.body.classList.add('keyboard-navigation');
-      }
-    });
-  }
-
-  function setupKeyboardNavigation() {
-    // Arrow keys for tab-like navigation
-    document.addEventListener('keydown', function(e) {
-      if (e.ctrlKey && e.key === 'ArrowRight') {
-        const next = DOM.search.nextElementSibling;
-        if (next) next.focus();
-      }
-      if (e.ctrlKey && e.key === 'ArrowLeft') {
-        const prev = DOM.search.previousElementSibling;
-        if (prev) prev.focus();
-      }
-    });
-  }
-
-  // Initialize when DOM is ready
+  // DOM READY
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
-  // Expose for debugging/development
-  window.ScholarixCockpit = {
+  // GLOBAL API
+  window.SgctechCockpit = {
     STATE,
     CONFIG,
     Analytics,
-    Storage,
     SearchModule,
     FilterModule,
     CompactMode,
-    Perf,
-    version: '2.1.0',
+    version: '2.0.1-sgctech-branding',
     build: new Date().toISOString()
   };
+
+  // Backward compatibility alias for prior integrations.
+  window.ScholarixCockpit = window.SgctechCockpit;
+
 })();
 </script>
+
 </body>
 </html>

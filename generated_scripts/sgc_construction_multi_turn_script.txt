@@ -1,0 +1,87 @@
+==================================================
+        SGC Tech AI | Multi-Turn Sales Script
+        Persona: SGC Construction Agent
+        Target: CFO / Finance Controller / Project Director
+        Goal: Book a scoping call with Finance/CFO, project controls, and operations.
+        ==================================================
+
+        Positioning:
+        AI-powered Odoo ERP for UAE construction and contracting firms, combining project-cost control, finance compliance, and fixed-scope rollout.
+
+        Top Pain Hooks:
+        - BoQ vs actual cost visibility is delayed
+- Retention, progress billing, and subcontractor settlements are manual
+- Project profitability is unclear until too late
+- Site, procurement, and finance teams operate in silos
+- VAT and Corporate Tax readiness is inconsistent across projects
+
+        Discovery Questions:
+        - How often do you get real-time cost variance per project?
+- How are retention and progress billings currently managed?
+- Where do delays happen between site updates and finance posting?
+- How do you monitor subcontractor liabilities and cashflow risk?
+- Can your team produce audit-ready supporting records on demand?
+
+        Product Catalog
+        Tiers:
+        - Starter: AED 2,500+ | Timeline: 30-45 days | Best for: Small contractors with core finance and project basics
+- Professional: AED 7,500+ | Timeline: 45-75 days | Best for: Mid-size contractors with multi-project controls
+- Enterprise: AED 15,000+ | Timeline: 60-90 days | Best for: Large contractors with advanced integrations and BI
+
+        Industry Modules:
+        - BoQ and cost-code management
+- Project costing and WIP tracking
+- Progress billing and retention handling
+- Subcontractor management and payment controls
+- Procurement and inventory linked to projects
+- Site reporting and approval workflows
+- Finance core with AP/AR, GL, fixed assets, cashflow
+- AI-assisted variance and risk insights
+
+        Integrations:
+        - n8n/Make workflow automations
+- WhatsApp and approval-notification flows
+- Power BI project profitability dashboards
+- API integrations with external procurement/tender systems
+
+        Compliance Stack:
+        - UAE VAT workflow and documentation
+- UAE Corporate Tax support
+- Audit trail and role-based controls
+- PDPL-aligned data governance
+- Security baseline with 2FA and encryption
+
+        ------------------ CALL FLOW ------------------
+        Turn 1 - Pattern Interrupt Opener
+        Agent: "Hi [Name], this is [Agent Name] from SGC Tech AI. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+
+        Turn 2 - Permission + Relevance
+        Prospect: "Depends, what is this about?"
+        Agent: "You're likely balancing finance accuracy, operations speed, and compliance pressure at once. We help teams close faster and stay audit-ready without long ERP projects."
+
+        Turn 3 - Qualification
+        Agent: "Before I continue, are you currently involved in approving systems or should we include Finance/CFO/Operations in the next call?"
+
+        Turn 4 - Discovery + Cost of Inaction
+        Agent: "To see if this is relevant: how long is month-end close today, where do manual reconciliations happen, and how much team time is consumed every week?"
+
+        Turn 5 - Tailored Pitch
+        Agent: "Based on what you shared, this is exactly where our SGC Construction Agent package fit is strongest. We deploy in phases, align to UAE compliance from day one, and link finance to operations with live dashboards and AI copilots."
+
+        Turn 7 - Objection Handling #1
+Prospect: "Our process is unique; ERP will not fit."
+Agent: "That is exactly why we use phased configuration and operator-led mapping. We do not force template-only rollout; we adapt workflows while keeping governance and compliance intact."
+
+Turn 8 - Objection Handling #2
+Prospect: "Implementation will disrupt projects."
+Agent: "We run controlled phased deployment with parallel operations where needed, so project delivery continues while systems are modernized."
+
+Turn 9 - Objection Handling #3
+Prospect: "We will revisit next quarter."
+Agent: "Understood. Delaying still carries project leakage and visibility cost. A scoping call now gives you a decision-ready roadmap without commitment."
+
+        Turn 10 - Meeting Lock
+        Agent: "Best next step is a 30-minute scoping call where we map your current flow and show the target architecture with ROI ranges. I can do Tuesday 10:00 or Thursday 14:00 UAE time. Which is better?"
+
+        Turn 11 - Follow-Up WhatsApp
+        Agent: "Thanks [Name]. As promised, I’ll send your tailored scope summary and module map. Confirming our scoping call on [Day, Time UAE]."

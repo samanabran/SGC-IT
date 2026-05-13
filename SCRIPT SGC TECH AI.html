@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SGC Tech AI — Sales Cockpit | Real Estate · Construction · Finance & Compliance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{
+    --navy:#0b3d91; --navy-dark:#072a66; --amber:#d97706; --amber-light:#fbbf24;
+    --green:#059669; --red:#dc2626; --slate:#334155; --slate-light:#64748b;
+    --bg:#f8fafc; --card:#ffffff; --border:#e2e8f0;
+    --opening:#0ea5e9; --discovery:#8b5cf6; --pitch:#0b3d91; --close:#059669; --post:#d97706;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--slate);font-size:13px;line-height:1.4}
+  .cockpit-bar{position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .cockpit-bar h1{font-family:'Orbitron',sans-serif;font-size:15px;letter-spacing:1px;margin-right:12px}
+  .cockpit-bar .tag{background:var(--amber);color:#fff;padding:2px 8px;border-radius:3px;font-size:10px;font-weight:700}
+  .search-box{flex:1;min-width:200px;padding:6px 10px;border:none;border-radius:4px;font-size:12px}
+  .filter-btn{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:5px 10px;border-radius:4px;font-size:11px;cursor:pointer;font-weight:600}
+  .filter-btn.active{background:var(--amber)}
+  .filter-btn:hover{background:rgba(255,255,255,.25)}
+  .container{max-width:1400px;margin:0 auto;padding:16px}
+  .phase{margin-bottom:24px;background:var(--card);border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+  .phase-header{padding:12px 16px;color:#fff;display:flex;justify-content:space-between;align-items:center}
+  .phase-header.p1{background:var(--opening)}
+  .phase-header.p2{background:var(--discovery)}
+  .phase-header.p3{background:var(--pitch)}
+  .phase-header.p4{background:var(--close)}
+  .phase-header.p5{background:var(--post)}
+  .phase-title{font-family:'Orbitron',sans-serif;font-size:14px;letter-spacing:1px}
+  .phase-meta{font-size:11px;opacity:.9}
+  .phase-body{padding:12px 16px}
+  .script-card{background:#f1f5f9;border-left:3px solid var(--navy);padding:10px 12px;margin-bottom:10px;border-radius:0 4px 4px 0;font-size:12px}
+  .script-card strong{color:var(--navy)}
+  .obj-row{display:grid;grid-template-columns:1fr 2fr;gap:12px;padding:10px;border:1px solid var(--border);border-radius:6px;margin-bottom:8px;background:#fff}
+  .obj-row:hover{box-shadow:0 2px 6px rgba(0,0,0,.06)}
+  .obj-trigger{background:#fef3c7;border-left:3px solid var(--amber);padding:8px 10px;border-radius:0 4px 4px 0}
+  .obj-trigger .label{font-size:9px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+  .obj-trigger .text{font-style:italic;color:var(--slate);font-size:12px}
+  .obj-response{background:#ecfdf5;border-left:3px solid var(--green);padding:8px 10px;border-radius:0 4px 4px 0}
+  .obj-response .label{font-size:9px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px}
+  .obj-response .text{color:var(--slate);font-size:12px}
+  .obj-response .text strong{color:var(--navy)}
+  .pill{display:inline-block;background:var(--navy);color:#fff;font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;margin-right:4px;margin-top:4px}
+  .pill.warn{background:var(--red)}
+  .pill.ok{background:var(--green)}
+  .pill.amber{background:var(--amber)}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .info-card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:12px}
+  .info-card h4{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--navy);margin-bottom:8px;letter-spacing:.5px}
+  .info-card ul{list-style:none}
+  .info-card li{padding:3px 0;font-size:11.5px;border-bottom:1px dashed #e2e8f0}
+  .info-card li:last-child{border:none}
+  .info-card li::before{content:"▸ ";color:var(--amber);font-weight:700}
+  .roi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+  .roi-cell{background:var(--navy);color:#fff;padding:10px;border-radius:6px;text-align:center}
+  .roi-cell .num{font-family:'Orbitron',sans-serif;font-size:18px;color:var(--amber-light);font-weight:700}
+  .roi-cell .lbl{font-size:9px;text-transform:uppercase;letter-spacing:1px;margin-top:3px;opacity:.9}
+  .tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+  .tier{border:2px solid var(--border);border-radius:8px;padding:12px;background:#fff}
+  .tier.featured{border-color:var(--amber);position:relative}
+  .tier.featured::before{content:"MOST POPULAR";position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--amber);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;letter-spacing:1px}
+  .tier h5{font-family:'Orbitron',sans-serif;color:var(--navy);font-size:13px;margin-bottom:4px}
+  .tier .price{font-family:'Orbitron',sans-serif;font-size:20px;color:var(--amber);font-weight:700;margin-bottom:8px}
+  .tier ul{list-style:none;font-size:11px}
+  .tier li{padding:2px 0}
+  .tier li::before{content:"✓ ";color:var(--green);font-weight:700}
+  .targets-strip{background:var(--navy-dark);color:#fff;padding:12px;border-radius:6px;display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin-bottom:16px}
+  .target{text-align:center}
+  .target .v{font-family:'Orbitron',sans-serif;font-size:20px;color:var(--amber-light);font-weight:700}
+  .target .l{font-size:9px;text-transform:uppercase;letter-spacing:1px;opacity:.9;margin-top:2px}
+  .cx-card{border:1px solid var(--border);border-radius:6px;padding:12px;background:#fff}
+  .cx-card h5{font-family:'Orbitron',sans-serif;color:var(--navy);font-size:12px;margin-bottom:6px}
+  .cx-card .tone{background:#f1f5f9;padding:6px 8px;border-radius:4px;font-size:11px;margin-bottom:6px;font-style:italic}
+  .compact-mode .info-card,.compact-mode .roi-grid,.compact-mode .tier-grid,.compact-mode .targets-strip,.compact-mode .cx-card{display:none}
+  .compact-mode .phase-body{padding:8px 12px}
+  .compact-mode .obj-row{padding:6px;margin-bottom:5px}
+  .hidden{display:none !important}
+  .hot-tip{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid var(--red);padding:8px 12px;margin:8px 0;border-radius:0 4px 4px 0;font-size:11.5px}
+  .hot-tip strong{color:var(--red)}
+  .win-tip{background:#ecfdf5;border:1px solid #a7f3d0;border-left:4px solid var(--green);padding:8px 12px;margin:8px 0;border-radius:0 4px 4px 0;font-size:11.5px}
+  .win-tip strong{color:var(--green)}
+  @media print{
+    .cockpit-bar{position:static}
+    .phase{break-inside:avoid;page-break-inside:avoid}
+    .obj-row{break-inside:avoid}
+    body{font-size:11px}
+  }
+  @page{margin:1cm}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="cockpit-bar">
+  <h1>🎯 SGC TECH AI — SALES COCKPIT</h1>
+  <span class="tag">v2026.05-sgctech</span>
+  <input type="text" class="search-box" id="search" placeholder="🔍 Search objection or keyword... (press /)">
+  <button class="filter-btn active" data-phase="all">ALL</button>
+  <button class="filter-btn" data-phase="p1">1·Opening</button>
+  <button class="filter-btn" data-phase="p2">2·Discovery</button>
+  <button class="filter-btn" data-phase="p3">3·Pitch</button>
+  <button class="filter-btn" data-phase="p4">4·Close</button>
+  <button class="filter-btn" data-phase="p5">5·Post</button>
+  <button class="filter-btn" id="compactBtn">⚡ Compact (C)</button>
+</div>
+
+<div class="container">
+
+  <!-- TARGETS STRIP -->
+  <div class="targets-strip">
+    <div class="target"><div class="v">60</div><div class="l">Dials/Day</div></div>
+    <div class="target"><div class="v">15</div><div class="l">Convos ≥2min</div></div>
+    <div class="target"><div class="v">5</div><div class="l">BANT Quals</div></div>
+    <div class="target"><div class="v">3</div><div class="l">Scoping Calls Booked</div></div>
+    <div class="target"><div class="v">1</div><div class="l">Demo Held</div></div>
+    <div class="target"><div class="v">AED 7.5K</div><div class="l">Avg Deal (Pro)</div></div>
+    <div class="target"><div class="v">30-90</div><div class="l">Days to Go-Live</div></div>
+    <div class="target"><div class="v">560%</div><div class="l">Typical 1Y ROI</div></div>
+  </div>
+
+  <!-- ============ PHASE 1: OPENING ============ -->
+  <div class="phase" data-phase="p1">
+    <div class="phase-header p1">
+      <div class="phase-title">PHASE 1 — OPENING (0:00 → 0:30)</div>
+      <div class="phase-meta">Goal: Earn 90 seconds · Lead with Finance/Compliance pain</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="script-card">
+        <strong>📞 PATTERN INTERRUPT OPENER (Real Estate / Construction):</strong><br>
+        "Hi [Name], this is [You] from <strong>SGC Tech AI</strong>. I'll be brief — we help UAE [real estate firms / contractors] close their books in days instead of weeks and stay 100% audit-ready for VAT and the new Corporate Tax. Quick question: <strong>is your current accounting setup giving your finance team headaches every month-end?</strong>"
+      </div>
+
+      <div class="script-card">
+        <strong>📞 ALTERNATE OPENER (Compliance Angle):</strong><br>
+        "Hi [Name], [You] from SGC Tech AI in Dubai. With the 9% Corporate Tax now in full effect and FTA audits stepping up, I'm calling [industry] CFOs to ask one thing — <strong>if the FTA asked you for a full transactional audit trail today, how long would it take your team to pull it together?</strong>"
+      </div>
+
+      <div class="grid-2">
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #1</div>
+            <div class="text">"I'm busy / not a good time."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"I completely understand — that's exactly why I called. The CFOs we help were also drowning in month-end before. <strong>If I could show you how to cut your closing cycle from 15 days to 3, is 90 seconds worth it right now?</strong>"<span class="pill">EARN TIME</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #2</div>
+            <div class="text">"We already have an accountant / ERP."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Perfect — most of our best clients said the same. They had accountants AND software, but still spent <strong>20+ hours a week on manual reconciliation and VAT prep</strong>. We don't replace your accountant — we make them 5x faster. Worth 2 minutes to see how?"<span class="pill ok">REFRAME</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #3</div>
+            <div class="text">"Just email me details."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Happy to — but our solutions are configured per company size and industry. <strong>If I send a generic brochure, it'll be wrong for you.</strong> Give me 2 minutes to ask 3 questions, and I'll send a tailored ROI sheet within an hour. Fair?"<span class="pill amber">CONDITIONAL SEND</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #4</div>
+            <div class="text">"Not interested." (cold tone)</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Totally fair — you don't know me yet. One quick check: <strong>if the FTA flagged your filings tomorrow, would your books pass a 4-hour audit?</strong> If yes, I'll let you go. If not, give me 2 minutes."<span class="pill warn">DISARM + HOOK</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hot-tip"><strong>⚠️ TRAINER NOTE:</strong> Never apologize for calling. Never say "sorry to bother." Use confident, consultative tone — you're calling because their books may be at risk, not to sell software.</div>
+
+    </div>
+  </div>
+
+  <!-- ============ PHASE 2: DISCOVERY ============ -->
+  <div class="phase" data-phase="p2">
+    <div class="phase-header p2">
+      <div class="phase-title">PHASE 2 — DISCOVERY & BANT (0:30 → 4:00)</div>
+      <div class="phase-meta">Goal: Qualify Budget, Authority, Need, Timeline · Quantify pain in AED</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="grid-2">
+        <div class="info-card">
+          <h4>🎯 BANT QUESTIONS (Finance-First)</h4>
+          <ul>
+            <li><strong>Need:</strong> "How long does your month-end close take?"</li>
+            <li><strong>Need:</strong> "Are you VAT-compliant and Corporate Tax ready?"</li>
+            <li><strong>Need:</strong> "How do you currently track project profitability / unit-level P&L?"</li>
+            <li><strong>Authority:</strong> "Who else is involved in approving finance systems?"</li>
+            <li><strong>Budget:</strong> "Have you allocated budget for digital transformation this year?"</li>
+            <li><strong>Timeline:</strong> "When do you need this resolved — before next VAT filing? Year-end?"</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>🏗️ INDUSTRY-SPECIFIC DIGGERS</h4>
+          <ul>
+            <li><strong>Real Estate:</strong> "How do you track service charges, ejari renewals, and owner statements?"</li>
+            <li><strong>Real Estate:</strong> "RERA escrow reconciliation — manual or automated?"</li>
+            <li><strong>Construction:</strong> "How do you handle BoQ vs actual cost variance per project?"</li>
+            <li><strong>Construction:</strong> "Subcontractor retention and progress billing — Excel or system?"</li>
+            <li><strong>Heavy Industry:</strong> "Equipment depreciation, asset tracking, maintenance cost-per-unit?"</li>
+            <li><strong>All:</strong> "If you lost your accountant tomorrow, would the books survive?"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="script-card" style="margin-top:12px">
+        <strong>💰 QUANTIFY THE PAIN — Live Calculation Script:</strong><br>
+        "Let me do quick math with you. You said your finance team is [X] people spending [Y] hours/week on manual work. That's <strong>[X × Y × 4] hours/month</strong>. At average AED 100/hour loaded cost, you're burning <strong>AED [X × Y × 400] every month</strong> on work that should take 10% of that time. <strong>That's AED [annual] per year — gone.</strong> And that's before we count VAT penalties, missed deadlines, or audit exposure."
+      </div>
+
+      <div class="obj-row">
+        <div class="obj-trigger">
+          <div class="label">🚫 OBJECTION #5</div>
+          <div class="text">"I need to check with my partner / GM / board."</div>
+        </div>
+        <div class="obj-response">
+          <div class="label">✅ RESPONSE</div>
+          <div class="text">"Smart — this isn't a solo decision. <strong>Let's set a 30-min scoping call with all decision-makers together</strong> so I can answer everyone's questions in one go. Saves you 3 internal meetings. Who else should join — your GM, CFO, IT lead?"<span class="pill ok">MULTI-THREAD</span></div>
+        </div>
+      </div>
+
+      <div class="obj-row">
+        <div class="obj-trigger">
+          <div class="label">🚫 OBJECTION #6</div>
+          <div class="text">"We're a small/mid company — too complex for us."</div>
+        </div>
+        <div class="obj-response">
+          <div class="label">✅ RESPONSE</div>
+          <div class="text">"That's actually a myth — our <strong>Starter package at AED 2,500</strong> is built for exactly your size. We go live in 30 days, not 6 months. Big-ERP horror stories don't apply here. Want me to show you 2 case studies of [similar-size] firms in [their industry]?"<span class="pill">SIZE-MATCH</span></div>
+        </div>
+      </div>
+
+      <div class="obj-row">
+        <div class="obj-trigger">
+          <div class="label">🚫 OBJECTION #7</div>
+          <div class="text">"My accountant won't like change / training is too hard."</div>
+        </div>
+        <div class="obj-response">
+          <div class="label">✅ RESPONSE</div>
+          <div class="text">"Valid concern. That's why we built it in <strong>Arabic + English with full RTL</strong> and include onboarding training in every package. Most accountants we onboard are doing month-end on the new system within <strong>2 weeks</strong> — and they actually thank us because their overtime disappears."<span class="pill ok">EMPATHY</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ PHASE 3: PITCH ============ -->
+  <div class="phase" data-phase="p3">
+    <div class="phase-header p3">
+      <div class="phase-title">PHASE 3 — TAILORED PITCH (4:00 → 8:00)</div>
+      <div class="phase-meta">Goal: Show industry fit + ROI · Lead with Finance, layer on Operations</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="script-card">
+        <strong>🎯 90-SECOND PITCH (Real Estate version):</strong><br>
+        "Here's how it works for a real estate firm like yours. SGC Tech AI deploys an <strong>AI-powered Odoo ERP</strong> tuned for UAE property businesses. Your core finance module handles VAT, Corporate Tax filings, IFRS-compliant books, and audit trails automatically. Layered on top, you get <strong>property CRM, unit-level P&L, owner portals, RERA-ready escrow reconciliation, service-charge automation, and Ejari integration</strong>. Your month-end goes from 15 days to 3. Your finance team stops doing data entry and starts doing analysis. You go live in <strong>30 to 90 days</strong>, fully VAT-ready, Arabic + English."
+      </div>
+
+      <div class="script-card">
+        <strong>🎯 90-SECOND PITCH (Construction version):</strong><br>
+        "For a contractor your size, here's what changes. SGC Tech AI gives you <strong>AI-powered Odoo ERP</strong> with finance and compliance as the core — VAT, Corporate Tax, IFRS, audit-ready in one click. On top of that you get <strong>project costing, BoQ tracking, subcontractor management, progress billing, retention handling, and site progress reports</strong> all linked to your P&L. You'll know exactly which project is bleeding cash <strong>before it bleeds you dry</strong>. 30 to 90 day go-live, Arabic + English, fully FTA-compliant."
+      </div>
+
+      <div class="script-card">
+        <strong>🎯 90-SECOND PITCH (Heavy Industry / Trading / Manufacturing):</strong><br>
+        "For [industry], we deploy <strong>AI-powered Odoo ERP</strong> built around three pillars: (1) <strong>Finance, VAT, Corporate Tax, and IFRS compliance</strong> at the core — books always audit-ready; (2) <strong>Operations</strong> — multi-warehouse, landed costs, asset depreciation, maintenance cycles, supplier portals; (3) <strong>AI analytics</strong> — real-time dashboards showing margin per SKU, project, or asset. Go-live in 30 to 90 days, Arabic + English, UAE VAT compliant from day one."
+      </div>
+
+      <div class="info-card" style="margin-top:12px">
+        <h4>💎 OUR 3-LAYER VALUE STACK (Memorize This)</h4>
+        <ul>
+          <li><strong>Layer 1 — Odoo 19 + UAE Compliance Core:</strong> Odoo 19 architecture, AI-assisted accounting, automated VAT returns, Corporate Tax workflows, IFRS-ready ledgers, FTA-grade audit trails, multi-currency, multi-entity consolidation.</li>
+          <li><strong>Layer 2 — Industry Operations + Integrations:</strong> Real Estate (property CRM, RERA escrow, Ejari, service charges, owner portal) · Construction (BoQ, project costing, subcontractor mgmt, progress billing) · Heavy/Manufacturing (asset tracking, maintenance, multi-warehouse, landed cost) + API/payment/WhatsApp integrations.</li>
+          <li><strong>Layer 3 — AI, Analytics, Security & Adoption:</strong> GPT-powered document extraction, smart reconciliation, anomaly detection, predictive forecasting, Power BI dashboards, role-based access + 2FA, and structured training/change management.</li>
+        </ul>
+      </div>
+
+      <div class="roi-grid">
+        <div class="roi-cell"><div class="num">15→3</div><div class="lbl">Days to Close Books</div></div>
+        <div class="roi-cell"><div class="num">80%</div><div class="lbl">Less Manual Entry</div></div>
+        <div class="roi-cell"><div class="num">100%</div><div class="lbl">VAT / CT Audit Ready</div></div>
+        <div class="roi-cell"><div class="num">30-90</div><div class="lbl">Day Go-Live</div></div>
+      </div>
+
+      <div class="tier-grid">
+        <div class="tier">
+          <h5>STARTER</h5>
+          <div class="price">AED 2,500</div>
+          <ul>
+            <li>5-8 core Odoo modules</li>
+            <li>Finance, VAT, basic CRM</li>
+            <li>30-day email support</li>
+            <li>Single entity</li>
+          </ul>
+        </div>
+        <div class="tier featured">
+          <h5>PROFESSIONAL</h5>
+          <div class="price">AED 7,500</div>
+          <ul>
+            <li>12-18 modules</li>
+            <li>Industry pack + Finance core</li>
+            <li>Advanced automations</li>
+            <li>90-day priority support</li>
+            <li>Corporate Tax module</li>
+          </ul>
+        </div>
+        <div class="tier">
+          <h5>ENTERPRISE</h5>
+          <div class="price">AED 15,000+</div>
+          <ul>
+            <li>20+ modules · multi-entity</li>
+            <li>AI analytics + Power BI</li>
+            <li>180-day dedicated support</li>
+            <li>On-site staff training</li>
+            <li>Custom integrations</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="win-tip"><strong>✅ WIN TIP:</strong> Always quote the package price <em>after</em> showing the AED-loss number from discovery. Anchor: "You're losing AED 39,600/month — and a full Professional deployment is AED 7,500 one-time. That's 2 months of waste = paid back forever."</div>
+
+    </div>
+  </div>
+
+  <!-- ============ PHASE 4: CLOSE ============ -->
+  <div class="phase" data-phase="p4">
+    <div class="phase-header p4">
+      <div class="phase-title">PHASE 4 — CLOSE & MEETING LOCK (8:00 → 12:00)</div>
+      <div class="phase-meta">Goal: Book scoping call OR handle objections to close</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="script-card">
+        <strong>🔐 MEETING-LOCK SCRIPT (Assumptive):</strong><br>
+        "Based on what you've shared, this is exactly the kind of setup we deploy in 60 days. <strong>Next step is a 30-minute scoping call</strong> with our solutions architect where we walk through your current system and show a live demo on your actual numbers. I have <strong>Tuesday 10am or Thursday 2pm</strong> open this week — which works better?"
+      </div>
+
+      <div class="grid-2">
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #8 — PRICE</div>
+            <div class="text">"Too expensive."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Compared to what? Let's put it side by side: you said you're losing <strong>AED [X]/month</strong> on manual finance work. Professional package is AED 7,500 one-time. <strong>That's paid back in [Y] weeks — then it's pure savings for years.</strong> The expensive option is doing nothing."<span class="pill warn">ANCHOR LOSS</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #9 — DISCOUNT</div>
+            <div class="text">"Can you give me a discount?"</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Our pricing is published and consistent — that's how we keep deployments fast and quality high. <strong>What I can offer: 5% pre-pay discount if you commit on the scoping call</strong>, plus we lock current pricing before the Q3 increase. Fair?"<span class="pill amber">HOLD LINE</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #10 — COMPETITOR</div>
+            <div class="text">"We're also looking at [SAP / Zoho / Tally / Sage]."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Smart to compare. Here's our honest difference: <strong>SAP takes 9-18 months and 6-figure budgets. Zoho/Tally won't handle RERA/BoQ/project costing</strong>. We sit in the sweet spot — enterprise-grade Odoo + AI + UAE compliance + 30-90 day go-live. Let's do the scoping call and you decide with data."<span class="pill">DIFFERENTIATE</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #11 — TIMING</div>
+            <div class="text">"Let's revisit in 3-6 months."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Understood — but here's the math: every month you delay = <strong>AED [X] gone</strong>. In 6 months that's AED [6X]. Plus, Corporate Tax filings are coming up. <strong>Let's at least do the scoping call now — costs nothing, locks current price, and you decide on timing after.</strong>"<span class="pill warn">URGENCY</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #12 — TRUST</div>
+            <div class="text">"Never heard of SGC Tech AI."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Fair point. We're <strong>SGC TECH AI</strong> — operator-led, UAE-based, Odoo + AI specialists with fixed-price, fixed-timeline delivery. We've deployed for real estate firms, contractors, and trading houses across Dubai and Abu Dhabi. Check sgctech.ai/about — I'll send <strong>3 case studies in your industry</strong> before our scoping call."<span class="pill ok">SOCIAL PROOF</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #13 — COMPLEXITY</div>
+            <div class="text">"Implementation will disrupt our operations."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"That's the #1 fear — and exactly why we built our <strong>30-90 day structured delivery</strong>. We run parallel to your current system for 2-4 weeks, no business disruption. Your team trains while we migrate. Go-live is a controlled switch, not a leap of faith."<span class="pill ok">DE-RISK</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #14 — IT TEAM</div>
+            <div class="text">"Need to ask our IT department first."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Perfect — bring them to the scoping call. Our tech stack is <strong>cloud-native AWS/Azure, REST API, PostgreSQL 16, full SSL/2FA</strong>. Your IT team will love it. <strong>Tuesday 10am or Thursday 2pm</strong> — which works for both of you?"<span class="pill">LOOP IN IT</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #15 — DATA</div>
+            <div class="text">"What about our existing data?"</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Migration is included in every package. We pull from <strong>Tally, QuickBooks, Sage, Excel, Zoho — any source</strong>. Our team does data mapping, cleansing, and validation before go-live. You'll see your live data in the demo during the scoping call."<span class="pill ok">FULL MIGRATION</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ PHASE 5: POST-CALL ============ -->
+  <div class="phase" data-phase="p5">
+    <div class="phase-header p5">
+      <div class="phase-title">PHASE 5 — POST-CALL / GHOSTING RESCUE</div>
+      <div class="phase-meta">Goal: Follow up disciplined, rescue silent prospects, capture contract details</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="script-card">
+        <strong>📧 IMMEDIATE FOLLOW-UP (within 1 hour):</strong><br>
+        "Hi [Name], great speaking earlier. As promised — attached is the <strong>tailored ROI summary</strong> for [their company] and 2 case studies from [their industry]. Confirming our scoping call: <strong>[Day] [Date] [Time] UAE time</strong>. Calendar invite incoming. Talk soon — [You], SGC Tech AI."
+      </div>
+
+      <div class="grid-2">
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #16 — NO-SHOW</div>
+            <div class="text">Prospect missed the scoping call.</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE (Call within 15 min)</div>
+            <div class="text">"Hi [Name], no worries — I know how UAE schedules go. <strong>Let's reset to today 4pm or tomorrow 11am</strong>. I have your numbers ready and the solutions architect on standby. Which works?"<span class="pill warn">NO BLAME</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #17 — GHOSTING</div>
+            <div class="text">No reply for 3+ days after demo.</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE (Short, direct)</div>
+            <div class="text">"Hi [Name] — quick check: are we a <strong>yes, no, or not now</strong>? Any answer helps me clean my pipeline and stop chasing. Appreciate your honesty either way."<span class="pill amber">PERMISSION TO CLOSE</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #18 — BUYER REMORSE</div>
+            <div class="text">"I'm having second thoughts after signing."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Totally normal — every CFO feels this 24 hours after committing. <strong>Let me set up a 15-min check-in with our delivery lead this week</strong> so you see exactly what happens in the first 30 days. The ROI math hasn't changed — only the noise in your head has."<span class="pill ok">REASSURE</span></div>
+          </div>
+        </div>
+
+        <div class="obj-row">
+          <div class="obj-trigger">
+            <div class="label">🚫 OBJECTION #19 — INTERNAL PUSHBACK</div>
+            <div class="text">"My partner/team is resisting."</div>
+          </div>
+          <div class="obj-response">
+            <div class="label">✅ RESPONSE</div>
+            <div class="text">"Common — change is hard. <strong>Let me run a 20-min stakeholder briefing with your team directly</strong>. I'll address their concerns, show the demo, and you stay neutral. Champion's job done."<span class="pill ok">CHAMPION ENABLEMENT</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="script-card">
+        <strong>📋 CONTRACT CAPTURE SCRIPT:</strong><br>
+        "Excellent — to send the agreement I'll need: (1) <strong>Legal company name</strong> as on trade license, (2) <strong>Trade license number + jurisdiction</strong>, (3) <strong>Billing address + TRN</strong>, (4) <strong>Authorized signatory name + designation + Emirates ID</strong>, (5) <strong>Billing email + WhatsApp</strong>, (6) <strong>Preferred go-live month</strong>. I'll send a DocuSign within 2 hours."
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============ CULTURAL QUICK-SWITCH ============ -->
+  <div class="phase">
+    <div class="phase-header" style="background:var(--slate)">
+      <div class="phase-title">🌍 CULTURAL QUICK-SWITCH</div>
+      <div class="phase-meta">Adjust tone per prospect profile · 80% of UAE B2B fits these 3</div>
+    </div>
+    <div class="phase-body">
+      <div class="grid-3">
+        <div class="cx-card">
+          <h5>CX1 · ARAB / EMIRATI OWNER</h5>
+          <div class="tone">Tone: Respectful, relationship-first, patient. Use titles (Mr./Sheikh/Eng.). Don't rush.</div>
+          <strong style="font-size:11px;color:var(--navy)">Open:</strong>
+          <div style="font-size:11px;margin:4px 0">"Assalamu alaikum, Mr. [Name]. I hope your day is blessed. This is [You] from SGC Tech AI..."</div>
+          <strong style="font-size:11px;color:var(--navy)">Close:</strong>
+          <div style="font-size:11px;margin:4px 0">"It would be an honor to visit your office for the scoping call. Shall we say next Tuesday, inshallah?"</div>
+          <span class="pill ok">DO: Tea/coffee meeting</span>
+          <span class="pill warn">DON'T: Pressure close</span>
+        </div>
+
+        <div class="cx-card">
+          <h5>CX2 · INDIAN / PAKISTANI OWNER</h5>
+          <div class="tone">Tone: Direct on numbers, ROI-focused, negotiate-friendly. Speak business-fast.</div>
+          <strong style="font-size:11px;color:var(--navy)">Open:</strong>
+          <div style="font-size:11px;margin:4px 0">"Mr. [Name], [You] from SGC Tech AI. Quick one — losing AED 30K+ on manual finance work monthly. Have 2 minutes?"</div>
+          <strong style="font-size:11px;color:var(--navy)">Close:</strong>
+          <div style="font-size:11px;margin:4px 0">"ROI is clear, sir. Lock current pricing now, 5% pre-pay discount, scoping Tuesday — done?"</div>
+          <span class="pill ok">DO: Share AED numbers fast</span>
+          <span class="pill warn">DON'T: Refuse negotiation flatly</span>
+        </div>
+
+        <div class="cx-card">
+          <h5>CX3 · WESTERN EXPAT CFO</h5>
+          <div class="tone">Tone: Data-driven, structured, professional. Skip pleasantries, deliver insight.</div>
+          <strong style="font-size:11px;color:var(--navy)">Open:</strong>
+          <div style="font-size:11px;margin:4px 0">"[Name], [You] from SGC Tech AI. Calling UAE finance leaders about Corporate Tax compliance gaps. 2 minutes?"</div>
+          <strong style="font-size:11px;color:var(--navy)">Close:</strong>
+          <div style="font-size:11px;margin:4px 0">"I'll send the ROI model + 2 case studies. Scoping call Thursday 2pm to walk through technical architecture?"</div>
+          <span class="pill ok">DO: Send data pre-call</span>
+          <span class="pill warn">DON'T: Over-promise</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ PRE-CALL CHECKLIST ============ -->
+  <div class="phase">
+    <div class="phase-header" style="background:var(--navy-dark)">
+      <div class="phase-title">✅ PRE-CALL CHECKLIST (60 SECONDS BEFORE DIAL)</div>
+      <div class="phase-meta">Run this before every cold call</div>
+    </div>
+    <div class="phase-body">
+      <div class="grid-2">
+        <div class="info-card">
+          <h4>🎯 RESEARCH (30 sec)</h4>
+          <ul>
+            <li>Company name + industry confirmed</li>
+            <li>Decision-maker name + role</li>
+            <li>Trade license type (FZE / LLC / Mainland)</li>
+            <li>Industry pain hook (RERA / BoQ / VAT / CT)</li>
+            <li>One credible reference / case study ready</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>🧠 MINDSET (30 sec)</h4>
+          <ul>
+            <li>One goal for this call (book scoping / qualify out)</li>
+            <li>I am helping them avoid AED loss + FTA risk</li>
+            <li>I lead with Finance/Compliance, not features</li>
+            <li>Silence is my friend — let them talk</li>
+            <li>No is a complete sentence — move to next</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hot-tip" style="margin-top:12px"><strong>⚠️ HARD RULES:</strong> Never quote pricing in Phase 1. Never discount before Phase 4. Never email without a booked next step. Never end a call without a clear yes/no/next-action.</div>
+    </div>
+  </div>
+
+  <!-- ============ AUTO-GENERATED PERSONA LIBRARY ============ -->
+  <div class="phase">
+    <div class="phase-header" style="background:linear-gradient(135deg,var(--navy),var(--discovery))">
+      <div class="phase-title">🧩 AUTO-GENERATED PERSONA LIBRARY (READY HTML BLOCKS)</div>
+      <div class="phase-meta">Converted from JSON personas · copy directly into live call flows</div>
+    </div>
+    <div class="phase-body">
+
+      <div class="win-tip"><strong>✅ How to use:</strong> Pick one persona, run Turn 1 to Turn 5, then use the objection lines and meeting lock. These are aligned to SGC TECH AI service context and UAE compliance-first positioning.</div>
+
+      <div class="grid-3">
+        <div class="info-card">
+          <h4>PERSONA 1 · REAL ESTATE (CFO/FINANCE)</h4>
+          <ul>
+            <li><strong>Positioning:</strong> AI-powered Odoo ERP for UAE real estate operators.</li>
+            <li><strong>Core pains:</strong> slow month-end close, escrow/service-charge reconciliation, fragmented systems.</li>
+            <li><strong>Scoping goal:</strong> Book Finance/CFO + operations call.</li>
+          </ul>
+
+          <div class="script-card" style="margin-top:8px">
+            <strong>Turn 1:</strong> "Hi [Name], this is [Agent Name] from SGC Tech AI. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+          </div>
+          <div class="script-card">
+            <strong>Turn 2:</strong> "You're likely balancing finance accuracy, operations speed, and compliance pressure at once. We help teams close faster and stay audit-ready without long ERP projects."
+          </div>
+          <div class="script-card">
+            <strong>Turn 3:</strong> "Before I continue, are you currently involved in approving systems or should we include Finance/CFO/Operations in the next call?"
+          </div>
+          <div class="script-card">
+            <strong>Turn 4:</strong> "How long is month-end close today, where do manual reconciliations happen, and how much team time is consumed every week?"
+          </div>
+          <div class="script-card">
+            <strong>Turn 5:</strong> "We deploy in phases, align to UAE compliance from day one, and link finance to operations with live dashboards and AI copilots."
+          </div>
+
+          <div class="obj-row" style="margin-top:8px">
+            <div class="obj-trigger">
+              <div class="label">OBJECTION</div>
+              <div class="text">"We already have ERP/accounting software."</div>
+            </div>
+            <div class="obj-response">
+              <div class="label">RESPONSE</div>
+              <div class="text">"That is common. We usually start where existing systems leave gaps: reconciliation speed, compliance depth, and cross-team visibility."</div>
+            </div>
+          </div>
+
+          <div class="script-card">
+            <strong>Meeting Lock:</strong> "Best next step is a 30-minute scoping call. I can do Tuesday 10:00 or Thursday 14:00 UAE time. Which is better?"
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h4>PERSONA 2 · CONSTRUCTION (PROJECT + FINANCE)</h4>
+          <ul>
+            <li><strong>Positioning:</strong> Odoo ERP for contractors with project-cost control + compliance.</li>
+            <li><strong>Core pains:</strong> BoQ variance delays, retention/progress billing complexity, siloed teams.</li>
+            <li><strong>Scoping goal:</strong> Book CFO + project controls + operations call.</li>
+          </ul>
+
+          <div class="script-card" style="margin-top:8px">
+            <strong>Turn 1:</strong> "Hi [Name], this is [Agent Name] from SGC Tech AI... fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+          </div>
+          <div class="script-card">
+            <strong>Turn 2:</strong> "You're balancing finance accuracy, operations speed, and compliance pressure. We help teams close faster and stay audit-ready."
+          </div>
+          <div class="script-card">
+            <strong>Turn 3:</strong> "Are you involved in approving systems, or should we include Finance/CFO/Operations in the next call?"
+          </div>
+          <div class="script-card">
+            <strong>Turn 4:</strong> "How often do you get real-time cost variance per project? How are retention and progress billings managed?"
+          </div>
+          <div class="script-card">
+            <strong>Turn 5:</strong> "We deploy in phases, align to UAE compliance from day one, and link project controls to finance dashboards."
+          </div>
+
+          <div class="obj-row" style="margin-top:8px">
+            <div class="obj-trigger">
+              <div class="label">OBJECTION</div>
+              <div class="text">"Implementation will disrupt projects."</div>
+            </div>
+            <div class="obj-response">
+              <div class="label">RESPONSE</div>
+              <div class="text">"We run controlled phased deployment with parallel operations where needed, so project delivery continues while systems are modernized."</div>
+            </div>
+          </div>
+
+          <div class="script-card">
+            <strong>Meeting Lock:</strong> "Let's map your current flow and show the target architecture with ROI ranges. Tuesday 10:00 or Thursday 14:00 UAE?"
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h4>PERSONA 3 · HEAVY INDUSTRY (PLANT + FINANCE)</h4>
+          <ul>
+            <li><strong>Positioning:</strong> Odoo ERP for heavy industry with maintenance, supply-chain, and finance integration.</li>
+            <li><strong>Core pains:</strong> asset/maintenance cost blind spots, disconnected planning, manual reconciliation risk.</li>
+            <li><strong>Scoping goal:</strong> Book CFO + plant/operations leadership call.</li>
+          </ul>
+
+          <div class="script-card" style="margin-top:8px">
+            <strong>Turn 1:</strong> "Hi [Name], this is [Agent Name] from SGC Tech AI... fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+          </div>
+          <div class="script-card">
+            <strong>Turn 2:</strong> "You are likely balancing finance accuracy, operations speed, and compliance pressure."
+          </div>
+          <div class="script-card">
+            <strong>Turn 3:</strong> "Are you involved in system approvals, or should we include Finance/CFO/Operations?"
+          </div>
+          <div class="script-card">
+            <strong>Turn 4:</strong> "How do you track OEE, downtime cost, and maintenance spend? Can you see real margin by line/plant in near real time?"
+          </div>
+          <div class="script-card">
+            <strong>Turn 5:</strong> "We phase rollout by plant/process, align compliance from day one, and provide operator-grade dashboards and AI insights."
+          </div>
+
+          <div class="obj-row" style="margin-top:8px">
+            <div class="obj-trigger">
+              <div class="label">OBJECTION</div>
+              <div class="text">"Our operations are too complex for this."</div>
+            </div>
+            <div class="obj-response">
+              <div class="label">RESPONSE</div>
+              <div class="text">"Complexity is exactly where integrated architecture helps most. We phase rollout by plant/process and prioritize control points first, then scale."</div>
+            </div>
+          </div>
+
+          <div class="script-card">
+            <strong>Meeting Lock:</strong> "Let's run a 30-minute scoping call and map your control points. Tuesday 10:00 or Thursday 14:00 UAE time?"
+          </div>
+        </div>
+      </div>
+
+      <div class="hot-tip" style="margin-top:12px"><strong>Source files:</strong> generated_scripts/sgc_real_estate_multi_turn_script.txt · generated_scripts/sgc_construction_multi_turn_script.txt · generated_scripts/sgc_heavy_industry_multi_turn_script.txt</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Search filter
+  const search = document.getElementById('search');
+  const objRows = document.querySelectorAll('.obj-row');
+  search.addEventListener('input', e=>{
+    const q = e.target.value.toLowerCase();
+    objRows.forEach(r=>{
+      const t = r.textContent.toLowerCase();
+      r.classList.toggle('hidden', q && !t.includes(q));
+    });
+  });
+
+  // Phase filter
+  document.querySelectorAll('.filter-btn[data-phase]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.filter-btn[data-phase]').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const p = btn.dataset.phase;
+      document.querySelectorAll('.phase').forEach(ph=>{
+        if(p==='all'){ph.classList.remove('hidden')}
+        else{ph.classList.toggle('hidden', ph.dataset.phase!==p)}
+      });
+    });
+  });
+
+  // Compact toggle
+  const compactBtn = document.getElementById('compactBtn');
+  compactBtn.addEventListener('click', ()=>document.body.classList.toggle('compact-mode'));
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e=>{
+    if(e.key==='/' && document.activeElement!==search){e.preventDefault();search.focus()}
+    if(e.key==='Escape'){search.value='';search.dispatchEvent(new Event('input'))}
+    if(e.key.toLowerCase()==='c' && document.activeElement!==search){document.body.classList.toggle('compact-mode')}
+    if(['1','2','3','4','5','0'].includes(e.key) && document.activeElement!==search){
+      const map={'0':'all','1':'p1','2':'p2','3':'p3','4':'p4','5':'p5'};
+      document.querySelector(`.filter-btn[data-phase="${map[e.key]}"]`)?.click();
+    }
+  });
+</script>
+
+</body>
+</html>

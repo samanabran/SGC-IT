@@ -1,0 +1,87 @@
+==================================================
+        SGC Tech AI | Multi-Turn Sales Script
+        Persona: SGC Heavy Industry Agent
+        Target: CFO / Plant Controller / Operations Director
+        Goal: Book a scoping call with Finance/CFO and plant/operations leadership.
+        ==================================================
+
+        Positioning:
+        AI-powered Odoo ERP for UAE heavy industry operators with integrated finance, maintenance, supply-chain control, and compliance-by-design deployment.
+
+        Top Pain Hooks:
+        - High asset and maintenance costs with low visibility
+- Inventory, procurement, and production planning are disconnected
+- Cost-to-serve and margin analysis is delayed
+- Manual reconciliations increase reporting risk
+- Compliance and audit readiness depend on spreadsheet workarounds
+
+        Discovery Questions:
+        - How do you currently track OEE, downtime cost, and maintenance spend?
+- Can you view real margin by product line or plant in near real time?
+- How are procurement and inventory tied to production and finance?
+- Where do manual entries create risk in month-end and tax filings?
+- How quickly can your team provide plant-to-finance audit evidence?
+
+        Product Catalog
+        Tiers:
+        - Starter: AED 2,500+ | Timeline: 30-45 days | Best for: Core finance + inventory baseline for smaller plants
+- Professional: AED 7,500+ | Timeline: 45-75 days | Best for: Integrated plant operations and finance controls
+- Enterprise: AED 15,000+ | Timeline: 60-90 days | Best for: Multi-site heavy industry with advanced analytics
+
+        Industry Modules:
+        - Asset lifecycle and depreciation management
+- Preventive and corrective maintenance workflows
+- Inventory, MRP, and procurement controls
+- Production planning and cost tracking
+- Plant-level KPI and downtime analysis
+- Quality checkpoints and traceability
+- Finance core and multi-entity consolidation
+- AI forecasting and anomaly detection
+
+        Integrations:
+        - Power BI operational dashboards
+- API integrations with plant systems
+- Workflow automation via n8n/Make
+- Supplier and approval workflow integrations
+
+        Compliance Stack:
+        - UAE VAT and Corporate Tax readiness
+- PDPL-aligned data controls
+- Audit trails and role-based security
+- 2FA and encryption baseline
+- Structured governance and compliance reporting
+
+        ------------------ CALL FLOW ------------------
+        Turn 1 - Pattern Interrupt Opener
+        Agent: "Hi [Name], this is [Agent Name] from SGC Tech AI. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+
+        Turn 2 - Permission + Relevance
+        Prospect: "Depends, what is this about?"
+        Agent: "You're likely balancing finance accuracy, operations speed, and compliance pressure at once. We help teams close faster and stay audit-ready without long ERP projects."
+
+        Turn 3 - Qualification
+        Agent: "Before I continue, are you currently involved in approving systems or should we include Finance/CFO/Operations in the next call?"
+
+        Turn 4 - Discovery + Cost of Inaction
+        Agent: "To see if this is relevant: how long is month-end close today, where do manual reconciliations happen, and how much team time is consumed every week?"
+
+        Turn 5 - Tailored Pitch
+        Agent: "Based on what you shared, this is exactly where our SGC Heavy Industry Agent package fit is strongest. We deploy in phases, align to UAE compliance from day one, and link finance to operations with live dashboards and AI copilots."
+
+        Turn 7 - Objection Handling #1
+Prospect: "Our operations are too complex for this."
+Agent: "Complexity is exactly where integrated architecture helps most. We phase rollout by plant/process and prioritize control points first, then scale."
+
+Turn 8 - Objection Handling #2
+Prospect: "We cannot spare team bandwidth now."
+Agent: "Understood. We design rollout around your operational calendar and minimize load through structured workshops and prebuilt accelerators."
+
+Turn 9 - Objection Handling #3
+Prospect: "We need to see proof first."
+Agent: "Absolutely. The scoping call includes architecture walkthrough, module fit, and an evidence-based ROI model for your operating profile."
+
+        Turn 10 - Meeting Lock
+        Agent: "Best next step is a 30-minute scoping call where we map your current flow and show the target architecture with ROI ranges. I can do Tuesday 10:00 or Thursday 14:00 UAE time. Which is better?"
+
+        Turn 11 - Follow-Up WhatsApp
+        Agent: "Thanks [Name]. As promised, I’ll send your tailored scope summary and module map. Confirming our scoping call on [Day, Time UAE]."

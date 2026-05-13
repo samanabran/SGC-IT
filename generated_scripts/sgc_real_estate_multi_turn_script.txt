@@ -1,0 +1,87 @@
+==================================================
+        SGC Tech AI | Multi-Turn Sales Script
+        Persona: SGC Real Estate Agent
+        Target: CFO / Finance Manager / Real Estate Operations Head
+        Goal: Book a scoping call with Finance/CFO and operations stakeholders.
+        ==================================================
+
+        Positioning:
+        AI-powered Odoo ERP for UAE real estate operators with fixed-price, fixed-timeline implementation, compliance-first finance architecture, and operator-led delivery.
+
+        Top Pain Hooks:
+        - Month-end close cycles are too long and manual
+- RERA escrow and service charge reconciliations consume high team effort
+- Fragmented systems across sales, leasing, accounting, and operations
+- Limited visibility into unit-level P&L and receivables
+- Compliance anxiety around VAT, Corporate Tax, and audit trails
+
+        Discovery Questions:
+        - How long does your month-end close currently take?
+- Which parts of escrow/service-charge reconciliation are still manual?
+- How do you track receivables and overdue collections by unit/project?
+- Do finance and sales teams work from one source of truth today?
+- How quickly can your team produce audit-ready transactional trails?
+
+        Product Catalog
+        Tiers:
+        - Starter: AED 2,500+ | Timeline: 30-45 days | Best for: Small portfolios and single-entity setup
+- Professional: AED 7,500+ | Timeline: 45-75 days | Best for: Growing real-estate operators with multi-team workflows
+- Enterprise: AED 15,000+ | Timeline: 60-90 days | Best for: Large portfolios, multi-entity and advanced analytics
+
+        Industry Modules:
+        - Property CRM and lead-to-lease/sale workflow
+- Unit-level P&L and project profitability
+- RERA-ready escrow and trust reconciliation
+- Service charge automation and owner statements
+- Ejari-aligned contract management
+- Collections and receivables automation
+- Finance core: GL, AP/AR, fixed assets, budgeting
+- AI copilots for reporting and reconciliation assistance
+
+        Integrations:
+        - Payment gateways (Stripe, PayTabs)
+- WhatsApp business workflow integrations
+- Power BI dashboards and KPI packs
+- API integrations for portals and third-party systems
+
+        Compliance Stack:
+        - UAE VAT 5% workflow and reporting
+- UAE Corporate Tax support
+- PDPL-aligned access and audit controls
+- RERA-aligned operational workflows
+- Role-based access, 2FA, and audit logs
+
+        ------------------ CALL FLOW ------------------
+        Turn 1 - Pattern Interrupt Opener
+        Agent: "Hi [Name], this is [Agent Name] from SGC Tech AI. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+
+        Turn 2 - Permission + Relevance
+        Prospect: "Depends, what is this about?"
+        Agent: "You're likely balancing finance accuracy, operations speed, and compliance pressure at once. We help teams close faster and stay audit-ready without long ERP projects."
+
+        Turn 3 - Qualification
+        Agent: "Before I continue, are you currently involved in approving systems or should we include Finance/CFO/Operations in the next call?"
+
+        Turn 4 - Discovery + Cost of Inaction
+        Agent: "To see if this is relevant: how long is month-end close today, where do manual reconciliations happen, and how much team time is consumed every week?"
+
+        Turn 5 - Tailored Pitch
+        Agent: "Based on what you shared, this is exactly where our SGC Real Estate Agent package fit is strongest. We deploy in phases, align to UAE compliance from day one, and link finance to operations with live dashboards and AI copilots."
+
+        Turn 7 - Objection Handling #1
+Prospect: "We already have ERP/accounting software."
+Agent: "That is common. Our work usually starts where existing systems leave gaps: reconciliation speed, compliance depth, and cross-team visibility. We can optimize your current stack or phase-migrate with minimal disruption."
+
+Turn 8 - Objection Handling #2
+Prospect: "Too expensive."
+Agent: "The better comparison is implementation cost vs monthly leakage from manual close, delays, and compliance risk. In most cases, savings and control improvements recover the investment quickly."
+
+Turn 9 - Objection Handling #3
+Prospect: "Send details by email."
+Agent: "Happy to send them. To avoid generic information, a 30-minute scoping call lets us tailor modules and ROI assumptions to your portfolio model first."
+
+        Turn 10 - Meeting Lock
+        Agent: "Best next step is a 30-minute scoping call where we map your current flow and show the target architecture with ROI ranges. I can do Tuesday 10:00 or Thursday 14:00 UAE time. Which is better?"
+
+        Turn 11 - Follow-Up WhatsApp
+        Agent: "Thanks [Name]. As promised, I’ll send your tailored scope summary and module map. Confirming our scoping call on [Day, Time UAE]."
