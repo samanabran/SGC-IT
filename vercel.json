@@ -10,6 +10,13 @@
       "use": "@vercel/static"
     }
   ],
+  "redirects": [
+    {
+      "source": "/SGC%20TECH%20AI%20COMPANY%20PROFILE%202025.html",
+      "destination": "/SGC%20TECH%20AI%20BUSINESS%20PROFILE.pdf",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     { "source": "/api/roleplay-token", "destination": "/api/roleplay-token.js" },
     { "source": "/", "destination": "/index.html" },
