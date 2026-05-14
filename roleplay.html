@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Role Play Studio - SGC-IT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a1222;
+            --panel: #111b31;
+            --panel-soft: #172540;
+            --text: #f7fafc;
+            --muted: #9cb2d4;
+            --brand: #3b82f6;
+            --accent: #10b981;
+            --line: #2a3b5f;
+            --radius: 14px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at 20% 10%, #1a2d52 0%, var(--bg) 50%, #070d19 100%);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(8, 14, 27, 0.88);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            text-decoration: none;
+            color: #d8e6ff;
+            background: #12213c;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .tab:hover,
+        .tab.active {
+            background: var(--brand);
+            border-color: #4ea0ff;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 42px 20px 56px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(16, 185, 129, 0.15));
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            color: #d7e4ff;
+            font-size: 17px;
+            max-width: 780px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 20px 0 28px;
+        }
+
+        .card {
+            background: linear-gradient(145deg, var(--panel), var(--panel-soft));
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 18px;
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .chip {
+            display: inline-block;
+            margin-top: 10px;
+            background: rgba(16, 185, 129, 0.16);
+            border: 1px solid rgba(16, 185, 129, 0.45);
+            color: #9ff0cb;
+            border-radius: 999px;
+            padding: 5px 10px;
+            font-size: 12px;
+            letter-spacing: 0.2px;
+        }
+
+        .section {
+            background: rgba(9, 16, 30, 0.8);
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 16px;
+        }
+
+        .section h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .section p,
+        .section li {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .cmd {
+            margin-top: 12px;
+            background: #091225;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            padding: 12px;
+            overflow-x: auto;
+            color: #d7e4ff;
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 13px;
+        }
+
+        .actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: var(--brand);
+            color: #fff;
+            border-color: #4ea0ff;
+        }
+
+        .btn-secondary {
+            background: #13213c;
+            color: #dbe8ff;
+            border-color: var(--line);
+        }
+
+        .note {
+            margin-top: 10px;
+            color: #b8c9e6;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 27px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .container {
+                padding-top: 26px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="brand" href="index.html">
+            <i class="fas fa-briefcase"></i>
+            SGC-IT
+        </a>
+        <div class="tabs">
+            <a class="tab" href="index.html">Home</a>
+            <a class="tab" href="lead-scoring.html">Lead Scoring</a>
+            <a class="tab" href="Scholarix final Script.html">Sales Scripts</a>
+            <a class="tab active" href="roleplay.html">Role Play</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>Sales Role Play Studio</h1>
+            <p>Practice high-stakes sales calls with realistic buyer personas and voice interactions. Choose a persona, run the LiveKit agent, and simulate real conversations.</p>
+        </section>
+
+        <section class="section">
+            <h2>Available Personas</h2>
+            <div class="grid">
+                <article class="card">
+                    <h3>p1_faisal</h3>
+                    <p>Managing Director persona focused on strategic fit, outcomes, and executive-level clarity.</p>
+                    <span class="chip">Deepgram voice mapped</span>
+                </article>
+                <article class="card">
+                    <h3>p2_noura</h3>
+                    <p>Operations and process-oriented persona that tests delivery reliability and execution details.</p>
+                    <span class="chip">Deepgram voice mapped</span>
+                </article>
+                <article class="card">
+                    <h3>p3_omar</h3>
+                    <p>Technical evaluator persona focused on integration complexity and implementation feasibility.</p>
+                    <span class="chip">Deepgram voice mapped</span>
+                </article>
+                <article class="card">
+                    <h3>p4_rajesh</h3>
+                    <p>Aggressive commercial persona focused on ROI pressure, speed, and negotiation stress-testing.</p>
+                    <span class="chip">Deepgram voice mapped</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>How to Run Role Play</h2>
+            <ol>
+                <li>Open terminal in the project root.</li>
+                <li>Change into the roleplay folder.</li>
+                <li>Set your persona in environment variables.</li>
+                <li>Start the LiveKit agent server.</li>
+            </ol>
+            <div class="cmd">cd livekit-sales-roleplay
+set ROLEPLAY_PERSONA_ID=p1_faisal
+python agent.py</div>
+            <p class="note">Use one of: p1_faisal, p2_noura, p3_omar, p4_rajesh.</p>
+            <div class="actions">
+                <a class="btn btn-primary" href="livekit-sales-roleplay/README.md">
+                    <i class="fas fa-book"></i>
+                    Open Role Play README
+                </a>
+                <a class="btn btn-secondary" href="Scholarix final Script.html">
+                    <i class="fas fa-book-open"></i>
+                    Open Sales Scripts
+                </a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Instant Session (No Secret Configuration)</h2>
+            <p>Pick a persona and generate a secure session token from the Vercel server. This keeps secrets on the backend and removes user-side setup.</p>
+            <div class="actions" style="margin-top: 14px;">
+                <label for="personaSelect" style="display:flex;align-items:center;gap:8px;color:#dbe8ff;">
+                    Persona
+                    <select id="personaSelect" style="background:#0d1a31;color:#fff;border:1px solid #2a3b5f;border-radius:8px;padding:8px;">
+                        <option value="p1_faisal">p1_faisal</option>
+                        <option value="p2_noura">p2_noura</option>
+                        <option value="p3_omar">p3_omar</option>
+                        <option value="p4_rajesh">p4_rajesh</option>
+                    </select>
+                </label>
+                <button id="generateSessionBtn" class="btn btn-primary" type="button">
+                    <i class="fas fa-bolt"></i>
+                    Generate Session
+                </button>
+                <button id="startRoleplayBtn" class="btn btn-primary" type="button">
+                    <i class="fas fa-microphone"></i>
+                    Start Roleplay
+                </button>
+                <button id="endRoleplayBtn" class="btn btn-secondary" type="button" disabled>
+                    <i class="fas fa-phone-slash"></i>
+                    End Roleplay
+                </button>
+            </div>
+            <div class="actions" style="margin-top: 10px;">
+                <button id="copyTokenBtn" class="btn btn-secondary" type="button" disabled>
+                    <i class="fas fa-copy"></i>
+                    Copy Token
+                </button>
+                <button id="copyWsBtn" class="btn btn-secondary" type="button" disabled>
+                    <i class="fas fa-copy"></i>
+                    Copy wsUrl
+                </button>
+                <button id="copyRoomBtn" class="btn btn-secondary" type="button" disabled>
+                    <i class="fas fa-copy"></i>
+                    Copy Room
+                </button>
+            </div>
+            <div id="sessionStatus" class="note" style="margin-top: 10px;">Session not generated yet.</div>
+            <textarea id="sessionPayload" class="cmd" style="width:100%;min-height:150px;resize:vertical;margin-top:12px;" readonly></textarea>
+            <div class="cmd" style="margin-top:10px;">
+Step 1: Click Generate Session<br>
+Step 2: Click Start Roleplay to join voice session in browser<br>
+Step 3: Allow microphone access when prompted<br>
+Step 4: Speak with the selected persona and click End Roleplay to leave
+            </div>
+            <div id="audioMount" style="margin-top:10px;"></div>
+            <p class="note">Token expires quickly for security. If session expires, generate a fresh one.</p>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/livekit-client/dist/livekit-client.umd.min.js"></script>
+    <script>
+        (function() {
+            const personaSelect = document.getElementById('personaSelect');
+            const generateBtn = document.getElementById('generateSessionBtn');
+            const startRoleplayBtn = document.getElementById('startRoleplayBtn');
+            const endRoleplayBtn = document.getElementById('endRoleplayBtn');
+            const statusEl = document.getElementById('sessionStatus');
+            const payloadEl = document.getElementById('sessionPayload');
+            const copyTokenBtn = document.getElementById('copyTokenBtn');
+            const copyWsBtn = document.getElementById('copyWsBtn');
+            const copyRoomBtn = document.getElementById('copyRoomBtn');
+            const audioMount = document.getElementById('audioMount');
+            let currentSession = null;
+            let room = null;
+            let isGenerating = false;
+            let isStarting = false;
+            let agentJoinTimeout = null;
+
+            async function copyText(value, label) {
+                if (!value) {
+                    statusEl.textContent = `Nothing to copy for ${label}.`;
+                    return;
+                }
+                try {
+                    await navigator.clipboard.writeText(value);
+                    statusEl.textContent = `${label} copied.`;
+                } catch (error) {
+                    statusEl.textContent = `Copy failed for ${label}.`;
+                }
+            }
+
+            async function generateSession() {
+                if (isGenerating) {
+                    return null;
+                }
+
+                const persona = personaSelect.value;
+                statusEl.textContent = 'Generating secure session...';
+                generateBtn.disabled = true;
+                isGenerating = true;
+
+                try {
+                    const identity = 'web-user';
+                    const response = await fetch(`/api/roleplay-token?persona=${encodeURIComponent(persona)}&identity=${encodeURIComponent(identity)}`);
+                    const data = await response.json();
+
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Failed to generate session');
+                    }
+
+                    currentSession = data;
+                    payloadEl.value = JSON.stringify(data, null, 2);
+                    statusEl.textContent = `Ready: ${data.persona} in room ${data.room}. Expires in ${data.expiresIn}.`;
+                    if (data.dispatchError) {
+                        statusEl.textContent += ` Agent dispatch warning: ${data.dispatchError}`;
+                    }
+                    copyTokenBtn.disabled = false;
+                    copyWsBtn.disabled = false;
+                    copyRoomBtn.disabled = false;
+                    startRoleplayBtn.disabled = false;
+                    return data;
+                } catch (error) {
+                    currentSession = null;
+                    copyTokenBtn.disabled = true;
+                    copyWsBtn.disabled = true;
+                    copyRoomBtn.disabled = true;
+                    startRoleplayBtn.disabled = true;
+                    statusEl.textContent = `Failed: ${error.message}`;
+                    return null;
+                } finally {
+                    generateBtn.disabled = false;
+                    isGenerating = false;
+                }
+            }
+
+            async function startRoleplay() {
+                if (isStarting) {
+                    return;
+                }
+
+                isStarting = true;
+
+                if (!currentSession) {
+                    statusEl.textContent = 'No active session found. Generating one now...';
+                    const session = await generateSession();
+                    if (!session) {
+                        isStarting = false;
+                        startRoleplayBtn.disabled = false;
+                        return;
+                    }
+                }
+
+                try {
+                    startRoleplayBtn.disabled = true;
+                    statusEl.textContent = 'Connecting to voice room (same page, no redirect)...';
+
+                    if (!window.LivekitClient) {
+                        throw new Error('LiveKit client failed to load. Refresh and try again.');
+                    }
+
+                    if (room) {
+                        room.disconnect();
+                        room = null;
+                    }
+
+                    room = new LivekitClient.Room({
+                        adaptiveStream: true,
+                        dynacast: true,
+                    });
+
+                    room.on(LivekitClient.RoomEvent.Connected, () => {
+                        statusEl.textContent = `Connected to room ${currentSession.room}. Waiting for persona audio...`;
+                    });
+
+                    room.on(LivekitClient.RoomEvent.ParticipantConnected, (participant) => {
+                        if (agentJoinTimeout) {
+                            clearTimeout(agentJoinTimeout);
+                            agentJoinTimeout = null;
+                        }
+                        statusEl.textContent = `Participant joined: ${participant.identity}. Speak now.`;
+                    });
+
+                    room.on(LivekitClient.RoomEvent.TrackSubscribed, (track) => {
+                        if (track.kind === LivekitClient.Track.Kind.Audio) {
+                            const el = track.attach();
+                            el.autoplay = true;
+                            el.controls = true;
+                            audioMount.innerHTML = '';
+                            audioMount.appendChild(el);
+                            statusEl.textContent = `Live: connected to ${currentSession.room}. Persona audio attached.`;
+                        }
+                    });
+
+                    room.on(LivekitClient.RoomEvent.Disconnected, () => {
+                        if (agentJoinTimeout) {
+                            clearTimeout(agentJoinTimeout);
+                            agentJoinTimeout = null;
+                        }
+                        statusEl.textContent = 'Disconnected from roleplay.';
+                        endRoleplayBtn.disabled = true;
+                        startRoleplayBtn.disabled = false;
+                        audioMount.innerHTML = '';
+                    });
+
+                    await room.connect(currentSession.wsUrl, currentSession.token);
+                    await room.localParticipant.setMicrophoneEnabled(true);
+
+                    agentJoinTimeout = setTimeout(() => {
+                        if (!room) {
+                            return;
+                        }
+
+                        if (room.remoteParticipants && room.remoteParticipants.size === 0) {
+                            statusEl.textContent = `Connected to ${currentSession.room}, but no persona joined yet. Agent worker may be offline or missing LIVEKIT_URL/LIVEKIT_API_KEY/LIVEKIT_API_SECRET/DEEPGRAM_API_KEY.`;
+                        }
+                    }, 10000);
+
+                    statusEl.textContent = `Live: connected to ${currentSession.room}. URL stays the same by design. Start speaking.`;
+                    endRoleplayBtn.disabled = false;
+                } catch (error) {
+                    statusEl.textContent = `Unable to start roleplay: ${error.message}`;
+                    startRoleplayBtn.disabled = false;
+                } finally {
+                    isStarting = false;
+                }
+            }
+
+            async function endRoleplay() {
+                if (agentJoinTimeout) {
+                    clearTimeout(agentJoinTimeout);
+                    agentJoinTimeout = null;
+                }
+                if (room) {
+                    await room.disconnect();
+                    room = null;
+                }
+                endRoleplayBtn.disabled = true;
+                startRoleplayBtn.disabled = false;
+                audioMount.innerHTML = '';
+                statusEl.textContent = 'Roleplay ended.';
+            }
+
+            generateBtn.addEventListener('click', generateSession);
+            startRoleplayBtn.addEventListener('click', startRoleplay);
+            endRoleplayBtn.addEventListener('click', endRoleplay);
+            copyTokenBtn.addEventListener('click', () => copyText(currentSession && currentSession.token, 'Token'));
+            copyWsBtn.addEventListener('click', () => copyText(currentSession && currentSession.wsUrl, 'wsUrl'));
+            copyRoomBtn.addEventListener('click', () => copyText(currentSession && currentSession.room, 'Room'));
+        })();
+    </script>
+</body>
+</html>

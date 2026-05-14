@@ -941,6 +941,37 @@
       margin: 12mm;
     }
   </style>
+  <style id="contrast-override">
+    body, main, .intro, .goal-card, .your-line, .obj-row, .obj-trigger, .obj-response, .phase-header, header[role="banner"], .phase-btn, .mode-toggle {
+      background: #fff !important;
+      color: #111 !important;
+      border-color: #b36b00 !important;
+    }
+    .phase-btn.active, .mode-toggle.active {
+      background: #ffe066 !important;
+      color: #111 !important;
+      border-color: #b36b00 !important;
+    }
+    .obj-trigger .num {
+      background: #b91c1c !important;
+      color: #fff !important;
+    }
+    .obj-response {
+      background: #f6fff6 !important;
+    }
+    .obj-row:hover .obj-trigger {
+      background: #ffd6d6 !important;
+    }
+    .obj-row:hover .obj-response {
+      background: #e7fdee !important;
+    }
+    .obj-trigger .quote, .obj-response .script {
+      color: #111 !important;
+    }
+    .phase-header {
+      font-weight: bold !important;
+    }
+  </style>
 </head>
 
 <body role="application" aria-label="SGC TECH AI Sales Cockpit">

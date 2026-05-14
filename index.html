@@ -222,6 +222,7 @@
             <a href="#company-profile" class="nav-tab">📊 Company Profile</a>
             <a href="#business-card" class="nav-tab">💳 Business Card</a>
             <a href="lead-scoring.html" class="nav-tab">🎯 Lead Scoring</a>
+            <a href="roleplay.html" class="nav-tab">🎭 Role Play</a>
             <a href="linkedin-outreach.html" class="nav-tab">🔗 LinkedIn Outreach</a>
             <a href="scholarix-swimlane-workflow.html" class="nav-tab">🔄 Workflow</a>
             <a href="database-dashboard.html" class="nav-tab">🗄️ Databases</a>
@@ -310,6 +311,13 @@
                     <p>100-Point Authority Qualification Matrix. Identify decision-makers in 60 seconds with proven ROI formulas.</p>
                 </a>
 
+                <a href="roleplay.html" class="doc-card featured-card">
+                    <div class="featured-badge">Voice AI</div>
+                    <i class="fas fa-microphone-lines"></i>
+                    <h3>Sales Role Play Studio</h3>
+                    <p>Practice live sales conversations with persona-based role play scenarios powered by LiveKit and Deepgram voices.</p>
+                </a>
+
                 <a href="linkedin-outreach.html" class="doc-card featured-card">
                     <div class="featured-badge">Best for Growth</div>
                     <i class="fas fa-linkedin"></i>
@@ -355,8 +363,13 @@
         // Smooth scroll navigation with active tab highlighting
         document.querySelectorAll('.nav-tab').forEach(tab => {
             tab.addEventListener('click', function(e) {
+                const href = this.getAttribute('href') || '';
+                if (!href.startsWith('#')) {
+                    return;
+                }
+
                 e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
+                const targetId = href.substring(1);
                 const targetSection = document.getElementById(targetId);
                 
                 if (targetSection) {

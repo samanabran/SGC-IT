@@ -1,5 +1,17 @@
 {
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "**/*",
+      "use": "@vercel/static"
+    }
+  ],
   "rewrites": [
+    { "source": "/api/roleplay-token", "destination": "/api/roleplay-token.js" },
     { "source": "/", "destination": "/index.html" },
     { "source": "/card", "destination": "/index-simple.html" },
     { "source": "/business-card", "destination": "/index-simple.html" },

@@ -1,0 +1,14 @@
+# Avoid Python runtime auto-detection in Vercel
+**/*.py
+**/*.pyc
+
+# Local / non-deployment artifacts
+.venv/
+pages-dist/
+.omc/
+.claude/
+.wrangler/
+node_modules/
+
+# Large local-only backups
+SGC TECH AI BUSINESS PROFILE.original.pdf

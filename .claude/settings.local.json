@@ -4,9 +4,9 @@
     "claude-md-management@claude-plugins-official": true,
     "token-optimizer@alexgreensh-token-optimizer": true,
     "oh-my-claudecode@omc": true,
-    "context7@claude-plugins-official": false,
+    "context7@claude-plugins-official": true,
     "github@claude-plugins-official": true,
-    "feature-dev@claude-plugins-official": false,
+    "feature-dev@claude-plugins-official": true,
     "vercel@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": false,
     "claude-mem@thedotmack": false,
@@ -14,8 +14,8 @@
   },
   "_autoConfig": {
     "version": "1.2",
-    "detectedType": "cost-opt+git+nextjs+ecc",
-    "lastUpdated": "2026-05-13T15:34:33.014Z",
+    "detectedType": "cost-opt+git+nextjs+python+ecc",
+    "lastUpdated": "2026-05-14T02:49:47.023Z",
     "managedBy": "project-detector.mjs"
   }
 }

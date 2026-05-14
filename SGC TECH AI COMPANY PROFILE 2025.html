@@ -1471,6 +1471,114 @@
         transform: translateY(0);
       }
 
+      /* Flipbook Viewer */
+      body.flipbook-mode {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+
+      .flipbook-shell {
+        position: fixed;
+        inset: 0;
+        z-index: 900;
+        pointer-events: none;
+      }
+
+      .flipbook-controls {
+        position: fixed;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(5, 11, 20, 0.82);
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(10px);
+        z-index: 1000;
+      }
+
+      .flipbook-btn {
+        pointer-events: auto;
+        border: 1px solid rgba(212, 175, 55, 0.4);
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(255, 255, 255, 0.06));
+        color: var(--white);
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+      }
+
+      .flipbook-btn:hover {
+        transform: translateY(-1px);
+        border-color: rgba(212, 175, 55, 0.8);
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.28), rgba(255, 255, 255, 0.12));
+      }
+
+      .flipbook-counter {
+        color: var(--gold);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        min-width: 130px;
+        text-align: center;
+      }
+
+      .flipbook-page {
+        display: none;
+        position: relative;
+        min-height: 100vh;
+      }
+
+      .flipbook-page.is-active {
+        display: block;
+        animation: pageReveal 0.35s ease;
+      }
+
+      @keyframes pageReveal {
+        from {
+          opacity: 0;
+          transform: translateX(5vw) scale(0.985);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0) scale(1);
+        }
+      }
+
+      .flipbook-page.is-active::after {
+        content: 'Page Flip View';
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(212, 175, 55, 0.12);
+        color: var(--gold);
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        border: 1px solid rgba(212, 175, 55, 0.25);
+      }
+
+      @media (max-width: 768px) {
+        .flipbook-controls {
+          width: calc(100% - 20px);
+          justify-content: space-between;
+        }
+
+        .flipbook-counter {
+          min-width: auto;
+          font-size: 0.72rem;
+        }
+      }
+
       @media (max-width: 768px) {
         .print-button-container {
           top: 10px;
@@ -1512,7 +1620,7 @@
     </div>
 
     <!-- 1. Hero Section -->
-    <header class="hero">
+    <header class="hero" id="hero">
       <div class="container" style="position: relative; z-index: 200;">
         <div style="position: relative; display: inline-block">
           <div style="
@@ -1539,7 +1647,7 @@
     </header>
 
     <!-- 2. Table of Contents -->
-    <section class="toc" style="page-break-after: always;">
+    <section class="toc" id="toc" style="page-break-after: always;">
       <div class="container">
         <h2 class="text-center">Table of Contents</h2>
         <div class="toc-grid">
@@ -2329,10 +2437,128 @@
     }, 500);
   }
 
+  const FLIPBOOK_PAGE_IDS = [
+    'hero',
+    'toc',
+    'executive-summary',
+    'overview',
+    'problem',
+    'solution',
+    'pricing',
+    'case-study',
+    'technology',
+    'testimonials',
+    'why-us',
+    'faq',
+    'contact'
+  ];
+
+  function getFlipbookPages() {
+    return FLIPBOOK_PAGE_IDS
+      .map(pageId => document.getElementById(pageId))
+      .filter(Boolean);
+  }
+
+  function getFlipbookPageIndexFromHash(pages) {
+    const hashId = window.location.hash.replace('#', '');
+    if (!hashId) return 0;
+
+    const index = pages.findIndex(page => page.id === hashId);
+    return index >= 0 ? index : 0;
+  }
+
+  function setupFlipbook() {
+    const pages = getFlipbookPages();
+    if (!pages.length) {
+      return;
+    }
+
+    document.body.classList.add('flipbook-mode');
+    pages.forEach(page => page.classList.add('flipbook-page'));
+
+    const controls = document.createElement('div');
+    controls.className = 'flipbook-controls';
+    controls.innerHTML = `
+      <button type="button" class="flipbook-btn" data-action="prev">← Prev</button>
+      <div class="flipbook-counter" aria-live="polite"></div>
+      <button type="button" class="flipbook-btn" data-action="next">Next →</button>
+    `;
+    document.body.appendChild(controls);
+
+    const counter = controls.querySelector('.flipbook-counter');
+    const prevBtn = controls.querySelector('[data-action="prev"]');
+    const nextBtn = controls.querySelector('[data-action="next"]');
+    let currentIndex = getFlipbookPageIndexFromHash(pages);
+
+    function updateCounter() {
+      const currentPage = pages[currentIndex];
+      counter.textContent = `${String(currentIndex + 1).padStart(2, '0')} / ${String(pages.length).padStart(2, '0')} • ${currentPage.id.replace(/-/g, ' ')}`;
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === pages.length - 1;
+      prevBtn.style.opacity = prevBtn.disabled ? '0.45' : '1';
+      nextBtn.style.opacity = nextBtn.disabled ? '0.45' : '1';
+    }
+
+    function showPage(nextIndex, shouldScroll = true) {
+      const boundedIndex = Math.max(0, Math.min(nextIndex, pages.length - 1));
+
+      pages.forEach((page, index) => {
+        page.classList.toggle('is-active', index === boundedIndex);
+      });
+
+      currentIndex = boundedIndex;
+      updateCounter();
+
+      if (shouldScroll) {
+        pages[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      const pageId = pages[currentIndex].id;
+      if (window.location.hash !== `#${pageId}`) {
+        history.replaceState(null, '', `#${pageId}`);
+      }
+    }
+
+    prevBtn.addEventListener('click', () => showPage(currentIndex - 1));
+    nextBtn.addEventListener('click', () => showPage(currentIndex + 1));
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowLeft') {
+        showPage(currentIndex - 1);
+      }
+      if (e.key === 'ArrowRight') {
+        showPage(currentIndex + 1);
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+
+      const targetId = link.getAttribute('href').slice(1);
+      const targetIndex = pages.findIndex(page => page.id === targetId);
+      if (targetIndex >= 0) {
+        e.preventDefault();
+        showPage(targetIndex);
+      }
+    });
+
+    window.addEventListener('hashchange', function() {
+      const hashIndex = getFlipbookPageIndexFromHash(pages);
+      if (hashIndex !== currentIndex) {
+        showPage(hashIndex, false);
+      }
+    });
+
+    showPage(currentIndex, false);
+  }
+
   /**
    * Enhance print button functionality
    */
   document.addEventListener('DOMContentLoaded', function() {
+    setupFlipbook();
+
     const printBtn = document.querySelector('.print-btn');
     
     if (printBtn) {

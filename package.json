@@ -36,6 +36,9 @@
   "devDependencies": {
     "wrangler": "^3.0.0"
   },
+  "dependencies": {
+    "livekit-server-sdk": "^2.9.9"
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",

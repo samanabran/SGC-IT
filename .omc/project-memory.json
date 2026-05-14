@@ -1,0 +1,73 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1778726986909,
+  "projectRoot": "d:\\01_WORK_PROJECTS\\Important Documents -SGC\\sgc-overlay-temp\\SGC-IT",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": ">=16.0.0",
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "Python",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "requirements.txt"
+        ]
+      }
+    ],
+    "frameworks": [],
+    "packageManager": "npm",
+    "runtime": "Node.js 16.0.0"
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": "npm test",
+    "lintCommand": "npm run lint",
+    "devCommand": "npm run start",
+    "scripts": {
+      "deploy": "bash deploy.sh",
+      "test": "echo \"Running deployment tests...\" && bash deploy.sh",
+      "build": "echo \"Static site - no build required\"",
+      "start": "echo \"Open index.html in browser\"",
+      "lint": "echo \"HTML validation and security checks\"",
+      "validate": "bash deploy.sh"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "generated_scripts": {
+      "path": "generated_scripts",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1778726986804,
+      "keyFiles": [
+        "sgc_construction_multi_turn_script.txt",
+        "sgc_heavy_industry_multi_turn_script.txt",
+        "sgc_real_estate_multi_turn_script.txt"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}
