@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarix Business Card Designer</title>
+    <title>SGC TECH AI Business Card Designer</title>
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -1294,7 +1294,7 @@
 <body>
     <!-- Loading Screen -->
     <div class="loading-screen" id="loadingScreen">
-        <div class="loading-logo">SCHOLARIX IT</div>
+        <div class="loading-logo">SGC TECH AI</div>
         <div class="loading-subtitle">Professional Business Card Designer</div>
         <div class="loading-spinner"></div>
         <div class="loading-progress">
@@ -1352,7 +1352,7 @@
     <!-- Main Content -->
     <div class="main-content">
         <div class="header">
-            <h1>Scholarix Business Card Designer</h1>
+            <h1>SGC TECH AI Business Card Designer</h1>
             <p>Professional Business Card Template</p>
         </div>
 
@@ -1360,7 +1360,7 @@
         <div class="card-preview">
             <div class="business-card-front" id="card-front">
                 <div class="front-left">
-                    <div class="company-name" id="company-name">Scholarix</div>
+                    <div class="company-name" id="company-name">SGC TECH AI</div>
                     <div class="company-subtitle">GLOBAL CONSULTANTS</div>
                     <div class="company-tagline" id="company-tagline">Vision. Innovation. Execution.</div>
                     
@@ -1370,7 +1370,7 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <i class="fas fa-envelope"></i>
-                            <span id="person-email">john.anderson@scholarix.com</span>
+                            <span id="person-email">john.anderson@sgctech.ai</span>
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-phone"></i>
@@ -1378,7 +1378,7 @@
                         </div>
                         <div class="contact-item">
                             <i class="fas fa-globe"></i>
-                            <span id="person-website">www.scholarix.com</span>
+                            <span id="person-website">www.sgctech.ai</span>
                         </div>
                     </div>
                     
@@ -1409,7 +1409,7 @@
         <div class="card-preview">
             <div class="business-card-back" id="card-back">
                 <div class="back-content-top">
-                    <div class="back-company" id="back-company">Scholarix</div>
+                    <div class="back-company" id="back-company">SGC TECH AI</div>
                     <div class="company-subtitle">GLOBAL CONSULTANTS</div>
                     <div class="back-company-tagline" id="back-company-tagline">Vision. Innovation. Execution.</div>
                 </div>
@@ -1466,7 +1466,7 @@
                 </div>
                 <div class="form-group">
                     <label for="input-email">Email Address *</label>
-                    <input type="email" id="input-email" value="john.anderson@scholarix.com" required>
+                    <input type="email" id="input-email" value="john.anderson@sgctech.ai" required>
                 </div>
                 <div class="form-group">
                     <label for="input-mobile">Mobile Number *</label>
@@ -1474,7 +1474,7 @@
                 </div>
                 <div class="form-group">
                     <label for="input-company">Company Name *</label>
-                    <input type="text" id="input-company" value="Scholarix" required>
+                    <input type="text" id="input-company" value="SGC TECH AI" required>
                 </div>
             </div>
 
@@ -1498,7 +1498,7 @@
             <div class="customization-form">
                 <div class="form-group">
                     <label for="input-website">Website</label>
-                    <input type="url" id="input-website" value="www.scholarix.com" placeholder="https://example.com">
+                    <input type="url" id="input-website" value="www.sgctech.ai" placeholder="https://example.com">
                 </div>
                 <div class="form-group">
                     <label for="input-linkedin">LinkedIn Profile</label>
@@ -1600,7 +1600,7 @@ END:VCARD`;
             document.getElementById('person-title').textContent = document.getElementById('input-title').value;
             document.getElementById('person-email').textContent = document.getElementById('input-email').value;
             document.getElementById('person-mobile').textContent = document.getElementById('input-mobile').value;
-            document.getElementById('person-website').textContent = document.getElementById('input-website').value || 'www.scholarix.com';
+            document.getElementById('person-website').textContent = document.getElementById('input-website').value || 'www.sgctech.ai';
             document.getElementById('company-name').textContent = document.getElementById('input-company').value;
             document.getElementById('back-company').textContent = document.getElementById('input-company').value;
             
@@ -1704,7 +1704,7 @@ END:VCARD`;
                             pdf.addImage(backImgData, 'PNG', 0, 0, 89, 51);
                             
                             // Save the PDF
-                            pdf.save('scholarix-business-card.pdf');
+                            pdf.save('sgc-tech-ai-business-card.pdf');
                             
                             // Reset button and cleanup
                             resetButton();
@@ -1803,10 +1803,10 @@ END:VCARD`;
                 // Reset to default values
                 document.getElementById('input-name').value = 'John Anderson';
                 document.getElementById('input-title').value = 'Senior AI Consultant';
-                document.getElementById('input-email').value = 'john.anderson@scholarix.com';
+                document.getElementById('input-email').value = 'john.anderson@sgctech.ai';
                 document.getElementById('input-mobile').value = '+1 (555) 123-4567';
-                document.getElementById('input-company').value = 'Scholarix';
-                document.getElementById('input-website').value = 'www.scholarix.com';
+                document.getElementById('input-company').value = 'SGC TECH AI';
+                document.getElementById('input-website').value = 'www.sgctech.ai';
                 document.getElementById('input-linkedin').value = 'https://linkedin.com/in/johnanderson';
                 document.getElementById('input-twitter').value = 'https://twitter.com/johnanderson';
                 document.getElementById('input-facebook').value = 'https://facebook.com/johnanderson';
@@ -1999,7 +1999,7 @@ END:VCARD`;
                     <!-- Column 1: About & Logo -->
                     <div class="footer-column footer-about">
                         <div class="footer-logo-container">
-                            <div class="footer-brand">SCHOLARIX IT</div>
+                            <div class="footer-brand">SGC TECH AI</div>
                         </div>
                         <p class="footer-tagline">
                             Your trusted partner for professional business solutions. 
@@ -2062,7 +2062,7 @@ END:VCARD`;
                             </li>
                             <li class="contact-item">
                                 <i class="fas fa-envelope"></i>
-                                <a href="mailto:info@scholarixstudy.com">info@scholarixstudy.com</a>
+                                <a href="mailto:info@sgctech.ai">info@sgctech.ai</a>
                             </li>
                             <li class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
@@ -2096,7 +2096,7 @@ END:VCARD`;
             <div class="footer-bottom">
                 <div class="footer-bottom-content">
                     <p class="copyright">
-                        © 2025 SCHOLARIX IT. All rights reserved.
+                        © 2025 SGC TECH AI. All rights reserved.
                     </p>
                     <ul class="footer-legal">
                         <li><a href="#">Privacy Policy</a></li>

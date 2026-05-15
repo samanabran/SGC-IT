@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Fast-response objection handler for live sales calls. Real-time search, phase filtering, ROI calculations, and cultural adaptations.">
   <meta name="theme-color" content="#0b3d91">
-  <meta property="og:title" content="Scholarix Sales Cockpit">
+  <meta property="og:title" content="SGC TECH AI Sales Cockpit">
   <meta property="og:description" content="Professional sales objection handler for fast-paced negotiations">
-  <title>Scholarix Sales Cockpit · Fast-Response Objection Handler</title>
+  <title>SGC TECH AI Sales Cockpit · Fast-Response Objection Handler</title>
   <style>
     /* ========================================
        SECTION 1: CSS VARIABLES & FOUNDATIONS
@@ -163,7 +163,7 @@
     }
 
     .brand {
-      font-weight: 800;
+      font-weight: 700;
       font-size: var(--font-size-md);
       letter-spacing: 0.05em;
       white-space: nowrap;
@@ -172,14 +172,36 @@
       gap: var(--space-sm);
     }
 
-    .brand span {
-      color: #fcd34d;
-      animation: pulse-accent 2s ease-in-out infinite;
+    .brand-logo-icon {
+      height: 28px;
+      width: auto;
+      display: block;
     }
 
-    @keyframes pulse-accent {
-      0%, 100% { opacity: 0.8; }
-      50% { opacity: 1; }
+    .brand-logo-text {
+      height: 24px;
+      width: auto;
+      display: block;
+      filter: brightness(1.06);
+    }
+
+    .brand-fallback {
+      display: none;
+      color: #fcd34d;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .brand-sub {
+      color: #e2e8f0;
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 999px;
+      line-height: 1;
     }
 
     /* Search Component */
@@ -249,7 +271,8 @@
     }
 
     .phase-btn:hover {
-      background: rgba(255, 255, 255, 0.28);
+      background: rgba(252, 211, 77, 0.22);
+      border-color: rgba(252, 211, 77, 0.45);
       transform: translateY(-1px);
     }
 
@@ -293,8 +316,17 @@
     }
 
     .mode-toggle:hover {
-      background: rgba(255, 255, 255, 0.28);
+      background: rgba(252, 211, 77, 0.22);
+      border-color: rgba(252, 211, 77, 0.45);
       transform: translateY(-1px);
+    }
+
+    .phase-btn,
+    .mode-toggle,
+    .search-wrap input,
+    a,
+    button {
+      -webkit-tap-highlight-color: transparent;
     }
 
     .mode-toggle:active {
@@ -464,7 +496,7 @@
        SECTION 7: YOUR LINE (SALES SCRIPT)
        ======================================== */
     .your-line {
-      background: #eff6ff;
+      background: #e7f0ff;
       border-left: 5px solid var(--navy);
       padding: var(--space-lg);
       margin: var(--space-sm) 0;
@@ -543,7 +575,7 @@
     .obj-trigger {
       background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
       padding: var(--space-lg);
-      border-right: 1px solid var(--line);
+      border-right: 2px solid #f59e9e;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -582,7 +614,7 @@
     .obj-trigger .quote {
       color: var(--ink);
       font-style: italic;
-      font-weight: 600;
+      font-weight: 700;
       font-size: var(--font-size-lg);
       line-height: var(--line-height-tight);
     }
@@ -602,7 +634,8 @@
 
     /* Objection Response (Right side) */
     .obj-response {
-      background: #f0fdf4;
+      background: #ecfdf3;
+      border-left: 3px solid #22c55e;
       padding: var(--space-lg);
       display: flex;
       flex-direction: column;
@@ -610,7 +643,7 @@
     }
 
     .obj-row:hover .obj-response {
-      background: #f0fdf4;
+      background: #ecfdf3;
     }
 
     .obj-response .tag {
@@ -632,7 +665,7 @@
 
     .obj-response .script {
       color: var(--ink);
-      font-weight: 500;
+      font-weight: 600;
       font-size: var(--font-size-base);
       line-height: var(--line-height-relaxed);
     }
@@ -649,9 +682,13 @@
     .obj-response .alt {
       margin-top: var(--space-lg);
       padding-top: var(--space-lg);
-      border-top: 1px dashed var(--line);
+      border-top: 2px dashed #94a3b8;
       font-size: 13px;
       color: var(--muted);
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: var(--border-radius-sm);
+      padding-left: var(--space-md);
+      padding-right: var(--space-md);
     }
 
     .obj-response .alt b {
@@ -901,6 +938,19 @@
         font-size: var(--font-size-base);
       }
 
+      .brand-logo-icon {
+        height: 24px;
+      }
+
+      .brand-logo-text {
+        height: 20px;
+      }
+
+      .brand-sub {
+        font-size: 9px;
+        padding: 2px 6px;
+      }
+
       .container {
         padding: var(--space-md);
       }
@@ -938,75 +988,15 @@
        ======================================== */
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1a1f2e;
-        --soft: #0f172a;
-        --line: #2d3748;
-        --ink: #f8fafc;
-        --muted: #cbd5e1;
+        --bg: #ffffff;
+        --soft: #f8fafc;
+        --line: #e2e8f0;
+        --ink: #0f172a;
+        --muted: #475569;
       }
 
       body {
         background: var(--soft);
-      }
-
-      .intro,
-      .goal-card,
-      .obj-row,
-      .roi-card {
-        background: #1a1f2e;
-        border-color: #2d3748;
-      }
-
-      .your-line {
-        background: rgba(15, 23, 42, 0.6);
-        border-color: #3b82f6;
-      }
-
-      .obj-trigger {
-        background: rgba(220, 38, 38, 0.12);
-      }
-
-      .obj-response {
-        background: rgba(34, 197, 94, 0.06);
-      }
-
-      .intro h1,
-      .goal-card b,
-      .your-line .label,
-      .obj-trigger .tag,
-      .obj-response .tag,
-      .obj-response .alt b,
-      .phase-header,
-      .phase-header .meta {
-        color: #f8fafc;
-      }
-
-      .intro p,
-      .goal-card,
-      .your-line .script,
-      .obj-trigger .quote,
-      .obj-response .script,
-      .obj-response .alt,
-      .micro-note,
-      .roi-card .row,
-      .roi-card h4 {
-        color: #e2e8f0;
-      }
-
-      .obj-response .script .key-phrase,
-      .your-line .pause {
-        color: inherit;
-      }
-
-      .intro kbd {
-        background: #111827;
-        border-color: #334155;
-        color: #f8fafc;
-      }
-
-      .calc {
-        background: rgba(124, 58, 237, 0.1);
-        border-color: #7c3aed;
       }
     }
 
@@ -1100,6 +1090,24 @@
       top: 0;
     }
 
+    /* Readability hardening for script content */
+    .obj-trigger .quote,
+    .obj-response .script,
+    .obj-response .alt,
+    .goal-card,
+    .your-line .script,
+    .micro-note,
+    .roi-card h4,
+    .roi-card .row {
+      color: var(--ink) !important;
+      opacity: 1 !important;
+      text-shadow: none !important;
+    }
+
+    .phase-header .meta {
+      opacity: 1;
+    }
+
     /* Reduced motion support */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -1122,14 +1130,29 @@
     }
   </style>
 </head>
-<body role="application" aria-label="Scholarix Sales Cockpit - Objection Handler">
+<body role="application" aria-label="SGC TECH AI Sales Cockpit - Objection Handler">
   <a href="#main-content" class="skip-to-main">Skip to main content</a>
 
   <!-- ===== COCKPIT CONTROL BAR (sticky header) ===== -->
-  <header class="cockpit-bar" role="banner" aria-label="Navigation and search controls">
+  <header class="cockpit-bar" id="main-header" role="banner" aria-label="Navigation and search controls">
     <div class="cockpit-row">
       <div class="brand" data-track="header_brand">
-        SCHOLARIX <span>·</span> <span data-abbr="sales">SALES</span> COCKPIT
+        <img
+          class="brand-logo-icon"
+          src="https://res.cloudinary.com/dsl5fhclj/image/upload/v1775378014/w6bzcnwaxljxintdbh7d.png"
+          alt="SGC TECH AI icon logo"
+          loading="eager"
+          decoding="async"
+        >
+        <img
+          class="brand-logo-text"
+          src="https://res.cloudinary.com/dsl5fhclj/image/upload/v1778582784/zedthtmgcyeyac3zxuls.png"
+          alt="SGC TECH AI text logo"
+          loading="eager"
+          decoding="async"
+        >
+        <span class="brand-fallback">SGC TECH AI</span>
+        <span class="brand-sub">Sales Cockpit</span>
       </div>
 
       <!-- Search Component -->
@@ -1259,7 +1282,7 @@
 
     <div class="your-line">
       <span class="label">▶ YOU OPEN WITH</span>
-      <div class="script">"Good morning! Is this Mr. [Name]? Hi Mr. [Name], this is [Your Name] from Scholarix IT Solutions in Dubai. I know you're running [Company] and probably very busy — I'll be super direct, just need <span class="pause">2 minutes</span>. Is that okay?"</div>
+      <div class="script">"Good morning! Is this Mr. [Name]? Hi Mr. [Name], this is [Your Name] from SGC TECH AI in Dubai. I know you're running [Company] and probably very busy — I'll be super direct, just need <span class="pause">2 minutes</span>. Is that okay?"</div>
     </div>
 
     <div class="obj-row" data-keywords="busy no time meeting later">
@@ -1744,7 +1767,7 @@
       </div>
       <div class="obj-response">
         <span class="tag">Tone Adjustments</span>
-        <div class="script"><b>Open:</b> "Hi David, this is [Name] from Scholarix. I'll keep this brief. We automate manual business processes — you're probably losing ~AED 25K/month to inefficiency. Worth a 30-min meeting?"<br>
+        <div class="script"><b>Open:</b> "Hi David, this is [Name] from SGC TECH AI. I'll keep this brief. We automate manual business processes — you're probably losing ~AED 25K/month to inefficiency. Worth a 30-min meeting?"<br>
         <b>Close:</b> "Current loss AED 27,500/mo · our cost AED 5,999/mo · payback 3 months · 258% ROI. <span class="key-phrase">I need your decision by Friday for December start. Yes or no?</span>"</div>
         <div class="alt">
           <span class="pill pill-critical">Never:</span> Excessive small talk · vague pricing · miss deadlines · over-explain<br>
@@ -1805,7 +1828,7 @@
 <!-- ===== SCRIPT ===== -->
 <script>
 /**
- * SCHOLARIX SALES COCKPIT
+ * SGC TECH AI SALES COCKPIT
  * Fast-response objection handler with search, filtering, and user preferences
  * 
  * Architecture:
@@ -1823,7 +1846,7 @@
   // CONFIG & STATE
   // ========================================
   const CONFIG = {
-    storagePrefix: 'scholarix_cockpit_',
+    storagePrefix: 'sgctech_ai_cockpit_',
     analyticsEnabled: true,
     debounceDelay: 200,
     defaultPhase: 'all',
@@ -1848,7 +1871,7 @@
     rows: document.querySelectorAll('.obj-row'),
     body: document.body,
     main: document.querySelector('main'),
-    header: document.getElementById('main-header'),
+    header: document.getElementById('main-header') || document.querySelector('header.cockpit-bar'),
     intro: document.querySelector('.intro')
   };
 
@@ -2213,6 +2236,9 @@
       // Setup keyboard navigation
       setupKeyboardNavigation();
 
+      // Setup logo fallback handling
+      setupBrandFallback();
+
       Analytics.track('cockpit_initialized', {
         compactMode: STATE.compactMode,
         phase: STATE.currentPhase,
@@ -2220,7 +2246,7 @@
         totalPhases: DOM.phases.length
       });
       
-      console.log('✓ Scholarix Sales Cockpit loaded successfully');
+      console.log('✓ SGC TECH AI Sales Cockpit loaded successfully');
     } catch (error) {
       console.error('Cockpit initialization error:', error);
       Analytics.track('cockpit_error', {
@@ -2231,12 +2257,14 @@
   }
 
   function setupAccessibility() {
-    // Add skip to main content link
-    const skipLink = document.createElement('a');
-    skipLink.href = '#main-content';
-    skipLink.className = 'skip-to-main';
-    skipLink.textContent = 'Skip to main content';
-    document.body.insertBefore(skipLink, document.body.firstChild);
+    // Add skip to main content link only when it doesn't already exist
+    if (!document.querySelector('.skip-to-main')) {
+      const skipLink = document.createElement('a');
+      skipLink.href = '#main-content';
+      skipLink.className = 'skip-to-main';
+      skipLink.textContent = 'Skip to main content';
+      document.body.insertBefore(skipLink, document.body.firstChild);
+    }
 
     // Add landmark roles robustly
     if (DOM.header) {
@@ -2244,7 +2272,7 @@
         DOM.header.setAttribute('role', 'banner');
       }
     } else {
-      console.warn('[Scholarix] DOM.header (main-header) not found. Accessibility role not set.');
+      console.warn('[SGC TECH AI] DOM.header (main-header) not found. Accessibility role not set.');
     }
     // cache-busting: accessibility hardening v2 - 2026-05-14
     
@@ -2270,6 +2298,25 @@
     });
   }
 
+  function setupBrandFallback() {
+    const brand = document.querySelector('.brand');
+    if (!brand) return;
+
+    const iconLogo = brand.querySelector('.brand-logo-icon');
+    const textLogo = brand.querySelector('.brand-logo-text');
+    const fallback = brand.querySelector('.brand-fallback');
+
+    function enableFallback() {
+      if (!fallback) return;
+      fallback.style.display = 'inline';
+      if (iconLogo) iconLogo.style.display = 'none';
+      if (textLogo) textLogo.style.display = 'none';
+    }
+
+    if (iconLogo) iconLogo.addEventListener('error', enableFallback, { once: true });
+    if (textLogo) textLogo.addEventListener('error', enableFallback, { once: true });
+  }
+
   // Initialize when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -2278,7 +2325,7 @@
   }
 
   // Expose for debugging/development
-  window.ScholarixCockpit = {
+  window.SGCTechAICockpit = {
     STATE,
     CONFIG,
     Analytics,

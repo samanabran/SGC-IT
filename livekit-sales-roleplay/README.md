@@ -49,7 +49,7 @@ Required variables:
 - `LIVEKIT_API_KEY`
 - `LIVEKIT_API_SECRET`
 - `DEEPGRAM_API_KEY`
-- `ROLEPLAY_PERSONA_ID`
+- `ROLEPLAY_PERSONA_ID` fallback only, used when dispatch metadata does not include a persona
 
 Supported personas:
 
@@ -57,6 +57,12 @@ Supported personas:
 - `p2_noura`
 - `p3_omar`
 - `p4_rajesh`
+
+Persona selection behavior:
+
+- The browser/API chooses the persona per session and sends it in LiveKit dispatch metadata.
+- The worker reads `ctx.job.metadata` and loads the correct persona for that room.
+- `ROLEPLAY_PERSONA_ID` is only a fallback for manual testing or missing dispatch metadata.
 
 ## Run the worker
 

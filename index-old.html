@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scholarix Business Card - Design Preview</title>
+    <title>SGC TECH AI Business Card - Design Preview</title>
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -725,7 +725,7 @@
 </head>
 <body>
     <div class="header">
-        <h1>Scholarix Business Card Designer</h1>
+        <h1>SGC TECH AI Business Card Designer</h1>
         <p>Professional Business Card Template with Digital Export Options</p>
     </div>
 
@@ -740,11 +740,11 @@
                             <div class="logo-box">
                                 <div class="logo-glow"></div>
                                 <img src="https://i.postimg.cc/qBGf66HL/Flux-Dev-Professional-logo-design-SCHOLARIX-GLOBAL-CONSULTANTS-2-Photoroom-2-Nero-AI-Image-Upscale.png" 
-                                     alt="Scholarix Logo"
+                                     alt="SGC TECH AI Logo"
                                      onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size: 40px; font-weight: bold; color: white;\'>S</span>';">
                             </div>
                             <div>
-                                <div class="company-name" id="company-name">Scholarix</div>
+                                <div class="company-name" id="company-name">SGC TECH AI</div>
                                 <div class="company-tagline" id="company-tagline">Global Consultants</div>
                             </div>
                         </div>
@@ -757,7 +757,7 @@
                         <div class="contact-list">
                             <div class="contact-row">
                                 <div class="contact-icon">📧</div>
-                                <span id="person-email">john.anderson@scholarix.com</span>
+                                <span id="person-email">john.anderson@sgctech.ai</span>
                             </div>
                             <div class="contact-row">
                                 <div class="contact-icon">📱</div>
@@ -765,7 +765,7 @@
                             </div>
                             <div class="contact-row">
                                 <div class="contact-icon">🌐</div>
-                                <span id="person-website">www.scholarix.com</span>
+                                <span id="person-website">www.sgctech.ai</span>
                             </div>
                         </div>
                     </div>
@@ -802,12 +802,12 @@
                     <div class="back-logo-container">
                         <div class="back-logo-box">
                             <img src="https://i.postimg.cc/qBGf66HL/Flux-Dev-Professional-logo-design-SCHOLARIX-GLOBAL-CONSULTANTS-2-Photoroom-2-Nero-AI-Image-Upscale.png" 
-                                 alt="Scholarix Logo"
+                                 alt="SGC TECH AI Logo"
                                  onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size: 60px; font-weight: bold; color: white;\'>S</span>';">
                         </div>
                     </div>
                     
-                    <div class="back-company" id="back-company">Scholarix</div>
+                    <div class="back-company" id="back-company">SGC TECH AI</div>
                     <div class="back-tagline" id="back-tagline">Global Consultants</div>
                     <div class="divider"></div>
                     <div class="back-slogan">Transforming Business Through AI Innovation</div>
@@ -832,7 +832,7 @@
             </div>
             <div class="form-group">
                 <label for="input-email">Email</label>
-                <input type="email" id="input-email" value="john.anderson@scholarix.com" placeholder="Enter email">
+                <input type="email" id="input-email" value="john.anderson@sgctech.ai" placeholder="Enter email">
             </div>
             <div class="form-group">
                 <label for="input-phone">Phone</label>
@@ -840,11 +840,11 @@
             </div>
             <div class="form-group">
                 <label for="input-website">Website</label>
-                <input type="text" id="input-website" value="www.scholarix.com" placeholder="Enter website">
+                <input type="text" id="input-website" value="www.sgctech.ai" placeholder="Enter website">
             </div>
             <div class="form-group">
                 <label for="input-company">Company</label>
-                <input type="text" id="input-company" value="Scholarix" placeholder="Enter company">
+                <input type="text" id="input-company" value="SGC TECH AI" placeholder="Enter company">
             </div>
         </div>
 
@@ -1029,7 +1029,7 @@ END:VCARD`;
                 });
                 
                 const link = document.createElement('a');
-                link.download = `scholarix-business-card-${side}.png`;
+                link.download = `sgc-tech-ai-business-card-${side}.png`;
                 link.href = canvas.toDataURL('image/png');
                 document.body.appendChild(link);
                 link.click();
@@ -1093,7 +1093,7 @@ END:VCARD`;
                 pdf.addImage(backImgData, 'PNG', 0, 0, 89, 51);
                 
                 // Save PDF
-                pdf.save('scholarix-business-card.pdf');
+                pdf.save('sgc-tech-ai-business-card.pdf');
                 alert('✅ PDF downloaded successfully!');
             } catch (error) {
                 console.error('Error generating PDF:', error);
@@ -1158,7 +1158,7 @@ END:VCARD`;
                 }
 
                 const link = document.createElement('a');
-                link.download = 'scholarix-digital-card-qr.png';
+                link.download = 'sgc-tech-ai-digital-card-qr.png';
                 link.href = canvas.toDataURL('image/png');
                 document.body.appendChild(link);
                 link.click();
@@ -1265,10 +1265,10 @@ END:VCARD`;
                 const fields = [
                     { id: 'input-name', value: 'John Anderson' },
                     { id: 'input-title', value: 'Senior AI Consultant' },
-                    { id: 'input-email', value: 'john.anderson@scholarix.com' },
+                    { id: 'input-email', value: 'john.anderson@sgctech.ai' },
                     { id: 'input-phone', value: '+1 (555) 123-4567' },
-                    { id: 'input-website', value: 'www.scholarix.com' },
-                    { id: 'input-company', value: 'Scholarix' }
+                    { id: 'input-website', value: 'www.sgctech.ai' },
+                    { id: 'input-company', value: 'SGC TECH AI' }
                 ];
 
                 fields.forEach(field => {

@@ -4,6 +4,7 @@ import os
 from typing import Any
 
 from livekit import api
+from livekit.api.agent_dispatch_service import CreateAgentDispatchRequest
 
 
 def _build_metadata() -> str:
@@ -12,7 +13,8 @@ def _build_metadata() -> str:
         return metadata_raw
 
     user_id = os.environ.get("LIVEKIT_USER_ID", "12345")
-    return json.dumps({"user_id": user_id})
+    persona = os.environ.get("ROLEPLAY_PERSONA_ID", "p1_faisal")
+    return json.dumps({"user_id": user_id, "persona": persona})
 
 
 def _read_config() -> dict[str, Any]:
@@ -33,7 +35,7 @@ async def create_explicit_dispatch() -> None:
 
     try:
         dispatch = await lkapi.agent_dispatch.create_dispatch(
-            api.CreateAgentDispatchRequest(
+            CreateAgentDispatchRequest(
                 agent_name=config["agent_name"],
                 room=config["room_name"],
                 metadata=config["metadata"],

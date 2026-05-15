@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self';" />
+  <title>Worker Admin</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f172a;
+      --panel: #111827;
+      --border: #334155;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #10b981;
+      --danger: #ef4444;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(circle at top right, #1e293b, var(--bg));
+      color: var(--text);
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .panel {
+      width: min(640px, 100%);
+      background: rgba(17, 24, 39, 0.95);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.4rem;
+    }
+
+    p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin: 0 0 8px;
+      font-weight: 600;
+    }
+
+    input,
+    textarea,
+    button {
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      padding: 12px;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .row {
+      margin-bottom: 14px;
+    }
+
+    button {
+      cursor: pointer;
+      background: linear-gradient(130deg, #047857, var(--accent));
+      font-weight: 700;
+      border: none;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .status {
+      margin-top: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      min-height: 1.4em;
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    .status.ok {
+      color: #34d399;
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <h1>Roleplay Worker Admin Trigger</h1>
+    <p>
+      Local admin-only endpoint. Keep this page private and do not expose your token.
+      This trigger is intentionally separated from the public roleplay page.
+    </p>
+
+    <div class="row">
+      <label for="workerToken">Worker Start Token</label>
+      <input id="workerToken" type="password" autocomplete="off" placeholder="ROLEPLAY_WORKER_START_TOKEN" />
+    </div>
+
+    <button id="startWorkerBtn" type="button">Start Worker</button>
+    <div id="status" class="status">Idle</div>
+  </main>
+
+  <script>
+    (function() {
+      const tokenInput = document.getElementById('workerToken');
+      const startWorkerBtn = document.getElementById('startWorkerBtn');
+      const status = document.getElementById('status');
+
+      function setStatus(message, kind) {
+        status.textContent = message;
+        status.className = 'status' + (kind ? ' ' + kind : '');
+      }
+
+      async function startWorker() {
+        const token = tokenInput.value.trim();
+        if (!token) {
+          setStatus('Token is required.', 'error');
+          return;
+        }
+
+        startWorkerBtn.disabled = true;
+        setStatus('Starting worker command...', '');
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+        try {
+          const response = await fetch('/api/roleplay-worker-start', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-worker-start-token': token,
+            },
+            body: JSON.stringify({ trigger: 'manual_admin_start' }),
+            signal: controller.signal,
+          });
+          clearTimeout(timeoutId);
+
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok) {
+            throw new Error(data.error || 'Request failed');
+          }
+
+          const pidText = data.pid ? ` PID: ${data.pid}.` : '';
+          setStatus(`Worker start requested successfully.${pidText}`, 'ok');
+        } catch (error) {
+          clearTimeout(timeoutId);
+          if (error.name === 'AbortError') {
+            setStatus('Start failed: request timeout after 10s.', 'error');
+            return;
+          }
+
+          setStatus(`Start failed: ${error.message}`, 'error');
+        } finally {
+          startWorkerBtn.disabled = false;
+        }
+      }
+
+      startWorkerBtn.addEventListener('click', startWorker);
+    })();
+  </script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const { AccessToken, AgentDispatchClient } = require('livekit-server-sdk');
 
-const ALLOWED_PERSONAS = new Set(['p1_faisal', 'p2_noura', 'p3_omar', 'p4_rajesh']);
+const ALLOWED_PERSONAS = new Set(['p1_faisal', 'p2_noura', 'p3_omar', 'p4_rajesh', 'p5_imran', 'p6_vikram', 'p7_sarah', 'p8_michael', 'p9_andrew']);
 
 function cleanEnv(value) {
   return typeof value === 'string' ? value.trim() : '';
