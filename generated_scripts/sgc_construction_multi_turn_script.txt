@@ -1,5 +1,5 @@
 ==================================================
-        SGC Tech AI | Multi-Turn Sales Script
+        [Anonymized Company] | Multi-Turn Sales Script
         Persona: SGC Construction Agent
         Target: CFO / Finance Controller / Project Director
         Goal: Book a scoping call with Finance/CFO, project controls, and operations.
@@ -53,7 +53,7 @@
 
         ------------------ CALL FLOW ------------------
         Turn 1 - Pattern Interrupt Opener
-        Agent: "Hi [Name], this is [Agent Name] from SGC Tech AI. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+        Agent: "Hi [Name], this is [Agent Name] from [Anonymized Company]. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
 
         Turn 2 - Permission + Relevance
         Prospect: "Depends, what is this about?"

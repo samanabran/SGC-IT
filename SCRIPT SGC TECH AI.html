@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SGC Tech AI — Sales Cockpit | Real Estate · Construction · Finance & Compliance</title>
+<title>[Anonymized Company] — Sales Cockpit | Real Estate · Construction · Finance & Compliance</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
   :root{
@@ -48,6 +48,10 @@
   .pill.amber{background:var(--amber)}
   .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .objection-grid{display:grid;grid-template-columns:1fr;gap:8px}
+  .objection-grid .obj-row{grid-template-columns:320px 1fr;gap:8px;padding:8px;margin-bottom:0}
+  .objection-grid .obj-trigger,.objection-grid .obj-response{padding:7px 9px}
+  .objection-grid .obj-trigger .text,.objection-grid .obj-response .text{font-size:11.5px;line-height:1.35}
   .info-card{background:#fff;border:1px solid var(--border);border-radius:6px;padding:12px}
   .info-card h4{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--navy);margin-bottom:8px;letter-spacing:.5px}
   .info-card ul{list-style:none}
@@ -77,6 +81,7 @@
   .compact-mode .info-card,.compact-mode .roi-grid,.compact-mode .tier-grid,.compact-mode .targets-strip,.compact-mode .cx-card{display:none}
   .compact-mode .phase-body{padding:8px 12px}
   .compact-mode .obj-row{padding:6px;margin-bottom:5px}
+  .compact-mode .objection-grid .obj-row{grid-template-columns:300px 1fr;gap:6px}
   .hidden{display:none !important}
   .hot-tip{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid var(--red);padding:8px 12px;margin:8px 0;border-radius:0 4px 4px 0;font-size:11.5px}
   .hot-tip strong{color:var(--red)}
@@ -88,6 +93,9 @@
     .obj-row{break-inside:avoid}
     body{font-size:11px}
   }
+  @media (max-width: 980px){
+    .objection-grid .obj-row{grid-template-columns:1fr}
+  }
   @page{margin:1cm}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
@@ -95,7 +103,7 @@
 <body>
 
 <div class="cockpit-bar">
-  <h1>🎯 SGC TECH AI — SALES COCKPIT</h1>
+  <h1>🎯 [ANONYMIZED COMPANY] — SALES COCKPIT</h1>
   <span class="tag">v2026.05-sgctech</span>
   <input type="text" class="search-box" id="search" placeholder="🔍 Search objection or keyword... (press /)">
   <button class="filter-btn active" data-phase="all">ALL</button>
@@ -131,15 +139,15 @@
 
       <div class="script-card">
         <strong>📞 PATTERN INTERRUPT OPENER (Real Estate / Construction):</strong><br>
-        "Hi [Name], this is [You] from <strong>SGC Tech AI</strong>. I'll be brief — we help UAE [real estate firms / contractors] close their books in days instead of weeks and stay 100% audit-ready for VAT and the new Corporate Tax. Quick question: <strong>is your current accounting setup giving your finance team headaches every month-end?</strong>"
+        "Hi [Name], this is [You] from <strong>[Anonymized Company]</strong>. I'll be brief — we help UAE [real estate firms / contractors] close their books in days instead of weeks and stay 100% audit-ready for VAT and the new Corporate Tax. Quick question: <strong>is your current accounting setup giving your finance team headaches every month-end?</strong>"
       </div>
 
       <div class="script-card">
         <strong>📞 ALTERNATE OPENER (Compliance Angle):</strong><br>
-        "Hi [Name], [You] from SGC Tech AI in Dubai. With the 9% Corporate Tax now in full effect and FTA audits stepping up, I'm calling [industry] CFOs to ask one thing — <strong>if the FTA asked you for a full transactional audit trail today, how long would it take your team to pull it together?</strong>"
+        "Hi [Name], [You] from [Anonymized Company] in Dubai. With the 9% Corporate Tax now in full effect and FTA audits stepping up, I'm calling [industry] CFOs to ask one thing — <strong>if the FTA asked you for a full transactional audit trail today, how long would it take your team to pull it together?</strong>"
       </div>
 
-      <div class="grid-2">
+      <div class="objection-grid">
         <div class="obj-row">
           <div class="obj-trigger">
             <div class="label">🚫 OBJECTION #1</div>
@@ -198,7 +206,7 @@
     </div>
     <div class="phase-body">
 
-      <div class="grid-2">
+      <div class="objection-grid">
         <div class="info-card">
           <h4>🎯 BANT QUESTIONS (Finance-First)</h4>
           <ul>
@@ -275,12 +283,12 @@
 
       <div class="script-card">
         <strong>🎯 90-SECOND PITCH (Real Estate version):</strong><br>
-        "Here's how it works for a real estate firm like yours. SGC Tech AI deploys an <strong>AI-powered Odoo ERP</strong> tuned for UAE property businesses. Your core finance module handles VAT, Corporate Tax filings, IFRS-compliant books, and audit trails automatically. Layered on top, you get <strong>property CRM, unit-level P&L, owner portals, RERA-ready escrow reconciliation, service-charge automation, and Ejari integration</strong>. Your month-end goes from 15 days to 3. Your finance team stops doing data entry and starts doing analysis. You go live in <strong>30 to 90 days</strong>, fully VAT-ready, Arabic + English."
+        "Here's how it works for a real estate firm like yours. [Anonymized Company] deploys an <strong>AI-powered Odoo ERP</strong> tuned for UAE property businesses. Your core finance module handles VAT, Corporate Tax filings, IFRS-compliant books, and audit trails automatically. Layered on top, you get <strong>property CRM, unit-level P&L, owner portals, RERA-ready escrow reconciliation, service-charge automation, and Ejari integration</strong>. Your month-end goes from 15 days to 3. Your finance team stops doing data entry and starts doing analysis. You go live in <strong>30 to 90 days</strong>, fully VAT-ready, Arabic + English."
       </div>
 
       <div class="script-card">
         <strong>🎯 90-SECOND PITCH (Construction version):</strong><br>
-        "For a contractor your size, here's what changes. SGC Tech AI gives you <strong>AI-powered Odoo ERP</strong> with finance and compliance as the core — VAT, Corporate Tax, IFRS, audit-ready in one click. On top of that you get <strong>project costing, BoQ tracking, subcontractor management, progress billing, retention handling, and site progress reports</strong> all linked to your P&L. You'll know exactly which project is bleeding cash <strong>before it bleeds you dry</strong>. 30 to 90 day go-live, Arabic + English, fully FTA-compliant."
+        "For a contractor your size, here's what changes. [Anonymized Company] gives you <strong>AI-powered Odoo ERP</strong> with finance and compliance as the core — VAT, Corporate Tax, IFRS, audit-ready in one click. On top of that you get <strong>project costing, BoQ tracking, subcontractor management, progress billing, retention handling, and site progress reports</strong> all linked to your P&L. You'll know exactly which project is bleeding cash <strong>before it bleeds you dry</strong>. 30 to 90 day go-live, Arabic + English, fully FTA-compliant."
       </div>
 
       <div class="script-card">
@@ -357,7 +365,7 @@
         "Based on what you've shared, this is exactly the kind of setup we deploy in 60 days. <strong>Next step is a 30-minute scoping call</strong> with our solutions architect where we walk through your current system and show a live demo on your actual numbers. I have <strong>Tuesday 10am or Thursday 2pm</strong> open this week — which works better?"
       </div>
 
-      <div class="grid-2">
+      <div class="objection-grid">
         <div class="obj-row">
           <div class="obj-trigger">
             <div class="label">🚫 OBJECTION #8 — PRICE</div>
@@ -405,11 +413,11 @@
         <div class="obj-row">
           <div class="obj-trigger">
             <div class="label">🚫 OBJECTION #12 — TRUST</div>
-            <div class="text">"Never heard of SGC Tech AI."</div>
+            <div class="text">"Never heard of [Anonymized Company]."</div>
           </div>
           <div class="obj-response">
             <div class="label">✅ RESPONSE</div>
-            <div class="text">"Fair point. We're <strong>SGC TECH AI</strong> — operator-led, UAE-based, Odoo + AI specialists with fixed-price, fixed-timeline delivery. We've deployed for real estate firms, contractors, and trading houses across Dubai and Abu Dhabi. Check sgctech.ai/about — I'll send <strong>3 case studies in your industry</strong> before our scoping call."<span class="pill ok">SOCIAL PROOF</span></div>
+            <div class="text">"Fair point. We're <strong>[ANONYMIZED COMPANY]</strong> — operator-led, UAE-based, Odoo + AI specialists with fixed-price, fixed-timeline delivery. We've deployed for real estate firms, contractors, and trading houses across Dubai and Abu Dhabi. Check sgctech.ai/about — I'll send <strong>3 case studies in your industry</strong> before our scoping call."<span class="pill ok">SOCIAL PROOF</span></div>
           </div>
         </div>
 
@@ -460,7 +468,7 @@
 
       <div class="script-card">
         <strong>📧 IMMEDIATE FOLLOW-UP (within 1 hour):</strong><br>
-        "Hi [Name], great speaking earlier. As promised — attached is the <strong>tailored ROI summary</strong> for [their company] and 2 case studies from [their industry]. Confirming our scoping call: <strong>[Day] [Date] [Time] UAE time</strong>. Calendar invite incoming. Talk soon — [You], SGC Tech AI."
+        "Hi [Name], great speaking earlier. As promised — attached is the <strong>tailored ROI summary</strong> for [their company] and 2 case studies from [their industry]. Confirming our scoping call: <strong>[Day] [Date] [Time] UAE time</strong>. Calendar invite incoming. Talk soon — [You], [Anonymized Company]."
       </div>
 
       <div class="grid-2">
@@ -529,7 +537,7 @@
           <h5>CX1 · ARAB / EMIRATI OWNER</h5>
           <div class="tone">Tone: Respectful, relationship-first, patient. Use titles (Mr./Sheikh/Eng.). Don't rush.</div>
           <strong style="font-size:11px;color:var(--navy)">Open:</strong>
-          <div style="font-size:11px;margin:4px 0">"Assalamu alaikum, Mr. [Name]. I hope your day is blessed. This is [You] from SGC Tech AI..."</div>
+          <div style="font-size:11px;margin:4px 0">"Assalamu alaikum, Mr. [Name]. I hope your day is blessed. This is [You] from [Anonymized Company]..."</div>
           <strong style="font-size:11px;color:var(--navy)">Close:</strong>
           <div style="font-size:11px;margin:4px 0">"It would be an honor to visit your office for the scoping call. Shall we say next Tuesday, inshallah?"</div>
           <span class="pill ok">DO: Tea/coffee meeting</span>
@@ -540,7 +548,7 @@
           <h5>CX2 · INDIAN / PAKISTANI OWNER</h5>
           <div class="tone">Tone: Direct on numbers, ROI-focused, negotiate-friendly. Speak business-fast.</div>
           <strong style="font-size:11px;color:var(--navy)">Open:</strong>
-          <div style="font-size:11px;margin:4px 0">"Mr. [Name], [You] from SGC Tech AI. Quick one — losing AED 30K+ on manual finance work monthly. Have 2 minutes?"</div>
+          <div style="font-size:11px;margin:4px 0">"Mr. [Name], [You] from [Anonymized Company]. Quick one — losing AED 30K+ on manual finance work monthly. Have 2 minutes?"</div>
           <strong style="font-size:11px;color:var(--navy)">Close:</strong>
           <div style="font-size:11px;margin:4px 0">"ROI is clear, sir. Lock current pricing now, 5% pre-pay discount, scoping Tuesday — done?"</div>
           <span class="pill ok">DO: Share AED numbers fast</span>
@@ -551,7 +559,7 @@
           <h5>CX3 · WESTERN EXPAT CFO</h5>
           <div class="tone">Tone: Data-driven, structured, professional. Skip pleasantries, deliver insight.</div>
           <strong style="font-size:11px;color:var(--navy)">Open:</strong>
-          <div style="font-size:11px;margin:4px 0">"[Name], [You] from SGC Tech AI. Calling UAE finance leaders about Corporate Tax compliance gaps. 2 minutes?"</div>
+          <div style="font-size:11px;margin:4px 0">"[Name], [You] from [Anonymized Company]. Calling UAE finance leaders about Corporate Tax compliance gaps. 2 minutes?"</div>
           <strong style="font-size:11px;color:var(--navy)">Close:</strong>
           <div style="font-size:11px;margin:4px 0">"I'll send the ROI model + 2 case studies. Scoping call Thursday 2pm to walk through technical architecture?"</div>
           <span class="pill ok">DO: Send data pre-call</span>
@@ -602,7 +610,7 @@
     </div>
     <div class="phase-body">
 
-      <div class="win-tip"><strong>✅ How to use:</strong> Pick one persona, run Turn 1 to Turn 5, then use the objection lines and meeting lock. These are aligned to SGC TECH AI service context and UAE compliance-first positioning.</div>
+      <div class="win-tip"><strong>✅ How to use:</strong> Pick one persona, run Turn 1 to Turn 5, then use the objection lines and meeting lock. These are aligned to [ANONYMIZED COMPANY] service context and UAE compliance-first positioning.</div>
 
       <div class="grid-3">
         <div class="info-card">
@@ -614,7 +622,7 @@
           </ul>
 
           <div class="script-card" style="margin-top:8px">
-            <strong>Turn 1:</strong> "Hi [Name], this is [Agent Name] from SGC Tech AI. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+            <strong>Turn 1:</strong> "Hi [Name], this is [Agent Name] from [Anonymized Company]. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
           </div>
           <div class="script-card">
             <strong>Turn 2:</strong> "You're likely balancing finance accuracy, operations speed, and compliance pressure at once. We help teams close faster and stay audit-ready without long ERP projects."
@@ -654,7 +662,7 @@
           </ul>
 
           <div class="script-card" style="margin-top:8px">
-            <strong>Turn 1:</strong> "Hi [Name], this is [Agent Name] from SGC Tech AI... fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+            <strong>Turn 1:</strong> "Hi [Name], this is [Agent Name] from [Anonymized Company]... fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
           </div>
           <div class="script-card">
             <strong>Turn 2:</strong> "You're balancing finance accuracy, operations speed, and compliance pressure. We help teams close faster and stay audit-ready."
@@ -694,7 +702,7 @@
           </ul>
 
           <div class="script-card" style="margin-top:8px">
-            <strong>Turn 1:</strong> "Hi [Name], this is [Agent Name] from SGC Tech AI... fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+            <strong>Turn 1:</strong> "Hi [Name], this is [Agent Name] from [Anonymized Company]... fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
           </div>
           <div class="script-card">
             <strong>Turn 2:</strong> "You are likely balancing finance accuracy, operations speed, and compliance pressure."

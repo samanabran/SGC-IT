@@ -72,7 +72,7 @@ def build_multi_turn_script(agent: dict) -> str:
     return dedent(
         f"""
         ==================================================
-        {agent['company_name']} | Multi-Turn Sales Script
+        [Anonymized Company] | Multi-Turn Sales Script
         Persona: {name}
         Target: {target}
         Goal: {purpose}
@@ -91,7 +91,7 @@ def build_multi_turn_script(agent: dict) -> str:
 
         ------------------ CALL FLOW ------------------
         Turn 1 - Pattern Interrupt Opener
-        Agent: "Hi [Name], this is [Agent Name] from {agent['company_name']}. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
+        Agent: "Hi [Name], this is [Agent Name] from [Anonymized Company]. We help UAE operators replace spreadsheets, WhatsApp threads, and disconnected systems with fixed-price, fixed-timeline Odoo + AI delivery. Can I take 90 seconds?"
 
         Turn 2 - Permission + Relevance
         Prospect: "Depends, what is this about?"

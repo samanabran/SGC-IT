@@ -246,22 +246,22 @@
             <h2>Available Personas</h2>
             <div class="grid">
                 <article class="card">
-                    <h3>p1_faisal</h3>
+                    <h3>persona_01</h3>
                     <p>Managing Director persona focused on strategic fit, outcomes, and executive-level clarity.</p>
                     <span class="chip">Deepgram voice mapped</span>
                 </article>
                 <article class="card">
-                    <h3>p2_noura</h3>
+                    <h3>persona_02</h3>
                     <p>Operations and process-oriented persona that tests delivery reliability and execution details.</p>
                     <span class="chip">Deepgram voice mapped</span>
                 </article>
                 <article class="card">
-                    <h3>p3_omar</h3>
+                    <h3>persona_03</h3>
                     <p>Technical evaluator persona focused on integration complexity and implementation feasibility.</p>
                     <span class="chip">Deepgram voice mapped</span>
                 </article>
                 <article class="card">
-                    <h3>p4_rajesh</h3>
+                    <h3>persona_04</h3>
                     <p>Aggressive commercial persona focused on ROI pressure, speed, and negotiation stress-testing.</p>
                     <span class="chip">Deepgram voice mapped</span>
                 </article>
@@ -279,7 +279,7 @@
             <div class="cmd">cd livekit-sales-roleplay
 set ROLEPLAY_PERSONA_ID=p1_faisal
 python agent.py</div>
-            <p class="note">Use one of: p1_faisal, p2_noura, p3_omar, p4_rajesh, p5_imran, p6_vikram, p7_sarah, p8_michael, p9_andrew.</p>
+            <p class="note">Use one of the configured persona IDs in the selector below.</p>
             <div class="actions">
                 <a class="btn btn-primary" href="livekit-sales-roleplay/README.md">
                     <i class="fas fa-book"></i>
@@ -299,15 +299,15 @@ python agent.py</div>
                 <label for="personaSelect" style="display:flex;align-items:center;gap:8px;color:#dbe8ff;">
                     Persona
                     <select id="personaSelect" style="background:#0d1a31;color:#fff;border:1px solid #2a3b5f;border-radius:8px;padding:8px;">
-                        <option value="p1_faisal">p1_faisal</option>
-                        <option value="p2_noura">p2_noura</option>
-                        <option value="p3_omar">p3_omar</option>
-                        <option value="p4_rajesh">p4_rajesh</option>
-                        <option value="p5_imran">p5_imran</option>
-                        <option value="p6_vikram">p6_vikram</option>
-                        <option value="p7_sarah">p7_sarah</option>
-                        <option value="p8_michael">p8_michael</option>
-                        <option value="p9_andrew">p9_andrew</option>
+                        <option value="p1_faisal">persona_01</option>
+                        <option value="p2_noura">persona_02</option>
+                        <option value="p3_omar">persona_03</option>
+                        <option value="p4_rajesh">persona_04</option>
+                        <option value="p5_imran">persona_05</option>
+                        <option value="p6_vikram">persona_06</option>
+                        <option value="p7_sarah">persona_07</option>
+                        <option value="p8_michael">persona_08</option>
+                        <option value="p9_andrew">persona_09</option>
                     </select>
                 </label>
                 <button id="generateSessionBtn" class="btn btn-primary" type="button">
