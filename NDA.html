@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SGC Tech AI — Mutual Non-Disclosure & Confidentiality Agreement v2026.05</title>
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --muted: #555;
+    --rule: #d4d4d4;
+    --accent: #0f3a5f;
+    --accent-soft: #eef3f8;
+    --red: #b32020;
+    --amber: #b87a00;
+    --green: #1e6b3a;
+    --paper: #ffffff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: Georgia, "Times New Roman", serif;
+    color: var(--ink);
+    background: #f5f5f3;
+    margin: 0;
+    padding: 40px 20px;
+    line-height: 1.55;
+  }
+  .page {
+    max-width: 880px;
+    margin: 0 auto 40px;
+    background: var(--paper);
+    padding: 56px 64px;
+    border: 1px solid var(--rule);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .topbar {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 10px;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+  }
+  h1 {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 28px;
+    line-height: 1.2;
+    color: var(--accent);
+    margin: 0 0 6px;
+    letter-spacing: -0.5px;
+  }
+  h2 {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    color: var(--accent);
+    margin-top: 36px;
+    margin-bottom: 10px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid var(--rule);
+    letter-spacing: 0.3px;
+  }
+  h3 {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    margin-top: 22px;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  p { margin: 8px 0; text-align: justify; }
+  .lede {
+    font-size: 14px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 22px;
+  }
+  .status-box {
+    background: #fff8e6;
+    border-left: 4px solid var(--amber);
+    padding: 12px 16px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+    color: #5a4500;
+    margin: 18px 0 28px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 12.5px;
+  }
+  th, td {
+    border: 1px solid var(--rule);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+  }
+  ol.legal { padding-left: 22px; }
+  ol.legal > li { margin-bottom: 10px; }
+  ul.tight { margin: 6px 0 6px 18px; padding: 0; }
+  ul.tight li { margin-bottom: 4px; }
+  .draft-clause {
+    background: #f7f9fc;
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-style: italic;
+    font-size: 13.5px;
+    color: #2a3a4a;
+  }
+  .signature-block {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+  }
+  .sig-col {
+    flex: 1;
+    border-top: 1px solid var(--ink);
+    padding-top: 8px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+  }
+  .sig-col strong { display: block; margin-bottom: 4px; }
+  .sig-line {
+    border-bottom: 1px solid var(--ink);
+    height: 26px;
+    margin: 14px 0 4px;
+  }
+  .schedule-pill {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 3px 9px;
+    border-radius: 2px;
+    margin-right: 8px;
+    text-transform: uppercase;
+  }
+  .red { color: var(--red); font-weight: 600; }
+  .amber { color: var(--amber); font-weight: 600; }
+  .green { color: var(--green); font-weight: 600; }
+  .footer-meta {
+    margin-top: 40px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.5px;
+    color: var(--muted);
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  .toc {
+    background: #fafafa;
+    border: 1px solid var(--rule);
+    padding: 16px 22px;
+    margin: 18px 0 30px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 12.5px;
+    columns: 2;
+    column-gap: 24px;
+  }
+  .toc div { break-inside: avoid; margin-bottom: 4px; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 18px;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+    margin: 10px 0 22px;
+  }
+  .meta-grid strong { color: var(--accent); }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .page { box-shadow: none; border: none; margin: 0; padding: 30px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="topbar">
+    <span>Confidential · Pre-Engagement Legal Instrument</span>
+    <span>Doc 09 · v2026.05</span>
+  </div>
+
+  <h1>Mutual Non-Disclosure &amp; Confidentiality Agreement</h1>
+  <p class="lede">A foundational confidentiality instrument executed before any candidate, contractor, partner, vendor, or prospective client is exposed to SGC Tech AI's commercial, technical, financial, or client-related information.</p>
+
+  <div class="status-box">
+    <strong>STATUS NOTE.</strong> This NDA is drafted to align with UAE Federal Decree-Law No. 33 of 2021 (Regulating Labour Relations), Federal Decree-Law No. 45 of 2021 (Personal Data Protection Law / PDPL), and Federal Law No. 5 of 1985 (Civil Transactions). It is calibrated to industry standards for UAE-based ERP, SaaS, and AI consultancies with proprietary reusable IP. Before deployment with a live counterparty, this instrument should be reviewed by a UAE-licensed commercial lawyer (estimated AED 3,000–6,000, 5–10 business days), per the same protocol applied to Doc 02.
+  </div>
+
+  <h2>Contents</h2>
+  <div class="toc">
+    <div><a href="#s1">1. Parties &amp; Effective Date</a></div>
+    <div><a href="#s2">2. Purpose &amp; Permitted Use</a></div>
+    <div><a href="#s3">3. Definition of Confidential Information</a></div>
+    <div><a href="#s4">4. Specifically Designated Trade Secrets</a></div>
+    <div><a href="#s5">5. Exclusions</a></div>
+    <div><a href="#s6">6. Obligations of the Receiving Party</a></div>
+    <div><a href="#s7">7. Standard of Care</a></div>
+    <div><a href="#s8">8. Permitted Disclosures</a></div>
+    <div><a href="#s9">9. Return &amp; Destruction</a></div>
+    <div><a href="#s10">10. Term &amp; Survival</a></div>
+    <div><a href="#s11">11. Intellectual Property &amp; No License</a></div>
+    <div><a href="#s12">12. Non-Reverse-Engineering</a></div>
+    <div><a href="#s13">13. Non-Solicitation</a></div>
+    <div><a href="#s14">14. Non-Circumvention</a></div>
+    <div><a href="#s15">15. Limited Non-Compete (Restricted Activities)</a></div>
+    <div><a href="#s16">16. Personal Data &amp; PDPL Compliance</a></div>
+    <div><a href="#s17">17. Liquidated Damages &amp; Injunctive Relief</a></div>
+    <div><a href="#s18">18. Indemnification</a></div>
+    <div><a href="#s19">19. No Warranty on Information</a></div>
+    <div><a href="#s20">20. No Obligation to Engage</a></div>
+    <div><a href="#s21">21. Notices</a></div>
+    <div><a href="#s22">22. Governing Law &amp; Dispute Resolution</a></div>
+    <div><a href="#s23">23. General Provisions</a></div>
+    <div><a href="#s24">24. Acknowledgement &amp; Execution</a></div>
+  </div>
+
+  <!-- ============== SECTION 1 ============== -->
+  <h2 id="s1">1. Parties &amp; Effective Date</h2>
+  <p>This Mutual Non-Disclosure &amp; Confidentiality Agreement (the <strong>"Agreement"</strong>) is entered into by and between:</p>
+
+  <p><strong>SGC Tech AI</strong>, the trading name of <strong>Scholarix Global Consultant FZE</strong>, a Free Zone Establishment incorporated under the laws of the United Arab Emirates, with its registered office in IFZA, Dubai, UAE (the <strong>"Disclosing Party"</strong> or <strong>"Company"</strong>); and</p>
+
+  <p>The counterparty named in the execution block at Section 24 (the <strong>"Receiving Party"</strong>), being a natural or legal person engaged or proposed to be engaged with the Company as a candidate, employee, intern, contractor, consultant, referral partner, vendor, sub-processor, prospective client, or in any other capacity requiring exposure to the Company's confidential information.</p>
+
+  <p>Each a <strong>"Party"</strong> and together the <strong>"Parties."</strong> Although styled as mutual, the Parties acknowledge that, in the ordinary course, the Company is the principal Disclosing Party and the Receiving Party is the principal recipient. The mutual structure is preserved for any incidental disclosure flowing the other way.</p>
+
+  <p>The <strong>"Effective Date"</strong> is the date of last signature in Section 24. Where the Receiving Party is exposed to Confidential Information before signature (including during phone screens, trial days under Doc 08, or referral discussions), this Agreement applies retroactively from the date of first exposure.</p>
+
+  <!-- ============== SECTION 2 ============== -->
+  <h2 id="s2">2. Purpose &amp; Permitted Use</h2>
+  <p>The Parties wish to engage in discussions and/or activities relating to one or more of the following (the <strong>"Purpose"</strong>):</p>
+  <ul class="tight">
+    <li>evaluation of the Receiving Party for a paid trial, internship, employment, or contractor engagement with the Company, including the 2-Day Paid Trial under Doc 08;</li>
+    <li>evaluation of the Receiving Party as a Business Referral Partner under Doc 05;</li>
+    <li>evaluation of the Company's services by a prospective client, including discovery workshops, Rescue Audits, and pre-Order-Form scoping calls;</li>
+    <li>evaluation of a commercial, technical, or investment relationship of any other nature.</li>
+  </ul>
+  <p>The Receiving Party shall use Confidential Information <strong>solely</strong> for the Purpose and for no other reason whatsoever. Any use beyond the Purpose — including personal benefit, use for the benefit of any third party, competitive use, training of artificial-intelligence models, publication, academic use, or use in any subsequent employment — is an immediate material breach of this Agreement.</p>
+
+  <!-- ============== SECTION 3 ============== -->
+  <h2 id="s3">3. Definition of Confidential Information</h2>
+  <p><strong>"Confidential Information"</strong> means any and all non-public information disclosed by or on behalf of the Disclosing Party to the Receiving Party, in any form (oral, written, electronic, visual, observed, demonstrated, or inferred), whether or not marked or identified as confidential, including without limitation:</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:24%;">Category</th><th>Includes (non-exhaustive)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Commercial &amp; Pricing</strong></td>
+        <td>The Pricing &amp; Offer Architecture (Doc 03) and all tier pricing, discount thresholds, overage rates, cost stacks, margin analyses, internal unit economics, and the Discount &amp; Approval Matrix.</td>
+      </tr>
+      <tr>
+        <td><strong>Client &amp; Pipeline</strong></td>
+        <td>Names, contact details, and engagement history of past, current, and prospective clients; the OSUS Properties audited case and all underlying data; CRM contents; lead lists (including the Day-2 lead list under Doc 08); BANT-lite scoring; and any client identity disclosed under NDA.</td>
+      </tr>
+      <tr>
+        <td><strong>Technical &amp; IP</strong></td>
+        <td>Category C Reusable Modules and architecture (AML/PEP screening, Real-Estate Commission Engine, AI Orchestration Layer, AI Voice, Document Extraction, RERA/Ejari Reporting Pack, Quarterly ROI Reporting Template); SaaS microservice designs; the three-layer commercial model; integration maps; prompt libraries; and configuration handbooks.</td>
+      </tr>
+      <tr>
+        <td><strong>Sales Methodology</strong></td>
+        <td>Templates T01–T08; the Trainer's Master Kit (Doc T-08-A); mock-call scripts and personas; scorecards; the Go/No-Go Decision Tree; objection-handling playbooks; the Engagement Flow (Doc 06); and any internal sales artefact.</td>
+      </tr>
+      <tr>
+        <td><strong>Financial &amp; Operational</strong></td>
+        <td>The Master Commission Plan (Doc 05) including all rates, ceilings, the Hungry Intern Test calibration, the cost stack, reserve and clawback mechanics, and the P&amp;L stress test.</td>
+      </tr>
+      <tr>
+        <td><strong>Legal &amp; Compliance</strong></td>
+        <td>The MSA &amp; SLA Framework (Doc 02); the IP &amp; Licensing Schedule (Schedule D); the Exit &amp; Transition Schedule (Schedule E); the Successor Vendor NDA template; disclosed compliance gaps (SOC 2, ISO 27001 status); and any communication with UAE-licensed counsel.</td>
+      </tr>
+      <tr>
+        <td><strong>Personnel &amp; Partners</strong></td>
+        <td>Identities of Founders, employees, advisors, referral partners, and sub-processors; compensation structures; the Hard Rules under Doc 08 §07; and any internal disciplinary, performance, or hiring information.</td>
+      </tr>
+      <tr>
+        <td><strong>Derived Information</strong></td>
+        <td>Any notes, analyses, compilations, models, summaries, or other materials prepared by the Receiving Party that are based on, contain, or reflect Confidential Information.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>For the avoidance of doubt, all documents internally numbered Doc 02 through Doc 08 (and any successor numbering) and all Schedules attached to the MSA Framework are deemed Confidential Information by default and are subject to the highest protection under this Agreement.</p>
+
+  <!-- ============== SECTION 4 ============== -->
+  <h2 id="s4">4. Specifically Designated Trade Secrets</h2>
+  <p>The following items are <strong>specifically designated as trade secrets</strong> of the Company and shall be afforded the maximum protection available under UAE law. Confidentiality obligations in respect of trade secrets are <strong>perpetual</strong> and survive expiration or termination of this Agreement, the Purpose, or any subsequent engagement indefinitely, for so long as the information retains commercial value and is not in the public domain through no fault of the Receiving Party:</p>
+  <ol class="legal">
+    <li>The source code, architecture, prompt structures, and training data of the <strong>Category C Reusable Modules</strong> and all SaaS microservice components, as defined in Schedule D of the MSA Framework.</li>
+    <li>The Company's <strong>cost stack, margin model, and discount calibration logic</strong> as set out in Doc 03 §10, Doc 05 §5, and the Discount Penalty mechanics of Doc 05 §13.</li>
+    <li>The <strong>OSUS Properties audited case</strong>, including the client's identity, the underlying data, the methodology of the audit, and the unredacted ROI report.</li>
+    <li>The <strong>Day-2 lead list</strong>, CRM database, and all client/prospect contact information.</li>
+    <li>The <strong>Founder's proprietary scoring rubrics, mock-call hidden truths, and decision trees</strong> contained in the Trainer's Master Kit (Doc T-08-A §5, §6, §8).</li>
+  </ol>
+
+  <!-- ============== SECTION 5 ============== -->
+  <h2 id="s5">5. Exclusions</h2>
+  <p>Confidential Information does not include information that the Receiving Party can demonstrate, by contemporaneous written records:</p>
+  <ol class="legal">
+    <li>was lawfully in the Receiving Party's possession, free of any confidentiality obligation, before disclosure by the Disclosing Party;</li>
+    <li>is or becomes generally available to the public other than as a result of any act or omission of the Receiving Party or any person to whom the Receiving Party disclosed it;</li>
+    <li>is rightfully received from a third party who has the lawful right to disclose it and who is not under any confidentiality obligation in respect of it; or</li>
+    <li>is independently developed by the Receiving Party without use of, reference to, or benefit from any Confidential Information, and such independent development is provable by written records made at the time.</li>
+  </ol>
+  <p>The burden of establishing any exclusion rests entirely with the Receiving Party, on a clear and convincing standard.</p>
+
+  <!-- ============== SECTION 6 ============== -->
+  <h2 id="s6">6. Obligations of the Receiving Party</h2>
+  <p>The Receiving Party shall:</p>
+  <ol class="legal">
+    <li><strong>Hold in strict confidence</strong> all Confidential Information and not disclose it, in whole or in part, to any person except as expressly permitted under Section 8;</li>
+    <li><strong>Use it solely for the Purpose</strong> and for no other reason;</li>
+    <li><strong>Not copy, reproduce, summarise, photograph, screenshot, screen-record, transcribe, or otherwise duplicate</strong> any Confidential Information except as strictly necessary for the Purpose and only on Company-controlled systems;</li>
+    <li><strong>Not store</strong> any Confidential Information on personal devices, personal email accounts, personal cloud storage (including but not limited to personal Google Drive, iCloud, Dropbox, OneDrive), personal note-taking applications, or any third-party AI service (including but not limited to ChatGPT, Claude, Gemini, Copilot, or any other large-language-model interface that may use inputs for training);</li>
+    <li><strong>Not input Confidential Information</strong> into any third-party AI tool, prompt, or service that does not have a contractually-binding zero-retention, no-training data-handling commitment with the Receiving Party or the Company;</li>
+    <li><strong>Promptly notify</strong> the Company in writing of any actual, suspected, or threatened unauthorised disclosure, loss, or compromise of Confidential Information, within 24 hours of becoming aware of it; and</li>
+    <li><strong>Cooperate fully</strong>, at the Receiving Party's expense where the breach is attributable to the Receiving Party, with any investigation, mitigation, or enforcement action the Company elects to take.</li>
+  </ol>
+
+  <!-- ============== SECTION 7 ============== -->
+  <h2 id="s7">7. Standard of Care</h2>
+  <p>The Receiving Party shall protect Confidential Information using <strong>at least the same degree of care it uses to protect its own most sensitive confidential information, and in no event less than a reasonable standard of care</strong>. For trade secrets designated under Section 4, the standard is the <strong>highest degree of care</strong>, including physical, technical, and administrative safeguards proportionate to the value and sensitivity of the information.</p>
+
+  <!-- ============== SECTION 8 ============== -->
+  <h2 id="s8">8. Permitted Disclosures</h2>
+  <p>The Receiving Party may disclose Confidential Information only:</p>
+  <ol class="legal">
+    <li>to its own employees, directors, officers, or professional advisors who (a) have a strict need to know for the Purpose, (b) have been informed of the confidential nature, and (c) are bound by written confidentiality obligations no less protective than those in this Agreement — the Receiving Party remaining fully liable for their acts and omissions; or</li>
+    <li>to the extent required by a court order, regulator, or other governmental authority with jurisdiction, <strong>provided that</strong> the Receiving Party (a) gives the Company prompt written notice of the requirement before disclosure (where lawful), (b) limits disclosure to the minimum legally required, and (c) cooperates with any application by the Company to seek a protective order or other appropriate remedy.</li>
+  </ol>
+  <p>No other disclosure is permitted, irrespective of the apparent justification, without the Company's prior written consent signed by a Founder.</p>
+
+  <!-- ============== SECTION 9 ============== -->
+  <h2 id="s9">9. Return &amp; Destruction</h2>
+  <p>Upon the earlier of (a) the Company's written request, (b) conclusion of the Purpose, or (c) termination of any engagement between the Parties, the Receiving Party shall, within <strong>seven (7) calendar days</strong>:</p>
+  <ol class="legal">
+    <li>return all Confidential Information in tangible form;</li>
+    <li>permanently delete all Confidential Information in electronic form, including any copies, backups, and derived materials, from all systems within the Receiving Party's possession or control;</li>
+    <li>where deletion is not technically feasible (e.g. immutable backups), continue to treat the residual information as Confidential Information indefinitely under this Agreement; and</li>
+    <li>certify in writing, signed by the Receiving Party (or by a director if the Receiving Party is a legal entity), that the obligations of this Section have been performed in full.</li>
+  </ol>
+  <p>Notwithstanding the return obligation, the Receiving Party's continuing obligations of confidentiality, non-use, and non-reverse-engineering remain in full force.</p>
+
+  <!-- ============== SECTION 10 ============== -->
+  <h2 id="s10">10. Term &amp; Survival</h2>
+  <p>This Agreement commences on the Effective Date and continues until terminated by mutual written agreement of the Parties.</p>
+  <p>Confidentiality obligations survive termination as follows:</p>
+  <ul class="tight">
+    <li><strong>General Confidential Information:</strong> five (5) years from the date of last disclosure;</li>
+    <li><strong>Trade Secrets (Section 4):</strong> perpetually, for so long as the information retains commercial value;</li>
+    <li><strong>Personal data (Section 16):</strong> perpetually, in accordance with UAE PDPL;</li>
+    <li><strong>Sections 11 (IP), 12 (Non-Reverse-Engineering), 17 (Liquidated Damages), 18 (Indemnification), 22 (Governing Law):</strong> perpetually.</li>
+  </ul>
+  <p>Non-solicitation, non-circumvention, and restricted-activity periods under Sections 13–15 run from the date the Receiving Party's engagement with the Company concludes (or, if no engagement is entered into, from the date the Purpose concludes).</p>
+
+  <!-- ============== SECTION 11 ============== -->
+  <h2 id="s11">11. Intellectual Property &amp; No License</h2>
+  <p>All Confidential Information, and all intellectual property rights in it, remain the sole and exclusive property of the Disclosing Party. <strong>No licence</strong>, assignment, or other right — express or implied, by estoppel or otherwise — is granted to the Receiving Party under any patent, copyright, trade mark, trade secret, design right, database right, or other intellectual property right of the Disclosing Party, except the limited right to use the Confidential Information solely for the Purpose for the duration of this Agreement.</p>
+
+  <p>Any improvements, derivatives, modifications, suggestions, or feedback that the Receiving Party provides in relation to Confidential Information shall be the exclusive property of the Company, and the Receiving Party hereby irrevocably assigns to the Company all rights, title, and interest in such improvements, with no further consideration owed.</p>
+
+  <!-- ============== SECTION 12 ============== -->
+  <h2 id="s12">12. Non-Reverse-Engineering</h2>
+  <p>The Receiving Party shall not, and shall not permit or assist any third party to:</p>
+  <ol class="legal">
+    <li>reverse engineer, decompile, disassemble, or otherwise attempt to derive the source code, structure, algorithms, prompts, training data, or trade-secret content of any Company software, module, microservice, or system (including all Category C Reusable Modules and SaaS microservice components);</li>
+    <li>create any derivative work, competing product, training-dataset, model fine-tune, or service based on, modelled after, or substantially similar to any Company offering;</li>
+    <li>use Confidential Information to train, fine-tune, evaluate, or improve any artificial-intelligence model, whether for the Receiving Party's own use or for any third party;</li>
+    <li>benchmark, test, or measure the performance of any Company offering for the purpose of developing a competing product; or</li>
+    <li>copy or imitate the Company's documentation, templates, scorecards, scripts, methodology, or commercial structure for use outside the Purpose.</li>
+  </ol>
+
+  <!-- ============== SECTION 13 ============== -->
+  <h2 id="s13">13. Non-Solicitation of Personnel &amp; Clients</h2>
+  <p>During the term of this Agreement, any engagement between the Parties, and for a period of <strong>twelve (12) months</strong> thereafter, the Receiving Party shall not, directly or indirectly, whether on its own account or for any other person:</p>
+  <ol class="legal">
+    <li><strong>Personnel:</strong> solicit, induce, recruit, or attempt to hire any employee, contractor, intern, or referral partner of the Company with whom the Receiving Party had contact, or about whom the Receiving Party learned Confidential Information, during the Purpose;</li>
+    <li><strong>Clients:</strong> solicit or attempt to solicit any client, prospective client, or lead of the Company (including any contact appearing in the Company's CRM, any party on the Day-2 lead list under Doc 08, or any party introduced under NDA) for the purpose of providing services competitive with the Company's offerings;</li>
+    <li><strong>Suppliers:</strong> interfere with, or seek to alter the terms of, any relationship between the Company and any of its sub-processors, vendors, or partners.</li>
+  </ol>
+  <p>Passive, non-targeted hiring through general public advertisement, where the Receiving Party did not initiate contact, is not a breach of paragraph (1).</p>
+
+  <!-- ============== SECTION 14 ============== -->
+  <h2 id="s14">14. Non-Circumvention</h2>
+  <p>If the Company introduces the Receiving Party to any client, prospect, partner, supplier, investor, or other counterparty in the course of the Purpose, the Receiving Party shall not, for a period of <strong>twenty-four (24) months</strong> from the date of introduction, directly or indirectly engage in any commercial transaction with that counterparty that bypasses, circumvents, or excludes the Company, without the Company's prior written consent. Any economic benefit obtained in breach of this Section is held on constructive trust for the Company.</p>
+
+  <!-- ============== SECTION 15 ============== -->
+  <h2 id="s15">15. Limited Non-Compete (Restricted Activities)</h2>
+  <p>The Parties acknowledge that, under UAE Federal Decree-Law No. 33 of 2021 and prevailing market practice, non-compete restrictions are enforceable only where they are reasonable in scope, duration, and geography, and necessary to protect a legitimate business interest. Accordingly:</p>
+
+  <p>For a period of <strong>six (6) months</strong> following the conclusion of any employment, internship, contractor engagement, or referral partnership between the Receiving Party and the Company, the Receiving Party shall not, within the <strong>United Arab Emirates</strong>, directly or indirectly:</p>
+  <ol class="legal">
+    <li>establish, own, manage, or be employed by a business whose primary activity is the implementation, hosting, or operation of <strong>Odoo ERP combined with an AI operating layer</strong> for mid-market clients in real estate, construction, or trading; or</li>
+    <li>provide services to any client of the Company that the Receiving Party serviced, solicited, or learned Confidential Information about during the preceding twelve (12) months.</li>
+  </ol>
+  <p>This Section is narrowly tailored to the Company's specific market segment (UAE mid-market Odoo + AI, real estate / construction / trading vertical) and shall not be construed to prevent the Receiving Party from earning a living in unrelated sectors, generic ERP work, or generic AI work outside this specific combination. If any court of competent jurisdiction finds any portion of this Section unenforceable, the remainder shall continue in force, and the Parties authorise the court to reduce duration, scope, or geography to the minimum necessary to make the Section enforceable.</p>
+
+  <!-- ============== SECTION 16 ============== -->
+  <h2 id="s16">16. Personal Data &amp; PDPL Compliance</h2>
+  <p>Where Confidential Information includes personal data within the meaning of UAE Federal Decree-Law No. 45 of 2021 (PDPL), the Receiving Party shall:</p>
+  <ol class="legal">
+    <li>process such data only as strictly necessary for the Purpose and on the Company's documented instructions;</li>
+    <li>implement appropriate technical and organisational measures to protect it;</li>
+    <li>not transfer it outside the UAE without the Company's prior written authorisation and a lawful transfer mechanism;</li>
+    <li>notify the Company within twenty-four (24) hours of becoming aware of any actual or suspected personal-data breach; and</li>
+    <li>on conclusion of the Purpose, return or delete all such personal data in accordance with Section 9.</li>
+  </ol>
+  <p>The Receiving Party acknowledges that breach of this Section may give rise to regulatory liability under PDPL in addition to the contractual remedies in this Agreement.</p>
+
+  <!-- ============== SECTION 17 ============== -->
+  <h2 id="s17">17. Liquidated Damages &amp; Injunctive Relief</h2>
+  <p>The Parties acknowledge that breach of this Agreement is likely to cause the Company harm that is substantial, immediate, and difficult to quantify in monetary terms — including loss of competitive position, dilution of trade secrets, damage to client relationships, and erosion of investment in the Category C Reusable Modules.</p>
+
+  <h3>17.1 Liquidated Damages</h3>
+  <p>In the event of a material breach of Sections 6 (Obligations), 11 (IP), 12 (Non-Reverse-Engineering), 13 (Non-Solicitation), 14 (Non-Circumvention), 15 (Restricted Activities), or any unauthorised disclosure of a trade secret designated under Section 4, the Receiving Party shall pay to the Company, as liquidated damages and not as a penalty, the <strong>higher of</strong>:</p>
+  <ul class="tight">
+    <li><strong>AED 250,000</strong> per incident of breach; or</li>
+    <li>where the breach relates to a specific client engagement, <strong>three (3) times the annual Platform Subscription fee</strong> applicable to that engagement (consistent with Schedule D.7 of the MSA Framework); or</li>
+    <li>where the breach relates to misappropriation of Confidential Information for the benefit of a competing offering, <strong>three (3) times the gross revenue</strong> received by the Receiving Party (or any party acting in concert with the Receiving Party) from such competing activity in the twelve months following the breach.</li>
+  </ul>
+  <p>The Parties agree this amount is a genuine pre-estimate of the Company's loss, calibrated against the difficulty of quantifying competitive harm and the value of the Company's Category C IP investment, and is enforceable as liquidated damages under UAE Civil Transactions Law.</p>
+
+  <h3>17.2 Injunctive Relief</h3>
+  <p>The Receiving Party agrees that monetary damages alone may be inadequate and that the Company is entitled, without proof of actual damage and without posting bond, to seek <strong>immediate injunctive relief, specific performance, and any other equitable remedy</strong> from a court of competent jurisdiction (including in any jurisdiction where the Receiving Party or the misappropriated Confidential Information is located), in addition to all other remedies available at law or in equity. Recourse to liquidated damages does not preclude recourse to injunctive relief.</p>
+
+  <h3>17.3 Legal Costs</h3>
+  <p>In any successful action by the Company to enforce this Agreement, the Receiving Party shall reimburse the Company's reasonable legal fees, expert fees, investigative costs, and court or arbitration costs.</p>
+
+  <!-- ============== SECTION 18 ============== -->
+  <h2 id="s18">18. Indemnification</h2>
+  <p>The Receiving Party shall indemnify, defend, and hold harmless the Company, its Founders, employees, advisors, and affiliates against any and all losses, damages, claims, liabilities, judgments, settlements, fines, regulatory penalties, and reasonable costs (including legal fees) arising out of or in connection with: (a) any breach of this Agreement by the Receiving Party or any person to whom it disclosed Confidential Information; (b) any third-party claim arising from such breach; or (c) any unauthorised use of Confidential Information.</p>
+
+  <!-- ============== SECTION 19 ============== -->
+  <h2 id="s19">19. No Warranty on Information</h2>
+  <p>Confidential Information is provided <strong>"as is"</strong>. The Disclosing Party makes no representation or warranty, express or implied, as to the accuracy, completeness, fitness for purpose, or non-infringement of any Confidential Information, and shall have no liability arising from the Receiving Party's use of, or reliance on, Confidential Information. The Receiving Party's protections and obligations under this Agreement are unaffected by this disclaimer.</p>
+
+  <!-- ============== SECTION 20 ============== -->
+  <h2 id="s20">20. No Obligation to Engage</h2>
+  <p>Nothing in this Agreement obliges either Party to enter into any further agreement, employment, engagement, partnership, or commercial transaction. Disclosure of Confidential Information does not create any obligation to proceed to a hire, an Order Form, a partnership agreement, or any other relationship.</p>
+
+  <!-- ============== SECTION 21 ============== -->
+  <h2 id="s21">21. Notices</h2>
+  <p>Notices under this Agreement shall be in writing and delivered to the addresses set out in Section 24, by hand, registered courier, or email with confirmation of receipt. Notices to the Company shall be addressed to the Founder &amp; CEO at <em>bran@sgctech.ai</em>, with a copy to the Co-Founder. Notices to the Receiving Party shall be addressed to the contact details provided in Section 24.</p>
+
+  <!-- ============== SECTION 22 ============== -->
+  <h2 id="s22">22. Governing Law &amp; Dispute Resolution</h2>
+  <p>This Agreement is governed by the laws of the <strong>United Arab Emirates</strong>, as applied in the Free Zone of the Company's incorporation, without regard to conflict-of-laws principles.</p>
+
+  <p>Any dispute, claim, or controversy arising out of or in connection with this Agreement, including any question regarding its existence, validity, breach, or termination, shall be resolved by <strong>arbitration administered by the Dubai International Arbitration Centre (DIAC)</strong> under its Arbitration Rules in force at the time of commencement, before a sole arbitrator, in the English language, seated in Dubai, UAE.</p>
+
+  <p>Notwithstanding the foregoing, the Company may seek <strong>urgent injunctive or interim relief</strong> in any court of competent jurisdiction, including outside the UAE, to protect its Confidential Information, intellectual property, or contractual rights, without first proceeding to arbitration.</p>
+
+  <!-- ============== SECTION 23 ============== -->
+  <h2 id="s23">23. General Provisions</h2>
+  <ol class="legal">
+    <li><strong>Entire Agreement.</strong> This Agreement constitutes the entire agreement between the Parties regarding confidentiality and supersedes all prior oral or written understandings on the same subject. It does not supersede any subsequent fully-executed employment contract, MSA, or partnership agreement that expressly references and incorporates a confidentiality regime; in such case, both regimes apply cumulatively and the stricter provision controls.</li>
+    <li><strong>Amendment.</strong> No amendment is effective unless in writing and signed by both Parties.</li>
+    <li><strong>Waiver.</strong> No failure or delay in exercising any right under this Agreement operates as a waiver of that right. A waiver in one instance does not waive any further breach.</li>
+    <li><strong>Severability.</strong> If any provision is held invalid or unenforceable, the remaining provisions continue in force; the Parties authorise any court or arbitrator to reform the invalid provision to the minimum extent necessary to render it enforceable, consistent with the Parties' commercial intent.</li>
+    <li><strong>Assignment.</strong> The Receiving Party shall not assign or transfer this Agreement, in whole or in part, without the Company's prior written consent. The Company may assign this Agreement to any successor entity, affiliate, or acquirer of its business.</li>
+    <li><strong>No Joint Venture.</strong> This Agreement does not create any partnership, joint venture, agency, employment, or fiduciary relationship between the Parties.</li>
+    <li><strong>Counterparts &amp; Electronic Signature.</strong> This Agreement may be executed in counterparts and by electronic signature (including DocuSign or equivalent), each of which is an original and all of which together constitute one instrument.</li>
+    <li><strong>Language.</strong> This Agreement is executed in English. In the event of any dispute requiring translation, the English version prevails to the extent permitted under UAE law.</li>
+    <li><strong>Headings.</strong> Headings are for convenience only and do not affect interpretation.</li>
+  </ol>
+
+  <!-- ============== SECTION 24 ============== -->
+  <h2 id="s24">24. Acknowledgement &amp; Execution</h2>
+
+  <p>By signing below, the Receiving Party expressly acknowledges that:</p>
+  <ol class="legal">
+    <li>they have <strong>read, understood, and had the opportunity to seek independent legal advice</strong> on this Agreement before signing;</li>
+    <li>they understand the Company is relying on this Agreement as a condition of disclosing Confidential Information, and that disclosure would not occur in its absence;</li>
+    <li>they accept that the obligations imposed — including the perpetual protection of trade secrets, the liquidated damages in Section 17, and the restricted activities in Section 15 — are <strong>reasonable, proportionate, and necessary</strong> to protect the Company's legitimate business interests in its Category C Reusable Modules, audited client work, and proprietary commercial methodology;</li>
+    <li>they enter into this Agreement <strong>freely and voluntarily</strong>, without duress or undue influence.</li>
+  </ol>
+
+    <div class="sig-col">
+      <strong>FOR THE COMPANY</strong>
+      <p>SGC Tech AI<br>(Scholarix Global Consultant FZE)<br>IFZA, Dubai, UAE</p>
+      <div class="sig-line"></div>
+      <p>Name:Authorized Signatory<br><br>Date: ____________________</p>
+    </div>
+    <div class="sig-col">
+      <strong>FOR THE RECEIVING PARTY</strong>
+      <p>Name: ___________________________________<br>
+      Capacity (tick one):<br>
+      &nbsp;&nbsp;☐ Candidate / Intern&nbsp;&nbsp;☐ Employee&nbsp;&nbsp;☐ Contractor<br>
+      &nbsp;&nbsp;☐ Referral Partner&nbsp;&nbsp;☐ Vendor&nbsp;&nbsp;☐ Prospective Client&nbsp;&nbsp;☐ Other</p>
+      <p>Emirates ID / Passport No.: ____________________<br>
+      Email: ____________________<br>
+      Mobile: ____________________</p>
+      <div class="sig-line"></div>
+      <p>Signature &amp; Date: ____________________</p>
+    </div>
+  </div>
+
+  <p style="margin-top:32px; font-family:'Helvetica Neue',Arial,sans-serif; font-size:11px; color:var(--muted);">
+    <strong>Witness (where required for trial candidates under Doc 08):</strong><br>
+    Name: ____________________ &nbsp;&nbsp; Signature: ____________________ &nbsp;&nbsp; Date: ____________________
+  </p>
+
+  <div class="footer-meta">
+    SGC TECH AI · MUTUAL NDA · Doc 09 · v2026.05 · Companion to Doc 02 (MSA &amp; SLA Framework) and Doc 08 (Sales Hire Playbook) · Confidential — pre-engagement legal instrument · For UAE-licensed lawyer review before deployment.
+  </div>
+
+</div>
+
+</body>
+</html>

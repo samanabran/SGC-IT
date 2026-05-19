@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>SGC TECH AI | Database Command Center</title>
     
     <!-- Fonts -->
@@ -50,6 +54,178 @@
             color: #ffffff;
             line-height: 1.6;
             overflow-x: hidden;
+        }
+
+        body.is-locked {
+            overflow: hidden;
+        }
+
+        body.is-locked .main-container {
+            opacity: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        body.is-locked .background-container {
+            filter: blur(16px) brightness(0.5);
+        }
+
+        .security-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: radial-gradient(circle at center, rgba(12, 30, 52, 0.55), rgba(10, 10, 10, 0.95));
+            backdrop-filter: blur(8px);
+            visibility: visible;
+            opacity: 1;
+            transition: opacity var(--transition-medium), visibility var(--transition-medium);
+        }
+
+        .security-overlay[hidden] {
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+            display: none;
+        }
+
+        .security-panel {
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid rgba(0, 255, 240, 0.3);
+            border-radius: 16px;
+            background: rgba(12, 30, 52, 0.92);
+            box-shadow: var(--shadow-lg), var(--shadow-glow);
+            padding: 28px;
+        }
+
+        .security-title {
+            font-size: 24px;
+            color: var(--electric-cyan);
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: 0.4px;
+        }
+
+        .security-subtitle {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.75);
+            margin-bottom: 18px;
+        }
+
+        .security-input {
+            width: 100%;
+            border: 1px solid rgba(0, 255, 240, 0.25);
+            border-radius: 10px;
+            background: rgba(10, 10, 10, 0.55);
+            color: #ffffff;
+            font-size: 14px;
+            padding: 12px 14px;
+            outline: none;
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+
+        .security-input:focus {
+            border-color: var(--electric-cyan);
+            box-shadow: 0 0 0 2px rgba(0, 255, 240, 0.15);
+        }
+
+        .security-actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .security-button {
+            width: 100%;
+        }
+
+        .security-error {
+            min-height: 20px;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #ff7b7b;
+        }
+
+        .security-note {
+            margin-top: 10px;
+            font-size: 11px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+            white-space: nowrap;
+        }
+
+        .registry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .registry-card {
+            background: rgba(12, 30, 52, 0.8);
+            border: 1px solid rgba(0, 255, 240, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .registry-title {
+            color: var(--electric-cyan);
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .registry-note {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 14px;
+        }
+
+        .registry-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .registry-table th,
+        .registry-table td {
+            text-align: left;
+            padding: 9px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            vertical-align: top;
+        }
+
+        .registry-table th {
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .registry-table td {
+            color: #ffffff;
+        }
+
+        .masked-value {
+            color: var(--electric-cyan);
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            letter-spacing: 0.2px;
         }
 
         /* ============================================
@@ -531,6 +707,27 @@
             .btn {
                 width: 100%;
             }
+
+            .security-panel {
+                padding: 22px;
+            }
+
+            .security-title {
+                font-size: 20px;
+            }
+        }
+
+        @media print {
+            body.is-locked .main-container,
+            body.is-locked .background-container {
+                display: none !important;
+            }
+
+            body.is-locked .security-overlay {
+                position: static;
+                background: #ffffff;
+                color: #000000;
+            }
         }
 
         /* ============================================
@@ -563,12 +760,29 @@
         }
     </style>
 </head>
-<body>
+<body class="is-locked">
     <!-- Animated Background -->
     <div class="background-container">
         <div class="hexagon-pattern"></div>
         <div class="neural-network"></div>
     </div>
+
+    <!-- Security Overlay -->
+    <section id="security-overlay" class="security-overlay" role="dialog" aria-modal="true" aria-labelledby="security-title">
+        <div class="security-panel">
+            <h2 id="security-title" class="security-title">Restricted Access</h2>
+            <p class="security-subtitle">Enter your access password to unlock the Database Command Center.</p>
+            <form id="security-form" autocomplete="off">
+                <label class="sr-only" for="security-password">Access password</label>
+                <input id="security-password" class="security-input" type="password" placeholder="Enter password" required>
+                <div class="security-actions">
+                    <button type="submit" class="btn btn-primary security-button">Unlock Dashboard</button>
+                </div>
+                <p id="security-error" class="security-error" aria-live="assertive" aria-atomic="true"></p>
+            </form>
+                <p class="security-note">Client-side lock reduces casual exposure only. Use server-side authentication for real access security.</p>
+        </div>
+    </section>
 
     <!-- Main Container -->
     <div class="main-container">
@@ -909,6 +1123,128 @@
             </div>
         </section>
 
+        <!-- API & URL Directory Section -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-icon">🔐</div>
+                <h2 class="section-title">API & URL Directory (Specific Use)</h2>
+            </div>
+
+            <div class="registry-grid">
+                <article class="registry-card">
+                    <h3 class="registry-title">API / Credential Register</h3>
+                    <p class="registry-note">Only masked values are shown in-browser. Keep full secrets in environment variables or secret manager.</p>
+                    <table class="registry-table" aria-label="API and credential register">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Specific Use</th>
+                                <th>Stored Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mistral API</td>
+                                <td>LLM generation workflows</td>
+                                <td class="masked-value">Configured (masked)</td>
+                            </tr>
+                            <tr>
+                                <td>Buffer API</td>
+                                <td>Social scheduling automation</td>
+                                <td class="masked-value">Configured (masked)</td>
+                            </tr>
+                            <tr>
+                                <td>n8n API</td>
+                                <td>Workflow orchestration</td>
+                                <td class="masked-value">Configured (masked)</td>
+                            </tr>
+                            <tr>
+                                <td>Stripe</td>
+                                <td>Payment operations</td>
+                                <td class="masked-value">Configured (masked)</td>
+                            </tr>
+                            <tr>
+                                <td>Groq</td>
+                                <td>Fast inference and AI calls</td>
+                                <td class="masked-value">Configured (masked)</td>
+                            </tr>
+                            <tr>
+                                <td>Deepgram</td>
+                                <td>Speech-to-text</td>
+                                <td class="masked-value">Configured (masked)</td>
+                            </tr>
+                            <tr>
+                                <td>Anthropic</td>
+                                <td>AI model integration</td>
+                                <td class="masked-value">Configured (masked)</td>
+                            </tr>
+                            <tr>
+                                <td>Resend</td>
+                                <td>Transactional email delivery</td>
+                                <td class="masked-value">Configured (masked)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+
+                <article class="registry-card">
+                    <h3 class="registry-title">URL Register</h3>
+                    <p class="registry-note">Operational links grouped for quick access and ownership context.</p>
+                    <table class="registry-table" aria-label="URL register">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Specific Use</th>
+                                <th>URL</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Lead Scraper</td>
+                                <td>Lead extraction and enrichment</td>
+                                <td><a href="https://scrapper.sgctech.ai" target="_blank" rel="noopener noreferrer" class="webpage-url">scrapper.sgctech.ai</a></td>
+                            </tr>
+                            <tr>
+                                <td>Personal Portfolio</td>
+                                <td>Personal profile and brand</td>
+                                <td><a href="https://ram.tachimao.com" target="_blank" rel="noopener noreferrer" class="webpage-url">ram.tachimao.com</a></td>
+                            </tr>
+                            <tr>
+                                <td>SGC Landing Page</td>
+                                <td>Primary marketing website</td>
+                                <td><a href="https://sgctech.ai" target="_blank" rel="noopener noreferrer" class="webpage-url">sgctech.ai</a></td>
+                            </tr>
+                            <tr>
+                                <td>Odoo SGC</td>
+                                <td>Core Odoo deployment</td>
+                                <td><a href="https://scholarixglobal.com" target="_blank" rel="noopener noreferrer" class="webpage-url">scholarixglobal.com</a></td>
+                            </tr>
+                            <tr>
+                                <td>Wiseapply</td>
+                                <td>Education vertical site</td>
+                                <td><a href="https://scholarixstudy.com" target="_blank" rel="noopener noreferrer" class="webpage-url">scholarixstudy.com</a></td>
+                            </tr>
+                            <tr>
+                                <td>SGC Presentation</td>
+                                <td>Sales deck (standard)</td>
+                                <td><a href="https://6012e440.sales-deck-46o.pages.dev/" target="_blank" rel="noopener noreferrer" class="webpage-url">sales-deck-46o.pages.dev</a></td>
+                            </tr>
+                            <tr>
+                                <td>Cinematic Presentation</td>
+                                <td>Sales deck (cinematic)</td>
+                                <td><a href="https://presentation.sgctech.ai/" target="_blank" rel="noopener noreferrer" class="webpage-url">presentation.sgctech.ai</a></td>
+                            </tr>
+                            <tr>
+                                <td>SGC Role Play</td>
+                                <td>Sales training roleplay app</td>
+                                <td><a href="https://sgc-it-roleplay.vercel.app/roleplay.html" target="_blank" rel="noopener noreferrer" class="webpage-url">sgc-it-roleplay.vercel.app</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </article>
+            </div>
+        </section>
+
         <!-- Footer -->
         <footer class="footer">
             <h2 class="footer-logo">SGC TECH AI</h2>
@@ -921,19 +1257,213 @@
 
     </div>
 
+    <script>
+        (function () {
+            'use strict';
+
+            const SECURITY = {
+                expectedHash: '381425d98c768c48e960b715118b3f60aa2b7afd5bf1443198973349e6f050ea',
+                maxAttempts: 5,
+                redirectUrl: 'https://sgctech.ai',
+                sessionKey: 'sgctech_db_dashboard_unlocked',
+                attemptsKey: 'sgctech_db_dashboard_attempts'
+            };
+
+            const dom = {
+                body: document.body,
+                mainContainer: document.querySelector('.main-container'),
+                overlay: document.getElementById('security-overlay'),
+                form: document.getElementById('security-form'),
+                passwordInput: document.getElementById('security-password'),
+                error: document.getElementById('security-error')
+            };
+
+            if (!dom.body || !dom.overlay || !dom.form || !dom.passwordInput || !dom.error) {
+                return;
+            }
+
+            let failedAttempts = 0;
+
+            function setUnlockState(unlocked) {
+                dom.body.classList.toggle('is-locked', !unlocked);
+                dom.overlay.hidden = unlocked;
+
+                if (dom.mainContainer) {
+                    dom.mainContainer.setAttribute('aria-hidden', unlocked ? 'false' : 'true');
+                }
+
+                if (!unlocked) {
+                    dom.passwordInput.focus();
+                    return;
+                }
+
+                const focusTarget = dom.mainContainer && dom.mainContainer.querySelector('h1, h2, a, button');
+                if (focusTarget) {
+                    if (focusTarget.tabIndex < 0) {
+                        focusTarget.tabIndex = -1;
+                    }
+                    focusTarget.focus();
+                }
+            }
+
+            function persistSession(unlocked) {
+                try {
+                    if (unlocked) {
+                        sessionStorage.setItem(SECURITY.sessionKey, '1');
+                        return;
+                    }
+
+                    sessionStorage.removeItem(SECURITY.sessionKey);
+                } catch (error) {
+                    console.warn('Session persistence unavailable:', error.message);
+                }
+            }
+
+            function getFailedAttempts() {
+                try {
+                    return parseInt(sessionStorage.getItem(SECURITY.attemptsKey) || '0', 10);
+                } catch (error) {
+                    return 0;
+                }
+            }
+
+            function setFailedAttempts(value) {
+                failedAttempts = value;
+                try {
+                    sessionStorage.setItem(SECURITY.attemptsKey, String(value));
+                } catch (error) {
+                    console.warn('Attempt tracking unavailable:', error.message);
+                }
+            }
+
+            function isSessionUnlocked() {
+                try {
+                    return sessionStorage.getItem(SECURITY.sessionKey) === '1';
+                } catch (error) {
+                    return false;
+                }
+            }
+
+            async function hashText(value) {
+                if (!window.crypto || !window.crypto.subtle) {
+                    throw new Error('Secure hashing unavailable in this browser context.');
+                }
+
+                const bytes = new TextEncoder().encode(value);
+                const digest = await crypto.subtle.digest('SHA-256', bytes);
+                return Array.from(new Uint8Array(digest)).map(function (byte) {
+                    return byte.toString(16).padStart(2, '0');
+                }).join('');
+            }
+
+            function showError(message) {
+                dom.error.textContent = message;
+            }
+
+            function denyAndRedirect() {
+                window.location.replace(SECURITY.redirectUrl);
+            }
+
+            function blockWhenLocked(event) {
+                if (!dom.body.classList.contains('is-locked')) {
+                    return;
+                }
+
+                if (dom.overlay.contains(event.target)) {
+                    return;
+                }
+
+                event.preventDefault();
+                event.stopPropagation();
+            }
+
+            async function onUnlock(event) {
+                event.preventDefault();
+
+                if (failedAttempts >= SECURITY.maxAttempts) {
+                    showError('Maximum attempts reached. Redirecting...');
+                    denyAndRedirect();
+                    return;
+                }
+
+                const candidate = dom.passwordInput.value;
+                dom.passwordInput.value = '';
+
+                if (!candidate) {
+                    showError('Password is required.');
+                    return;
+                }
+
+                let candidateHash;
+                try {
+                    candidateHash = await hashText(candidate);
+                } catch (error) {
+                    showError('Secure verification is unavailable. Open this page on HTTPS.');
+                    return;
+                }
+
+                if (candidateHash === SECURITY.expectedHash) {
+                    showError('');
+                    persistSession(true);
+                    setFailedAttempts(0);
+                    setUnlockState(true);
+                    return;
+                }
+
+                setFailedAttempts(failedAttempts + 1);
+                const attemptsRemaining = Math.max(SECURITY.maxAttempts - failedAttempts, 0);
+                showError('Invalid password. Attempts remaining: ' + attemptsRemaining + '.');
+
+                if (failedAttempts >= SECURITY.maxAttempts) {
+                    denyAndRedirect();
+                }
+            }
+
+            function trapFocus(event) {
+                if (!dom.body.classList.contains('is-locked')) {
+                    return;
+                }
+
+                if (event.key === 'Escape') {
+                    event.preventDefault();
+                    denyAndRedirect();
+                    return;
+                }
+
+                if (event.key !== 'Tab') {
+                    return;
+                }
+
+                const focusable = dom.overlay.querySelectorAll('button, input, [tabindex]:not([tabindex="-1"])');
+                if (!focusable.length) {
+                    return;
+                }
+
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (!event.shiftKey && document.activeElement === last) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            }
+
+            dom.form.addEventListener('submit', onUnlock);
+            document.addEventListener('click', blockWhenLocked, true);
+            document.addEventListener('contextmenu', blockWhenLocked, true);
+            document.addEventListener('keydown', trapFocus, true);
+
+            failedAttempts = getFailedAttempts();
+
+            if (isSessionUnlocked()) {
+                setUnlockState(true);
+            } else {
+                setUnlockState(false);
+            }
+        })();
+    </script>
 </body>
 </html>
-
-<!-- Add this script before closing </body> tag -->
-<script>
-    // Simple password protection (use proper authentication in production)
-    const correctPassword = "SGC2025!";
-    
-    window.onload = function() {
-        const enteredPassword = prompt("Enter access password:");
-        if (enteredPassword !== correctPassword) {
-            alert("Access Denied");
-            window.location.href = "https://sgctech.ai";
-        }
-    };
-</script>
