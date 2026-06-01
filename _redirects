@@ -2,44 +2,12 @@
 # Format: /old-path /new-path [status-code]
 # Default: 301 (permanent redirect)
 
-# === BUSINESS CARD REDIRECTS ===
-/card                            /business-card-v2.html 301
-/business-card                   /business-card-v2.html 301
-/designer                        /business-card-v2.html 301
-/business-card-designer          /business-card-v2.html 301
-/card-designer                   /business-card-v2.html 301
-/signature                       /business-card-v2.html 301
-/v1                              /index-simple.html 301
-
-# === DOCUMENTATION REDIRECTS ===
-/docs                            / 301
-/documentation                   / 301
-/doc                             / 301
-/help                            / 301
-/guide                           / 301
-/reference                       / 301
-
 # === COMPANY PROFILE REDIRECTS ===
-/profile                         /SGC%20TECH%20AI%20COMPANY%20PROFILE%202025.html 301
-/company                         /SGC%20TECH%20AI%20COMPANY%20PROFILE%202025.html 301
-/about                           /SGC%20TECH%20AI%20COMPANY%20PROFILE%202025.html 301
-/company-profile                 /SGC%20TECH%20AI%20COMPANY%20PROFILE%202025.html 301
-
-# === TOOLS & UTILITIES REDIRECTS ===
-/sla                             /SLA%20TEMPLATE.html 301
-/template                        /SLA%20TEMPLATE.html 301
-/form-builder                    /sla-form-builder.html 301
-/forms                           /sla-form-builder.html 301
-/agreements                      /SLA%20TEMPLATE.html 301
-
-# === LEGACY SCHOLARIX COMPATIBILITY ===
-/scholarix                       / 301
-/scholarix-card                  /business-card-v2.html 301
-
-# === ASSETS & STATIC FILES ===
-# These are handled by Cloudflare automatically - cache optimally
-# *.js, *.css, *.png, *.jpg, *.gif, *.svg, *.ico, *.woff, *.woff2
+/profile                         /SGC%20TECH%20AI%20COMPANY%202025.html 301
+/company                         /SGC%20TECH%20AI%20COMPANY%202025.html 301
+/about                           /SGC%20TECH%20AI%20COMPANY%202025.html 301
+/company-profile                 /SGC%20TECH%20AI%20COMPANY%202025.html 301
+/                                /business-profile.pdf 302
 
 # === DEFAULT ROUTING ===
-# Single page app fallback - serves index.html for non-existent paths
 /*                               /index.html 200

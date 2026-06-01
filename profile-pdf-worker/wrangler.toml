@@ -1,0 +1,5 @@
+name = "profile-pdf-proxy"
+account_id = "5ca87478e09d6ebc6954f770ac4656e8"
+compatibility_date = "2026-05-20"
+route = "profile.sgctech.ai/SGC%20TECH%20AI%20BUSINESS%20PROFILE.pdf"
+zone_name = "sgctech.ai"

@@ -1,0 +1,8 @@
+# Cloudflare Pages Redirects Configuration
+# Format: /old-path /new-path [status-code]
+# Default: 301 (permanent redirect)
+
+/                                /business-profile.pdf 302
+
+# === DEFAULT ROUTING ===
+/*                               /index.html 200
